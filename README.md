@@ -1,4 +1,4 @@
-#IntelliMart
+# IntelliMart
 
 
 
@@ -50,7 +50,7 @@ We have discussed the benefits for the consumers in the previous segment.
 5. This can be done through the analytics support of the application for the store owner. 
 6. The consumer visits the store and picks up their desired goods and leaves much faster leading to better practicing of the social distancing norms and less exposure to the virus.   
 
-### ***Contributers***
+### ***Contributors***
 
 1. [Kirtik Singh](https://github.com/kirtiksingh) 
 2. [Prakhar Bhasin](https://github.com/prkhrbhsn)
