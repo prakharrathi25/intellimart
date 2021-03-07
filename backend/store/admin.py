@@ -1,9 +1,24 @@
 from django.contrib import admin
 from .models import *
 
-# Register your models here.
-admin.site.register(Product)
-admin.site.register(Category)
+
+'''
+
+Configure Admin Side Views for each model:
+
+This controls how they appear on the admin view panel
+
+'''
+class AdminProduct(admin.ModelAdmin):
+    list_display = ['name', 'price', 'quantity', 'category']
+
+class AdminCategory(admin.ModelAdmin):
+    list_display = ['name']
+
+
+''' MODEL REGISTRATION '''
+admin.site.register(Product, AdminProduct)
+admin.site.register(Category, AdminCategory)
 
 
 

@@ -6,6 +6,10 @@ from django.db import models
 # Category Model to store the details of categories to which products belong
 class Category(models.Model):
 
+	# Override the to string method for the class
+	def __str__(self):
+		return f"Category: {self.name}"
+
 	# Define plural name using meta class
 	class Meta:
 		verbose_name_plural = "categories"
