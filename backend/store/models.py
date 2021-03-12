@@ -24,6 +24,14 @@ class Product(models.Model):
 	name = models.CharField(max_length=100)
 	price = models.IntegerField(default=0)
 	quantity = models.IntegerField(default=0)
-	description = models.CharField(max_length=200, default='')
+	description = models.CharField(max_length=200, default='', null=True, blank=True)
 	image = models.ImageField(upload_to='uploads/images/products')
 	category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)    # Foriegn key with Category Model
+
+
+	# Create a static method to retrieve all products from the database
+	@staticmethod
+	def get_all_products():
+
+		# Return all products
+		return Product.objects.all()

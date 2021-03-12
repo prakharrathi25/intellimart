@@ -121,3 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Create custom urls for MEDIA
+MEDIA_URL = '/fakefolder/'
+MEDIA_ROOT = BASE_DIR
