@@ -6,6 +6,9 @@ from django.db import models
 # Category Model to store the details of categories to which products belong
 class Category(models.Model):
 
+	# Define the fields of the category model
+	name = models.CharField(max_length=50)
+
 	# Override the to string method for the class
 	def __str__(self):
 		return f"Category: {self.name}"
@@ -14,8 +17,12 @@ class Category(models.Model):
 	class Meta:
 		verbose_name_plural = "categories"
 
-	# Define the fields of the category model
-	name = models.CharField(max_length=50)
+	# Create a method to get all categories
+	@staticmethod
+	def get_all_categories():
+		return Category.objects.all()
+
+
 
 # Product model to store the details of all the products
 class Product(models.Model):
@@ -28,6 +35,7 @@ class Product(models.Model):
 	image = models.ImageField(upload_to='uploads/images/products')
 	category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)    # Foriegn key with Category Model
 
+	''' Filter functions for the product model '''
 
 	# Create a static method to retrieve all products from the database
 	@staticmethod
@@ -35,3 +43,15 @@ class Product(models.Model):
 
 		# Return all products
 		return Product.objects.all()
+
+	# Filter the data by category # IDEA:
+	@staticmethod
+	def get_all_products_by_category(category_id):
+
+		# Check if category ID was passed
+		if category_id:
+			return Product.objects.filter(category=category_id)
+
+		# else:
+		# 	# return all products
+		# 	get_all_products()
