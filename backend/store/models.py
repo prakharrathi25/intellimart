@@ -23,7 +23,6 @@ class Category(models.Model):
 		return Category.objects.all()
 
 
-
 # Product model to store the details of all the products
 class Product(models.Model):
 
@@ -55,3 +54,17 @@ class Product(models.Model):
 		# else:
 		# 	# return all products
 		# 	get_all_products()
+
+''' Customer model to save the details of the user '''
+class Customer(models.Model):
+
+	# Define the fields for the Customer
+	first_name = models.CharField(max_length=50)
+	last_name = models.CharField(max_length=50)
+	phone = models.CharField(max_length=15)
+	email = models.EmailField()
+	password = models.CharField(max_length=500)
+
+	''' Function to register the data in the database '''
+	def register(self):
+		self.save()

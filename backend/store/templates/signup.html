@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title> Sign Up </title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="p-4 m-4">
+            <div class="col-lg-5 mx-auto border rounded p-4">
+                <h3 class="alert alert-light">Create an Account</h3>
+                <form action="/signup" method="post">
+
+                    {% if error %}
+                    <!-- Add an alert messsage -->
+                    <div class="alert alert-danger" role="alert">
+                        {{error}}
+                    </div>
+                    {% endif %}
+
+                    <!-- Add a csrf token -->
+                    {% csrf_token %}
+
+                    <!-- firstname -->
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">First Name</label>
+                        <input required value="{{values.first_name}}" type="text" name="firstname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+
+                    <!-- lastname -->
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                        <input type="text" value="{{values.last_name}}" name="lastname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">phone number</label>
+                        <input required type="text" value="{{values.phone}}" name="phone-number" placeholder="1234567899" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+
+                    <!-- email -->
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input required value="{{values.email}}" type="email" name="user-email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+
+                    <!-- password -->
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input required type="password" name="user-password" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+                  <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+    </div>
+</div>
+
+{% endblock %}
