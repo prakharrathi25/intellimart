@@ -5,5 +5,6 @@ from . import views
 ''' Map URLs from the store app'''
 urlpatterns = [
     path('', views.index, name='homepage'),
-    path('signup', views.sign_up)
+    path('signup', views.signup),
+    path('login', views.login)
 ]

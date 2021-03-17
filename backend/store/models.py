@@ -65,6 +65,37 @@ class Customer(models.Model):
 	email = models.EmailField()
 	password = models.CharField(max_length=500)
 
+	''' Function to get customers by email '''
+	@staticmethod
+	def get_customer_by_email(email):
+		try:
+			return Customer.objects.get(email = email)
+
+		except:
+			return False
+
 	''' Function to register the data in the database '''
 	def register(self):
 		self.save()
+
+	'''Check whether the user already exists in the database '''
+	def is_exists(self):
+		if Customer.objects.filter(email=self.email):
+			return True
+		else:
+			return False
+
+	''' Function to validate custmer details '''
+	def validate_customer(self):
+
+		# Data validation
+		error_message = None
+
+		if not self.first_name:
+			error_message = "First Name Required!"
+		elif len(self.first_name) < 4:
+			error_message = "Firstname length should be greater than 4"
+		elif self.is_exists():
+			error_message = "Email Address is already registered"
+
+		return error_message

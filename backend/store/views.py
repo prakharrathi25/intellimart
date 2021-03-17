@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product, Category, Customer
+from django.contrib.auth.hashers import make_password, check_password
 
 ''' Store App Views '''
 
@@ -30,7 +31,7 @@ def index(request):
     return render(request, 'index.html', data)
 
 ''' Function to serve the signup page '''
-def sign_up(request):
+def signup(request):
 
     # Handle the request types
     if request.method == 'GET':
@@ -49,6 +50,9 @@ def sign_up(request):
         email = post_data.get('user-email')
         password = post_data.get('user-password')
 
+        # Hash the password
+        password = make_password(password)
+
         # Save the values in a value dictionary
         values = {
             'first_name': first_name,
@@ -57,21 +61,18 @@ def sign_up(request):
             'phone': phone
         }
 
-        # Data Validation
-        error_message = None
-        if not first_name:
-            error_message = "First Name Required!"
-        elif len(first_name) < 4:
-            error_message = "Firstname length should be greater than 4"
+        # Create an instance of the customer
+        customer = Customer(first_name=first_name,
+                            last_name=last_name,
+                            phone=phone,
+                            email=email,
+                            password=password)
 
+        # Perform data validation
+        error_message = customer.validate_customer()
+
+        # Save if there is no error
         if not error_message:
-
-            # Create an instance of the customer
-            customer = Customer(first_name=first_name,
-                            	last_name=last_name,
-                            	phone=phone,
-                            	email=email,
-                            	password=password)
 
             # Call the function to save the data
             customer.register()
@@ -85,3 +86,33 @@ def sign_up(request):
                 'values': values
             }
             return render(request, 'signup.html', data)
+
+
+''' Function to login the user '''
+def login(request):
+
+    # Render the page for a get request
+    if request.method == 'GET':
+        return render(request, 'login.html')
+
+    # Handle POST request
+    else:
+
+        # Read the data that was enterred
+        email = request.POST.get('user-email')
+        password = request.POST.get('user-password')
+
+        # Filter the user records with the email and retreieve password
+        customer = Customer.get_customer_by_email(email)
+
+        error_message = None
+        if customer:
+            if check_password(password, customer.password):
+                return redirect('homepage')
+            else:
+                error_message = "Email or password invalid"
+        else:
+            error_message = "Email or password invalid"
+
+        # Render login page with the error
+        return render(request, 'login.html', {'error':error_message})
