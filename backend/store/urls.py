@@ -4,7 +4,7 @@ from . import views
 
 ''' Map URLs from the store app'''
 urlpatterns = [
-    path('', views.index, name='homepage'),
+    path('', views.Index.as_view(), name='homepage'),
     path('signup', views.signup),
-    path('login', views.login)
+    path('login', views.Login.as_view())
 ]

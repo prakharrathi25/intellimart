@@ -23,14 +23,3 @@ class AdminCustomer(admin.ModelAdmin):
 admin.site.register(Product, AdminProduct)
 admin.site.register(Category, AdminCategory)
 admin.site.register(Customer, AdminCustomer)
-
-
-
-
-# Automatic model registration
-# from django.apps import apps
-#
-# models = apps.get_models()
-# print(models)
-# for model in models:
-#     admin.site.register(model)

@@ -2,33 +2,41 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product, Category, Customer
 from django.contrib.auth.hashers import make_password, check_password
+from django.views import View
 
 ''' Store App Views '''
 
 
-''' Function to serve the home page '''
-def index(request):
+''' Class to serve the home page '''
+class Index(View):
 
-    # retreive all categories
-    categories = Category.get_all_categories()
-    # retreive all the product data
-    products = None
+    ''' Function to handle get request and render home page '''
+    def get(request):
 
-    # Get categoryID for filtering from the page
-    category_id = request.GET.get('category')
-    if category_id:
-        products = Product.get_all_products_by_category(category_id)
-    else:
-        products = Product.get_all_products()
+        # retreive all categories
+        categories = Category.get_all_categories()
+        # retreive all the product data
+        products = None
 
-    # Data dictionary that needs to be passed as data for rendering
-    data = dict()
-    data['products'] = products
-    data['categories'] = categories
+        # Get categoryID for filtering from the page
+        category_id = request.GET.get('category')
+        if category_id:
+            products = Product.get_all_products_by_category(category_id)
+        else:
+            products = Product.get_all_products()
+
+        # Data dictionary that needs to be passed as data for rendering
+        data = dict()
+        data['products'] = products
+        data['categories'] = categories
 
 
-    # Render the index page and pass the data to it
-    return render(request, 'index.html', data)
+        # Render the index page and pass the data to it
+        return render(request, 'index.html', data)
+
+    ''' Function to handle POST Request '''
+    def post(self, request):
+        product = request.POST.get('product')
 
 ''' Function to serve the signup page '''
 def signup(request):
@@ -88,15 +96,15 @@ def signup(request):
             return render(request, 'signup.html', data)
 
 
-''' Function to login the user '''
-def login(request):
+''' Create a class based view for the login endpoint'''
+class Login(View):
 
-    # Render the page for a get request
-    if request.method == 'GET':
+    ''' Function to handle a get request '''
+    def get(self, request):
         return render(request, 'login.html')
 
-    # Handle POST request
-    else:
+    ''' Function to handle a POST request '''
+    def post(self, request):
 
         # Read the data that was enterred
         email = request.POST.get('user-email')
@@ -105,9 +113,20 @@ def login(request):
         # Filter the user records with the email and retreieve password
         customer = Customer.get_customer_by_email(email)
 
+        # Save the values in a value dictionary
+        values = {
+            'email': email,
+        }
+
         error_message = None
         if customer:
             if check_password(password, customer.password):
+
+                # Save the customer details in the session
+                request.session['customer_id'] = customer.id
+                request.session['email'] = customer.email
+
+                # redirect to home page
                 return redirect('homepage')
             else:
                 error_message = "Email or password invalid"
@@ -115,4 +134,8 @@ def login(request):
             error_message = "Email or password invalid"
 
         # Render login page with the error
-        return render(request, 'login.html', {'error':error_message})
+        data = {
+            'error': error_message,
+            'values': values
+        }
+        return render(request, 'login.html', data)
