@@ -2,7 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-
 # Category Model to store the details of categories to which products belong
 class Category(models.Model):
 
@@ -11,7 +10,7 @@ class Category(models.Model):
 
 	# Override the to string method for the class
 	def __str__(self):
-		return f"Category: {self.name}"
+		return f"{self.name}"
 
 	# Define plural name using meta class
 	class Meta:
@@ -51,10 +50,6 @@ class Product(models.Model):
 		if category_id:
 			return Product.objects.filter(category=category_id)
 
-		# else:
-		# 	# return all products
-		# 	get_all_products()
-
 ''' Customer model to save the details of the user '''
 class Customer(models.Model):
 
@@ -78,7 +73,7 @@ class Customer(models.Model):
 	def register(self):
 		self.save()
 
-	'''Check whether the user already exists in the database '''
+	''' Check whether the user already exists in the database '''
 	def is_exists(self):
 		if Customer.objects.filter(email=self.email):
 			return True
