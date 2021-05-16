@@ -11,7 +11,7 @@ from django.views import View
 class Index(View):
 
     ''' Function to handle get request and render home page '''
-    def get(request):
+    def get(self, request):
 
         # retreive all categories
         categories = Category.get_all_categories()

@@ -13,7 +13,7 @@ class AdminStore(admin.ModelAdmin):
     list_display = ['name', 'description', 'address', 'owner']
 
 class AdminProduct(admin.ModelAdmin):
-    list_display = ['name', 'price', 'quantity', 'category']
+    list_display = ['name', 'price', 'quantity', 'category', 'store']
 
 class AdminCategory(admin.ModelAdmin):
     list_display = ['name']
