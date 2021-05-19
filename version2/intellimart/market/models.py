@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.db.models import Q
 
 # Custom modules 
 from .utils import search_filter_by_text
@@ -110,8 +111,11 @@ class Product(models.Model):
             queryset = queryset.filter(category=category_id)
         
         if search_query: 
-            queryset = search_filter_by_text(Product, queryset, search_query)
-        
+            
+            # Combine queries 
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) | Q(description__icontains=search_query)
+            ) 
         return queryset
 
      # Filter the data by store ID:
