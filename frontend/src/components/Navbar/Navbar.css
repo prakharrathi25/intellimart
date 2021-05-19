@@ -17,7 +17,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color:#DB4A20;
+    background-color:transparent;
     transition: all 0.4s;
     backdrop-filter: blur(12.5px);
     -webkit-backdrop-filter: blur(12.5px);
