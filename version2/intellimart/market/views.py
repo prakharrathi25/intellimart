@@ -60,33 +60,35 @@ class ProductView(generics.ListAPIView):
         search_query = request.GET.get('search')
         category = request.GET.get('category')
 
-        print(store_id, search_query, category)
-        queryset = Product.get_all_products()
+        queryset = Product.get_products(store_id=store_id,
+                                        category_id=category,
+                                        search_query=search_query )
+        # Get the full query set
+        # queryset = Product.get_all_products()
         
-        # Apply filters to the data
-        if store_id:
-            queryset = queryset.filter(store=store_id)
+        # # Apply filters to the data
+        # if store_id:
+        #     queryset = queryset.filter(store=store_id)
         
-        if category:
-            queryset = queryset.filter(category=category)
+        # if category:
+        #     queryset = queryset.filter(category=category)
         
-        if search_query: 
-            pass 
-            names = queryset.filter(name__icontains=search_query)
-            descriptions = queryset.filter(description__icontains=search_query)
+        # if search_query: 
+        #     names = queryset.filter(name__icontains=search_query)
+        #     descriptions = queryset.filter(description__icontains=search_query)
 
-            # Iterate through the names and get all ids 
-            ids = []
-            for i in range(len(names)):
-                ids.append(names[i].id)
-                print(type(names[i].id), print(type(names[i])))
+        #     # Iterate through the names and get all ids 
+        #     ids = []
+        #     for i in range(len(names)):
+        #         ids.append(names[i].id)
+        #         print(type(names[i].id), print(type(names[i])))
             
-            # iterate through descriptions 
-            for i in range(len(descriptions)): 
-                if descriptions[i].id not in ids:
-                    ids.append(descriptions[i].id)
+        #     # iterate through descriptions 
+        #     for i in range(len(descriptions)): 
+        #         if descriptions[i].id not in ids:
+        #             ids.append(descriptions[i].id)
             
-            queryset = Product.objects.filter(id__in=ids)
+        #     queryset = Product.objects.filter(id__in=ids)
         
         return Response(ProductSerializer(queryset, many = True).data)
         

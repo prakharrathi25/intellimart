@@ -1,6 +1,9 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
 
+# Custom modules 
+from .utils import search_filter_by_text
+
 # Create your models here.
 
 ''' Store Owner Class '''
@@ -107,9 +110,9 @@ class Product(models.Model):
             queryset = queryset.filter(category=category_id)
         
         if search_query: 
-            names = queryset.filter(name__icontains=search_query)
-            descriptions = queryset.filter()
-            queryset = list(chain(page_list, article_list, post_list))
+            queryset = search_filter_by_text(Product, queryset, search_query)
+        
+        return queryset
 
      # Filter the data by store ID:
     @staticmethod
