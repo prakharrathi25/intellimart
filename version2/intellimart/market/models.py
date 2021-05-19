@@ -37,6 +37,21 @@ class Store(models.Model):
     logo = models.ImageField(upload_to='uploads/images/logos')
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, default=1) 
 
+    ''' Filter functions for the store model '''
+
+    # Create a static method to return all stores in the database 
+    @staticmethod
+    def get_all_stores():
+
+        # Return all products
+        return Store.objects.all()
+    
+    # Create a static method to return the store based on an ID 
+    @staticmethod
+    def get_store_by_id(store_id):
+
+        # Return the store details by a particular ID 
+        return Store.objects.filter(id=store_id)
 
 '''Category Model to store the details of categories to which products belong'''
 class Category(models.Model):
@@ -77,6 +92,24 @@ class Product(models.Model):
 
         # Return all products
         return Product.objects.all()
+
+    # Function to combine the search filters together 
+    @staticmethod 
+    def get_products(store_id=None, category_id=None, search_query=None):
+
+        queryset = Product.get_all_products()
+        
+        # Apply filters to the data
+        if store_id:
+            queryset = queryset.filter(store=store_id)
+        
+        if category_id:
+            queryset = queryset.filter(category=category_id)
+        
+        if search_query: 
+            names = queryset.filter(name__icontains=search_query)
+            descriptions = queryset.filter()
+            queryset = list(chain(page_list, article_list, post_list))
 
      # Filter the data by store ID:
     @staticmethod

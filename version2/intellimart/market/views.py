@@ -1,8 +1,13 @@
+from django.db.models import query
 from django.shortcuts import render
 from rest_framework import status, generics
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter
 from rest_framework.views import APIView
 from django.http import HttpResponse
+from itertools import chain
+
+# Custom  modules
 from .models import *
 from .serializers import *
 
@@ -11,31 +16,84 @@ from .serializers import *
 ''' API Views to return the data to the frontend ''' 
 
 class StoreView(generics.ListAPIView):
-    """Store view which returns the store data as a Json file. 
+    """Store view which returns the stores data as a Json file. 
     """
 
     # Define class variables 
-    serializer_class = StoreSerializer
+    queryset = []
 
     # Manage a get request 
+    def get(self, request): 
+        
+        ''' Display all the stores in our database if no id is passed 
+            and if an ID is passed then show the store with ID '''
+        
+        # Collect the id for the store to be displayed
+        store_id = request.GET.get('id')
+
+        if store_id:
+            queryset = Store.get_store_by_id(store_id)
+        else: 
+            queryset = Store.get_all_stores()
+        
+        return Response(StoreSerializer(queryset, many = True).data)
+
+class ProductView(generics.ListAPIView):
+    ''' Product View to return the details of all the products and filter by ID or string '''
+
+    # Define class variables 
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+
+    search_fields = ['name','description']
+    filter_backends = (SearchFilter,)
+    queryset = []
+
+    # Manage a get request
     def get(self, request):
         
-        # Get storeid for filtering from the page
-        store_id = request.GET.get('id')
-       
-        if store_id:
-            queryset = Product.get_all_products_by_store(store_id)[0]
-        else: 
-            queryset = Product.get_all_products()[0]
-            print("QUERYSET", queryset)
+        ''' Display all the products in our database if no id is passed 
+            and if a store ID and search is passed then use those parameters'''
         
-        return Response(ProductSerializer(queryset).data)
-        #queryset = Store.objects.all()
-        # serializer_class = StoreSerializer
+        # Get all the parameters sent in the data 
+        store_id = request.GET.get('store_id', None)
+        search_query = request.GET.get('search')
+        category = request.GET.get('category')
 
+        print(store_id, search_query, category)
+        queryset = Product.get_all_products()
+        
+        # Apply filters to the data
+        if store_id:
+            queryset = queryset.filter(store=store_id)
+        
+        if category:
+            queryset = queryset.filter(category=category)
+        
+        if search_query: 
+            pass 
+            names = queryset.filter(name__icontains=search_query)
+            descriptions = queryset.filter(description__icontains=search_query)
 
-''' View to Register a customer into our database '''
+            # Iterate through the names and get all ids 
+            ids = []
+            for i in range(len(names)):
+                ids.append(names[i].id)
+                print(type(names[i].id), print(type(names[i])))
+            
+            # iterate through descriptions 
+            for i in range(len(descriptions)): 
+                if descriptions[i].id not in ids:
+                    ids.append(descriptions[i].id)
+            
+            queryset = Product.objects.filter(id__in=ids)
+        
+        return Response(ProductSerializer(queryset, many = True).data)
+        
+
 class RegisterCustomer(APIView):
+
+    ''' View to Register a customer into our database '''
 
     # Define class variables 
     serializer_class = RegisterCustomerSerializer
