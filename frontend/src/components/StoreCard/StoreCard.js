@@ -1,21 +1,19 @@
 import React from "react";
 import "./StoreCard.css";
 
-const StoreCard = ({ title, price, quantity, image }) => {
+const StoreCard = ({ title, address, image,key }) => {
   return (
-    <div className="card-container">
+    <div className="store-card-container">
       <div className="store-title-details">
         <img
           className="store-image"
-          src="https://www.pinclipart.com/picdir/middle/555-5555016_alcohol-hand-sanitizer-png-dettol-sanitizer-clipart.png"
+          src={"http://127.0.0.1:8000" + image}
         />
-        {/* <img className="store-image" src={image} /> */}
         <h1 className="store-name">{title}</h1>
       </div>
       <div className="store-info">
-        <p className="column">₹{price}</p>
-        <p className="column">{quantity}</p>
-        <button className="add-button column" onClick={()=>console.log("Clicked")}>+</button>
+        <p className="column" id="address">{address}</p>
+        <button className="add-button column" onClick={()=>console.log("Clicked")}> ᐅ </button>
       </div>
     </div>
   );

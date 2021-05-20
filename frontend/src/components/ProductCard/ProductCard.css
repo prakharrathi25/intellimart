@@ -30,7 +30,8 @@
 }
 
 .product-title-details .product-image {  
-  height: 100%;
+  /* height: 100%; */
+  height: 10rem;
   /* width: auto; */
   padding: 5%;
 }

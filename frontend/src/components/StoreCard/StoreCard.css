@@ -1,4 +1,4 @@
-.card-container {
+.store-card-container {
   margin: 1.5% 1.25%;
   transform-style: preserve-3d;
   width: 17.5%;
@@ -26,11 +26,12 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 2%;
+  padding: 1.5%;
 }
 
 .store-title-details .store-image {  
-  height: 100%;
+  /* height: 100%; */
+  height:10rem;
   /* width: auto; */
   padding: 5%;
 }
@@ -56,13 +57,17 @@
   border: 1px solid black;
   /*min-width: 300px;*/
   margin-bottom: 8px;
-  font-size:16px;
+  font-size:5px;
+}
+
+#address{
+  font-size: 13px;
 }
 
 .add-button {
   background-color: var(--accent);
   border-radius: 50%;
-  padding: 2.75% 7%;
+  padding: 2.75% 6%;
   border: 0;
   font-size: 1.25rem;
   font-weight: 500;

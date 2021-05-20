@@ -10,7 +10,7 @@ const Stores = () => {
   const getStores = () => {
     var config = {
       method: "get",
-      url: "http://127.0.0.1:8000/products",
+      url: "http://127.0.0.1:8000/market",
       // headers: {
       //   Cookie:
       //     "csrftoken=No8wD0cOms43Hh37HiwdjatM4lpChEwbgfLcTTi4gmB1FIQxKrjiujILll3tDA8i",
@@ -35,54 +35,15 @@ const Stores = () => {
       <Navbar />
       <div className="store-container">
         {responseData !== null
-          ? responseData.map((product, index) => (
-            <>
+          ? responseData.map((stores, index) => (
               <StoreCard
-                title={product.name}
-                price={product.price}
-                quantity={product.quantity}
-                image={product.image}
-                key={index}
+                title={stores.name}
+                address={stores.address}
+                image={stores.logo}
+                key={stores.id}
               />
-              <StoreCard
-                title={product.name}
-                price={product.price}
-                quantity={product.quantity}
-                image={product.image}
-                key={index}
-              />
-              <StoreCard
-                title={product.name}
-                price={product.price}
-                quantity={product.quantity}
-                image={product.image}
-                key={index}
-              />
-              <StoreCard
-                title={product.name}
-                price={product.price}
-                quantity={product.quantity}
-                image={product.image}
-                key={index}
-              />
-              </>
             ))
           : null}
-
-        {/* <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" />
-        <ProductCard title="Dettol" price="2" quantity="500g" /> */}
       </div>
     </div>
   );
