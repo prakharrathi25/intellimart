@@ -183,3 +183,27 @@ class Customer(models.Model):
             error_message = "Email Address is already registered"
 
         return error_message
+
+
+''' Cart model to store the details of the users cart and products '''
+class Cart(models.Model):
+
+    # Define the model fields 
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    # products = models.ManyToManyField(to=Product)
+    products = models.ManyToManyField(
+        'Product',
+        related_name='carts'
+    )
+
+    ''' Function to display all products '''
+    @staticmethod
+    def get_all_products():
+
+        return Cart.objects.all()
+
+    ''' Function to filter the data by user ID '''
+    @staticmethod
+    def get_cart_products(user_id):
+
+        return Cart.objects.filter(user=user_id)

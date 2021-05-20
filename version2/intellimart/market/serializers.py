@@ -17,6 +17,11 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
 
+class CartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = '__all__'
+
 ''' Register Customer Serializer Class '''
 class RegisterCustomerSerializer(serializers.ModelSerializer):
     
@@ -48,11 +53,11 @@ class RegisterCustomerSerializer(serializers.ModelSerializer):
         
         if password != password2:
             raise serializers.ValidationError({
-                'password':'Passwords must match'
+                'error':'Passwords do not match'
             })
 
         new_customer.set_password(password)
-        new_customer.save()
+        # new_customer.save()
         
         return new_customer
 

@@ -63,35 +63,32 @@ class ProductView(generics.ListAPIView):
         queryset = Product.get_products(store_id=store_id,
                                         category_id=category,
                                         search_query=search_query )
-        # Get the full query set
-        # queryset = Product.get_all_products()
-        
-        # # Apply filters to the data
-        # if store_id:
-        #     queryset = queryset.filter(store=store_id)
-        
-        # if category:
-        #     queryset = queryset.filter(category=category)
-        
-        # if search_query: 
-        #     names = queryset.filter(name__icontains=search_query)
-        #     descriptions = queryset.filter(description__icontains=search_query)
 
-        #     # Iterate through the names and get all ids 
-        #     ids = []
-        #     for i in range(len(names)):
-        #         ids.append(names[i].id)
-        #         print(type(names[i].id), print(type(names[i])))
-            
-        #     # iterate through descriptions 
-        #     for i in range(len(descriptions)): 
-        #         if descriptions[i].id not in ids:
-        #             ids.append(descriptions[i].id)
-            
-        #     queryset = Product.objects.filter(id__in=ids)
-        
         return Response(ProductSerializer(queryset, many = True).data)
         
+class CartView(generics.ListAPIView):
+    
+    ''' View to display cart items and add items to the cart '''
+
+    # Define class variables 
+    serializer_class = CartSerializer
+    queryset = []
+
+    def get(self, request):
+
+        ''' Display all the cart items queried by the user ID '''
+         # Collect the id for the store to be displayed
+        user_id = request.GET.get('user')
+
+        if user_id:
+            queryset = Cart.get_cart_products(user_id)
+        
+        else:
+            queryset = Cart.get_all_products()
+        
+        
+        return Response(CartSerializer(queryset, many = True).data)
+
 
 class RegisterCustomer(APIView):
 
@@ -100,21 +97,18 @@ class RegisterCustomer(APIView):
     # Define class variables 
     serializer_class = RegisterCustomerSerializer
 
-    # # This is where I get the error 
-    # def get(self, request):
-    #     if request.method == 'GET':
-    #         return HttpResponse("Hello")
-
     # Function to handle post request
     def post(self, request, format=None):
         
         ''' Session handling for our users '''
         
-        # Check if their is an existing session
-        if not self.request.session.exists(self.request.session.session_key):
-           self.request.session.create()
-
+        # Check if their is an existing session (SESSION)
+        # if not self.request.session.exists(self.request.session.session_key):
+        #    self.request.session.create()
+        
+        # Serializer instance
         serializer = self.serializer_class(data=request.data) 
+        
         # if serializer.is_valid():
             
         #     cust_data = serializer.data
@@ -144,14 +138,17 @@ class RegisterCustomer(APIView):
         # return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Method 2 
-        data = {}
+        data = {}    # Data to be returned to the user
+
         if serializer.is_valid():
             new_cust = serializer.save()
-            data['response'] = "successfully registered a new user"
+            data['success'] = 'True'
             data['email'] = new_cust.email
             data['first_name'] = new_cust.first_name
             data['last_name'] = new_cust.last_name
             data['phone'] = new_cust.phone
+
+            print(data)
 
         else: 
             data = serializer.errors
