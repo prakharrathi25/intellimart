@@ -21,7 +21,7 @@ const Navbar = () => {
     },
     {
       title: "Log In",
-      link: "/",
+      link: "login",
     },
   ];
 
