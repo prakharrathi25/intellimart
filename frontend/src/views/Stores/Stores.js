@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Stores.css";
 import StoreCard from "../../components/StoreCard/StoreCard";
-import Navbar from "../../components/Navbar/Navbar";
 import axios from "axios";
 
 const Stores = () => {
@@ -32,7 +31,6 @@ const Stores = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="store-container">
         {responseData !== null
           ? responseData.map((stores, index) => (
