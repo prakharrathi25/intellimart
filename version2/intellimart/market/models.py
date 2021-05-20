@@ -40,7 +40,8 @@ class Store(models.Model):
     address = models.CharField(max_length=1000, null=True, default=" ", blank=True)
     logo = models.ImageField(upload_to='market/static/images/logos')
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, default=1) 
-
+    phone_number = models.CharField(max_length=15, null=True)
+    
     ''' Filter functions for the store model '''
 
     # Create a static method to return all stores in the database 
