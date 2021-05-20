@@ -38,7 +38,7 @@ class Store(models.Model):
     name = models.CharField(max_length=100, null=False)
     description = models.CharField(max_length=1000, default="", null=True, blank=True)
     address = models.CharField(max_length=1000, null=True, default=" ", blank=True)
-    logo = models.ImageField(upload_to='uploads/images/logos')
+    logo = models.ImageField(upload_to='market/static/images/logos')
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, default=1) 
 
     ''' Filter functions for the store model '''
@@ -84,7 +84,7 @@ class Product(models.Model):
     price = models.IntegerField(default=0)
     quantity = models.IntegerField(default=0)
     description = models.CharField(max_length=200, default='', null=True, blank=True)
-    image = models.ImageField(upload_to='uploads/images/products')
+    image = models.ImageField(upload_to='market/static/images/products')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)    # Foriegn key with Category Model
     store = models.ForeignKey(Store, on_delete=models.CASCADE, default=1)
     
