@@ -6,36 +6,40 @@ import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
 const formPanelTwoHandler = () => {
-    // console.log("formPanelTwoHandler clicked");
-    document.getElementsByClassName("form-toggle")[0].classList.add("visible");
-    document.getElementsByClassName("form-panel one")[0].classList.add("hidden");
-    document.getElementsByClassName("form-panel two")[0].classList.add("active");
-}
+  // console.log("formPanelTwoHandler clicked");
+  document.getElementsByClassName("form-toggle")[0].classList.add("visible");
+  document.getElementsByClassName("form-panel one")[0].classList.add("hidden");
+  document.getElementsByClassName("form-panel two")[0].classList.add("active");
+};
 const formToggleHandler = () => {
-    // console.log("formToggleHandler clicked");
-    document.getElementsByClassName("form-toggle")[0].classList.remove("visible");
-    document.getElementsByClassName("form-panel one")[0].classList.remove("hidden");
-    document.getElementsByClassName("form-panel two")[0].classList.remove("active");
-}
+  // console.log("formToggleHandler clicked");
+  document.getElementsByClassName("form-toggle")[0].classList.remove("visible");
+  document
+    .getElementsByClassName("form-panel one")[0]
+    .classList.remove("hidden");
+  document
+    .getElementsByClassName("form-panel two")[0]
+    .classList.remove("active");
+};
 
 const loginSubmit = (e) => {
-    e.preventDefault();
-    console.log("loginSubmit");
-    toast.success("Padhaaro Sa");
-}
+  e.preventDefault();
+  console.log("loginSubmit");
+  toast.success("Padhaaro Sa");
+};
 
 const signupSubmit = (e) => {
-    e.preventDefault();
-    console.log("signupSubmit");
-    toast.error("You Can't Sit With Us");
-}
+  e.preventDefault();
+  console.log("signupSubmit");
+  toast.error("You Can't Sit With Us");
+};
 
 const Login = () => {
   return (
-    <div >
+    <div className="login-container">
       <div className="form">
-        <div className="form-toggle" onClick={()=>formToggleHandler()}></div>
-        <div className="form-panel one" style={{cursor: "pointer"}}>
+        <div className="form-toggle" onClick={() => formToggleHandler()}></div>
+        <div className="form-panel one" style={{ cursor: "pointer" }}>
           <div className="form-header">
             <h1>Account Login</h1>
           </div>
@@ -64,9 +68,7 @@ const Login = () => {
                   <input type="checkbox" />
                   Remember Me
                 </label>
-                <a className="form-recovery">
-                  Forgot Password?
-                </a>
+                <a className="form-recovery">Forgot Password?</a>
               </div>
               <div className="form-group">
                 <button type="submit">Log In</button>
@@ -74,7 +76,7 @@ const Login = () => {
             </form>
           </div>
         </div>
-        <div className="form-panel two" onClick={()=>formPanelTwoHandler()}>
+        <div className="form-panel two" onClick={() => formPanelTwoHandler()}>
           <div className="form-header">
             <h1>Register Account</h1>
           </div>
