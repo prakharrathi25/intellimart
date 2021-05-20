@@ -10,19 +10,22 @@ This controls how they appear on the admin view panel
 
 '''
 class AdminStore(admin.ModelAdmin):
-    list_display = ['name', 'description', 'address', 'owner']
+    list_display = ['id', 'name', 'description', 'address', 'owner']
 
 class AdminProduct(admin.ModelAdmin):
-    list_display = ['name', 'price', 'quantity', 'category', 'store']
+    list_display = ['id', 'name', 'price', 'quantity', 'category', 'store']
 
 class AdminCategory(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['id', 'name']
 
 class AdminCustomer(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'email']
+    list_display = ['id', 'first_name', 'last_name', 'email']
 
 class AdminOwner(admin.ModelAdmin):
-     list_display = ['first_name', 'last_name', 'email']
+    list_display = ['id', 'first_name', 'last_name', 'email']
+
+class AdminCart(admin.ModelAdmin):
+    list_display = ['id', 'user', 'products']
 
 
 ''' MODEL REGISTRATION '''
@@ -31,3 +34,4 @@ admin.site.register(Category, AdminCategory)
 admin.site.register(Customer, AdminCustomer)
 admin.site.register(Store, AdminStore)
 admin.site.register(Owner, AdminOwner)
+admin.site.register(Cart)
