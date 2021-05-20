@@ -21,7 +21,7 @@
   flex-direction: column;
 }
 
-.product-title-details {
+.store-title-details {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,18 +29,18 @@
   padding: 2%;
 }
 
-.product-title-details .product-image {  
+.store-title-details .store-image {  
   height: 100%;
   /* width: auto; */
   padding: 5%;
 }
 
-.product-name {
+.store-name {
   font-size: 1.5rem;
   padding-top: 5%;
 }
 
-.product-info {
+.store-info {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -49,7 +49,7 @@
   box-sizing: border-box;
 }
 
-.product-info.column {
+.store-info.column {
   display: inline-block;
   min-height: 150px;
   width: 33.33%;

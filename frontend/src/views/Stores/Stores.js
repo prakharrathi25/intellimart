@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import "./Products.css";
-import ProductCard from "../../components/ProductCard/ProductCard";
+import "./Stores.css";
+import StoreCard from "../../components/StoreCard/StoreCard";
 import Navbar from "../../components/Navbar/Navbar";
 import axios from "axios";
 
-const Products = () => {
+const Stores = () => {
   const [responseData, setResponseData] = useState(null);
 
-  const getProducts = () => {
+  const getStores = () => {
     var config = {
       method: "get",
       url: "http://127.0.0.1:8000/products",
@@ -27,38 +27,38 @@ const Products = () => {
   };
 
   useEffect(() => {
-    getProducts();
+    getStores();
   }, []);
 
   return (
     <div>
       <Navbar />
-      <div className="product-container">
+      <div className="store-container">
         {responseData !== null
           ? responseData.map((product, index) => (
             <>
-              <ProductCard
+              <StoreCard
                 title={product.name}
                 price={product.price}
                 quantity={product.quantity}
                 image={product.image}
                 key={index}
               />
-              <ProductCard
+              <StoreCard
                 title={product.name}
                 price={product.price}
                 quantity={product.quantity}
                 image={product.image}
                 key={index}
               />
-              <ProductCard
+              <StoreCard
                 title={product.name}
                 price={product.price}
                 quantity={product.quantity}
                 image={product.image}
                 key={index}
               />
-              <ProductCard
+              <StoreCard
                 title={product.name}
                 price={product.price}
                 quantity={product.quantity}
@@ -88,4 +88,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Stores;

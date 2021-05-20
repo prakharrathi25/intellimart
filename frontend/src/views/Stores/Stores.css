@@ -1,0 +1,9 @@
+body {
+  background-color: var(--primary);
+}
+
+.store-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
