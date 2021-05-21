@@ -21,6 +21,10 @@
   flex-direction: column;
 }
 
+.store-card-container:hover{
+  cursor: pointer;
+}
+
 .store-title-details {
   display: flex;
   justify-content: center;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Stores.css";
 import StoreCard from "../../components/StoreCard/StoreCard";
+import StoreInfo from '../../components/StoreInfo/StoreInfo'
 import axios from "axios";
 
 const Stores = () => {
@@ -29,17 +30,22 @@ const Stores = () => {
     getStores();
   }, []);
 
+  
+
   return (
     <div>
       <div className="store-container">
         {responseData !== null
           ? responseData.map((stores, index) => (
+            // <div onClick={toggleModal}>
               <StoreCard
                 title={stores.name}
                 address={stores.address}
                 image={stores.logo}
                 key={stores.id}
+                
               />
+              // </div>
             ))
           : null}
       </div>
