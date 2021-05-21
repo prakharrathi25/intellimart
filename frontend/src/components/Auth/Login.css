@@ -17,14 +17,17 @@
 }
 
 .form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 15;
   position: relative;
   background: #ffffff;
-  width: 600px;
+  width: 80%;
   border-radius: 4px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  margin: 100px auto 10px;
+  /* margin: 100px auto 10px; */
   overflow: hidden;
 }
 .form-toggle {
@@ -51,7 +54,7 @@
   left: 50%;
   width: 30px;
   height: 4px;
-  background: #4285f4;
+  background: var(--accent);
   transform: translate(-50%, -50%);
 }
 .form-toggle:before {
@@ -113,7 +116,7 @@
 }
 .form-group button {
   outline: none;
-  background: #4285f4;
+  background: var(--accent);
   width: 100%;
   border: 0;
   border-radius: 4px;
@@ -128,7 +131,7 @@
 }
 .two .form-group button {
   background: #ffffff;
-  color: #4285f4;
+  color: var(--accent);
 }
 .form-group .form-remember {
   font-size: 12px;
@@ -142,13 +145,14 @@
   margin: 0 10px 0 0;
 }
 .form-group .form-recovery {
-  color: #4285f4;
+  color: var(--accent);
   font-size: 12px;
   text-decoration: none;
 }
 .form-panel {
-  padding: 60px calc(5% + 60px) 60px 60px;
+  padding: 60px calc(5% + 10px) 60px 60px;
   box-sizing: border-box;
+  width: 45%;
 }
 .form-panel.one:before {
   content: "";
@@ -167,12 +171,14 @@
   position: absolute;
   top: 0;
   left: 95%;
-  background: #4285f4;
-  width: 100%;
+  background: var(--accent);
+  width: 51%;
   min-height: 100%;
-  padding: 60px calc(10% + 60px) 60px 60px;
+  padding: 60px calc(10% + 20px) 60px 70px;
   transition: 0.3s ease;
   cursor: pointer;
+  
+  
 }
 .form-panel.two:before,
 .form-panel.two:after {
@@ -190,7 +196,7 @@
   left: 3%;
 }
 .form-panel.two:hover {
-  left: 93%;
+  left: 93.5%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .form-panel.two:hover:before,
@@ -198,7 +204,7 @@
   opacity: 0;
 }
 .form-panel.two.active {
-  left: 10%;
+  left: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   cursor: default;
 }
@@ -211,7 +217,7 @@
 }
 .form-header h1 {
   padding: 4px 0;
-  color: #4285f4;
+  color: var(--accent);
   font-size: 24px;
   font-weight: 700;
   text-transform: uppercase;
@@ -224,5 +230,23 @@
 
 .cp-fab {
   background: #ffffff !important;
-  color: #4285f4 !important;
+  color: var(--accent) !important;
+}
+
+.login-container{
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2.25% 0;
+}
+
+.login-illus{
+  width:40%;
+}
+
+.login-svg{
+  width: 90%;
 }

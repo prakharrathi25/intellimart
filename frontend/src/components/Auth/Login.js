@@ -1,5 +1,6 @@
 import React from "react";
 import "./Login.css";
+import Illustration from '../Auth/login_illus.svg';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -37,7 +38,12 @@ const signupSubmit = (e) => {
 const Login = () => {
   return (
     <div className="login-container">
+      
       <div className="form">
+      <div className="login-illus">
+        <img src={Illustration} alt="Login/Sign Up" className="login-svg"/>
+      </div>
+        
         <div className="form-toggle" onClick={() => formToggleHandler()}></div>
         <div className="form-panel one" style={{ cursor: "pointer" }}>
           <div className="form-header">
