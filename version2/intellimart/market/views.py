@@ -118,7 +118,7 @@ class LoginCustomer(APIView):
             # Check if the user exists 
             if customer:
                 # if check_password(password, customer.password):
-                if password == customer.password:
+                if check_password(password, customer.password):
 
                     # Return the email ID and success if the password is correct
                     data['success'] = 'True'

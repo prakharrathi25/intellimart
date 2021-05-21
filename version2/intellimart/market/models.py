@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.db.models import Q
+from django.contrib.auth.hashers import make_password, check_password
 
 # Custom modules 
 from .utils import search_filter_by_text
@@ -160,6 +161,9 @@ class Customer(models.Model):
 
     ''' Function to set password to the given value '''
     def set_password(self, password):
+        
+        # Hash the password
+        password = make_password(password)
         self.password = password
 
     ''' Check whether the user already exists in the database '''

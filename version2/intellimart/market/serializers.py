@@ -58,7 +58,7 @@ class RegisterCustomerSerializer(serializers.ModelSerializer):
             })
 
         new_customer.set_password(password)
-        # new_customer.save()
+        new_customer.save()
         
         return new_customer
 
