@@ -250,3 +250,70 @@
 .login-svg{
   width: 90%;
 }
+
+@media (max-width:700px) {
+ 
+
+
+.login-illus {
+  display: none;
+}
+
+.form-panel {
+  
+  padding: 0px 40px;
+  width: 100%;
+}
+
+.login-container {
+  
+  height: 90vh;
+}
+
+.form {
+  
+  width: 90%;
+  height: 70%;
+}
+
+.form-header h1 {
+  
+  font-size: 30px;
+}
+
+.form-panel.two {
+  width: auto;
+  padding: 60px 30px;
+  left:91.75%
+}
+
+.form-panel.two.active {
+  
+  left: 0%;
+}
+
+.form-toggle {
+  
+  
+  top: 65px;
+  right: 30px;
+}
+ 
+}
+
+@media (max-height:700px ){
+  .form{
+    width: 92.5%;
+    height: 80%;
+  }
+  .form-panel.two{
+    left:91%;
+    padding: 22.5px 30px;
+  }
+  .form-panel.one{
+    padding: 0px 50px 0 20px;
+  }
+  .form-toggle {
+    top: 32.5px;
+    right: 20px}
+}

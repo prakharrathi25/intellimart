@@ -84,7 +84,7 @@ const Login = () => {
         </div>
         <div className="form-panel two" onClick={() => formPanelTwoHandler()}>
           <div className="form-header">
-            <h1>Register Account</h1>
+            <h1>SIGN IN</h1>
           </div>
           <div className="form-content">
             <form onSubmit={signupSubmit}>

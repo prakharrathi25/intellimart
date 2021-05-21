@@ -7,3 +7,10 @@ body {
   flex-wrap: wrap;
   align-items: center;
 }
+
+@media (max-width:800px){
+  .product-container{
+    flex-direction: column;
+  }
+  
+}
