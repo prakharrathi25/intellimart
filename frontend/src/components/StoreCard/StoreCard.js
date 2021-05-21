@@ -13,7 +13,7 @@ const StoreCard = ({ title, address, image,key }) => {
       </div>
       <div className="store-info">
         <p className="column" id="address">{address}</p>
-        <button className="add-button column" onClick={()=>console.log("Clicked")}> ᐅ </button>
+        <button className="more-button column" onClick={()=>console.log("Clicked")}> ᐅ </button>
       </div>
     </div>
   );
