@@ -1,7 +1,9 @@
 from django.db import models
+from django.db.models.base import ModelState
 from django.db.models.deletion import CASCADE
 from django.db.models import Q
 from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.postgres.fields import ArrayField
 
 # Custom modules 
 from .utils import search_filter_by_text
@@ -188,16 +190,27 @@ class Customer(models.Model):
 
         return error_message
 
+''' Cart Quanitities model to save the details of the product and it's quantity in the database '''
+class CartQuantity(models.Model):
+
+    # Define the model fields 
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
 ''' Cart model to store the details of the users cart and products '''
 class Cart(models.Model):
 
     # Define the model fields 
     user = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    # products = models.ManyToManyField(to=Product)
+    total_value = models.FloatField(default=0)
     products = models.ManyToManyField(
         'Product',
         related_name='carts'
+    )
+    quantities = models.ManyToManyField(
+        'CartQuantity',
+        related_name='quantities'
     )
 
     ''' Function to display all products '''
@@ -211,3 +224,4 @@ class Cart(models.Model):
     def get_cart_products(user_id):
 
         return Cart.objects.filter(user=user_id)
+
