@@ -1,8 +1,10 @@
 # IntelliMart
 
+[![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
-
-### ***Platform/Tools to be Used***
+### ***Technology Stack***
 
 **Front-End:** ReactJS, HTML, CSS
 
@@ -50,9 +52,21 @@ We have discussed the benefits for the consumers in the previous segment.
 5. This can be done through the analytics support of the application for the store owner. 
 6. The consumer visits the store and picks up their desired goods and leaves much faster leading to better practicing of the social distancing norms and less exposure to the virus.   
 
-### ***Contributors***
+## 🤝 How to Contribute?
 
-1. [Kirtik Singh](https://github.com/kirtiksingh) 
-2. [Prakhar Bhasin](https://github.com/prkhrbhsn)
-3. [Prakhar Rathi](https://github.com/prakharrathi25)
+- Take a look at the Existing Issues or create your own Issues!
+- Wait for the Issue to be assigned to you after which you can start working on it.
+- Fork the Repo and create a Branch for any Issue that you are working upon.
+- Create a Pull Request which will be promptly reviewed and suggestions would be added to improve it.
+- Add Screenshots to help us know what this Script is all about.
+
+## 👨‍💻 Contributors 
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/prakharrathi25"><img src="https://avatars.githubusercontent.com/u/38958532?v=4" width="100px;" alt=""/><br /><sub><b>Prakhar Rathi</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/prkhrbhsn"><img src="https://avatars.githubusercontent.com/u/61727284?v=4" width="100px;" alt=""/><br /><sub><b>Prakhar Bhasin</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/kirtiksingh"><img src="https://avatars.githubusercontent.com/u/42700919?v=4" width="100px;" alt=""/><br /><sub><b>Kirtik Singh</b></sub></a><br /></td> 
+  </tr>
+</table>
 
