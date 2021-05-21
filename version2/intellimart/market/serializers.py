@@ -1,3 +1,4 @@
+from django.db.models import fields
 from rest_framework import serializers
 from .models import *
 
@@ -61,5 +62,9 @@ class RegisterCustomerSerializer(serializers.ModelSerializer):
         
         return new_customer
 
-        
-        
+''' Log in Customer Serializer Class which handles email and password '''
+class LoginCustomerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Customer
+        fields = ('email', 'password') 

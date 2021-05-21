@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter
+from django.contrib.auth.hashers import make_password, check_password
 from rest_framework.views import APIView
 from django.http import HttpResponse
 from itertools import chain
@@ -89,6 +90,51 @@ class CartView(generics.ListAPIView):
         
         return Response(CartSerializer(queryset, many = True).data)
 
+class LoginCustomer(APIView):
+    ''' View tp login a customer based on their credentials '''
+
+    # Define class variables 
+    serializer_class = LoginCustomerSerializer
+
+    # Function to handle a POST request 
+    def post(self, request):
+
+        # Create a serializer instance 
+        serializer = self.serializer_class(data=request.data)
+
+        data = {}    # Data to be returned to the user
+
+        if serializer.is_valid():
+            
+            login_input = serializer.data
+            
+            # Get the data
+            email = login_input.get('email')
+            password = login_input.get('password')
+
+            # Get the customer details
+            customer = Customer.get_customer_by_email(email)
+
+            # Check if the user exists 
+            if customer:
+                # if check_password(password, customer.password):
+                if password == customer.password:
+
+                    # Return the email ID and success if the password is correct
+                    data['success'] = 'True'
+                    data['user_id'] = customer.id
+                    data['email'] = customer.email
+
+                else:
+                    data['error'] = 'Invalid Password'
+            else:
+                data['error'] = 'User Does not exist'
+        
+        else: 
+            data['error'] = "Some other Error occurred"
+
+        return Response(data)
+
 
 class RegisterCustomer(APIView):
 
@@ -108,7 +154,27 @@ class RegisterCustomer(APIView):
         
         # Serializer instance
         serializer = self.serializer_class(data=request.data) 
+
+        data = {}    # Data to be returned to the user
         
+
+        if serializer.is_valid():
+            new_cust = serializer.save()
+            data['success'] = 'True'
+            data['email'] = new_cust.email
+            data['first_name'] = new_cust.first_name
+            data['last_name'] = new_cust.last_name
+            data['phone'] = new_cust.phone
+
+            print(data)
+
+        else: 
+            data = serializer.errors
+        
+        return Response(data)
+        
+        # Method 2 
+
         # if serializer.is_valid():
             
         #     cust_data = serializer.data
@@ -137,21 +203,5 @@ class RegisterCustomer(APIView):
         
         # return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Method 2 
-        data = {}    # Data to be returned to the user
-
-        if serializer.is_valid():
-            new_cust = serializer.save()
-            data['success'] = 'True'
-            data['email'] = new_cust.email
-            data['first_name'] = new_cust.first_name
-            data['last_name'] = new_cust.last_name
-            data['phone'] = new_cust.phone
-
-            print(data)
-
-        else: 
-            data = serializer.errors
         
-        return Response(data)
 
