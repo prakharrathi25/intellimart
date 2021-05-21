@@ -48,6 +48,12 @@ class RegisterCustomerSerializer(serializers.ModelSerializer):
             phone=self.validated_data['phone'],
         )
 
+        # Check if the email already exists or not 
+        if new_customer.is_exists():
+            raise serializers.ValidationError({
+                'error':'This user already exists!'
+            })
+
         # Password check 
         password = self.validated_data['password']
         password2 = self.validated_data['password2']
