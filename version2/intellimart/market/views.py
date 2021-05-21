@@ -66,7 +66,28 @@ class ProductView(generics.ListAPIView):
                                         search_query=search_query )
 
         return Response(ProductSerializer(queryset, many = True).data)
+
+class CartProductView(generics.ListAPIView):
+    
+    ''' View to display cart items and add items to the cart '''
+
+    # Define class variables 
+    serializer_class = CartProductSerializer
+    queryset = []
+
+    def get(self, request):
+
+        ''' Display all the cart items queried by different id paramters '''
+        user_id = request.GET.get('user')
+        cart_id = request.GET.get('cart')
+        product_id = request.GET.get('product')
+
+        queryset = CartProduct.get_cart_product(cart_id=cart_id, 
+                                    product_id=product_id, 
+                                    user_id=user_id)
         
+        return Response(CartProductSerializer(queryset, many=True).data)
+
 class CartView(generics.ListAPIView):
     
     ''' View to display cart items and add items to the cart '''

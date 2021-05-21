@@ -23,6 +23,13 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
         fields = '__all__'
 
+class CartProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartProduct
+        fields = '__all__'
+
+''' Data storage Serializers '''
+
 ''' Register Customer Serializer Class '''
 class RegisterCustomerSerializer(serializers.ModelSerializer):
     

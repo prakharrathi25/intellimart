@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.base import ModelState
+from django.db.models.base import Model, ModelState
 from django.db.models.deletion import CASCADE
 from django.db.models import Q
 from django.contrib.auth.hashers import make_password, check_password
@@ -190,14 +190,6 @@ class Customer(models.Model):
 
         return error_message
 
-''' Cart Quanitities model to save the details of the product and it's quantity in the database '''
-class CartQuantity(models.Model):
-
-    # Define the model fields 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=0)
-    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
-
 ''' Cart model to store the details of the users cart and products '''
 class Cart(models.Model):
 
@@ -224,4 +216,45 @@ class Cart(models.Model):
     def get_cart_products(user_id):
 
         return Cart.objects.filter(user=user_id)
+
+''' Cart Quanitities model to save the details of the product and it's quantity in the database '''
+class CartQuantity(models.Model):
+
+    # Define the model fields 
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, default=1)
+    # user = models.ForeignKey(Customer, on_delete=models.CASCADE)
+
+    # Define plural name using meta class
+    class Meta:
+        verbose_name_plural = "Cart Quantities"
+
+''' Cart Product Model for the details of the  '''
+class CartProduct(models.Model):
+
+    # Define the model fields 
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    price = models.IntegerField(default=0)
+
+    ''' Functions to filter the cart products by various fields '''
+    @staticmethod
+    def get_cart_product(cart_id=None, product_id=None, user_id=None):
+
+        queryset = CartProduct.objects.all()
+        
+        # Apply filters to the data
+        if cart_id:
+            queryset = queryset.filter(cart=cart_id)
+        
+        if product_id:
+            queryset = queryset.filter(product=product_id)
+        
+        if user_id:
+            queryset = queryset.filter(user=user_id)
+        
+        return queryset
 
