@@ -20,10 +20,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 80%;
+  height: 87.5%;
   z-index: 15;
   position: relative;
   background: #ffffff;
-  width: 80%;
   border-radius: 4px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
@@ -33,11 +34,11 @@
 .form-toggle {
   z-index: 10;
   position: absolute;
-  top: 60px;
-  right: 60px;
+  top: 30px;
+  right: 25px;
   background: #ffffff;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
   transform-origin: center;
   transform: translate(0, -25%) scale(0);
@@ -52,7 +53,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 30px;
+  width: 25px;
   height: 4px;
   background: var(--accent);
   transform: translate(-50%, -50%);
@@ -174,7 +175,7 @@
   background: var(--accent);
   width: 51%;
   min-height: 100%;
-  padding: 60px calc(10% + 20px) 60px 70px;
+  padding: 20px calc(10% + 20px) 10px 70px;
   transition: 0.3s ease;
   cursor: pointer;
   
@@ -213,7 +214,7 @@
   opacity: 0;
 }
 .form-header {
-  margin: 0 0 40px;
+  margin: 0 0 30px;
 }
 .form-header h1 {
   padding: 4px 0;
@@ -234,13 +235,14 @@
 }
 
 .login-container{
-  height: 80vh;
+  height: 87.5vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 2.25% 0;
+  padding:0;
+  
 }
 
 .login-illus{
@@ -267,7 +269,7 @@
 
 .login-container {
   
-  height: 90vh;
+  height: 95vh;
 }
 
 .form {
@@ -283,7 +285,7 @@
 
 .form-panel.two {
   width: auto;
-  padding: 60px 30px;
+  padding: 35px 30px;
   left:91.75%
 }
 
@@ -295,16 +297,16 @@
 .form-toggle {
   
   
-  top: 65px;
+  top: 45px;
   right: 30px;
 }
  
 }
 
-@media (max-height:700px ){
+@media screen and (max-height:700px ) and (max-width:376px){
   .form{
     width: 92.5%;
-    height: 80%;
+    height: 85%;
   }
   .form-panel.two{
     left:91%;
