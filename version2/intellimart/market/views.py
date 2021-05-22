@@ -262,3 +262,26 @@ class SlotView(APIView):
         
         
         return Response(SlotSerializer(queryset, many = True).data)
+
+
+class OwnerView(APIView):
+
+    ''' View to get the data of all the owners in our database '''
+
+    # Define class variables 
+    serializer_class = OwnerSerializer
+    queryset = []
+
+    def get(self, request): 
+        
+        ''' GET Request Handle: Display details of all the owners and the details of owner queried by ID ''' 
+        
+        # Collect id for the owner 
+        owner_id = request.GET.get('id')    
+        queryset = Owner.objects.all()
+
+        if owner_id:
+            queryset = queryset.filter(id=owner_id)
+        
+        return Response(OwnerSerializer(queryset, many=True).data)
+    

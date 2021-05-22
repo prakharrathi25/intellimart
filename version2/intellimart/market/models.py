@@ -15,15 +15,14 @@ from .utils import search_filter_by_text
 class Owner(models.Model):
     
     # Define the fields for the Customer
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    phone = models.CharField(max_length=15)
+    name = models.CharField(max_length=50)
+    phone = models.CharField(max_length=15, default="12345678")
     email = models.EmailField()
     password = models.CharField(max_length=500)
 
     # Override the to string method for the class
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.name}"
 
 
 ''' Store Model'''
@@ -44,7 +43,7 @@ class Store(models.Model):
     address = models.CharField(max_length=1000, null=True, default=" ", blank=True)
     logo = models.ImageField(upload_to='market/static/images/logos')
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, default=1) 
-    phone_number = models.CharField(max_length=15, null=True)
+    phone_number = models.CharField(max_length=15, default="123456789")
     
     ''' Filter functions for the store model '''
 

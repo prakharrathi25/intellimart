@@ -33,6 +33,11 @@ class SlotSerializer(serializers.ModelSerializer):
         model = Slot
         fields = '__all__'
 
+class OwnerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Owner
+        fields = '__all__'
+
 ''' Data storage Serializers '''
 
 ''' Register Customer Serializer Class '''
@@ -52,7 +57,7 @@ class RegisterCustomerSerializer(serializers.ModelSerializer):
 
         new_customer = Customer(
             email=self.validated_data['email'],
-            first_name=self.validated_data['name'],
+            name=self.validated_data['name'],
             phone=self.validated_data['phone'],
         )
 
