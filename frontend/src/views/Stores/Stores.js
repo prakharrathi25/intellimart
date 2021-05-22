@@ -3,6 +3,7 @@ import "./Stores.css";
 import StoreCard from "../../components/StoreCard/StoreCard";
 import StoreInfo from '../../components/StoreInfo/StoreInfo'
 import axios from "axios";
+import Loader from '../../components/loader'
 
 const Stores = () => {
   const [responseData, setResponseData] = useState(null);
@@ -19,6 +20,7 @@ const Stores = () => {
     axios(config)
       .then(function (response) {
         setResponseData(response.data);
+        console.log(response.data[0].id)
         // console.log(response.data);
       })
       .catch(function (error) {
@@ -42,12 +44,12 @@ const Stores = () => {
                 title={stores.name}
                 address={stores.address}
                 image={stores.logo}
-                key={stores.id}
+                id={stores.id}
                 
               />
               // </div>
             ))
-          : null}
+          : <Loader/>}
       </div>
     </div>
   );

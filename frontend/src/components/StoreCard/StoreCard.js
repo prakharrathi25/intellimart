@@ -3,7 +3,7 @@ import "./StoreCard.css";
 import StoreInfo from "../StoreInfo/StoreInfo";
 import {Link} from "react-router-dom"
 
-const StoreCard = ({ title, address, image, key }) => {
+const StoreCard = ({ title, address, image, id }) => {
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
@@ -18,7 +18,7 @@ const StoreCard = ({ title, address, image, key }) => {
       {/* <StoreInfo show={showModal} toggle={toggleModal} id={key} /> */}
       {/* :null} */}
       <div className="store-card-container" onClick={()=>toggleModal()}>
-        <Link to="/">
+        <Link to={`/store/${id}`}>
         <div className="store-title-details">
           <img className="store-image" src={"http://127.0.0.1:8000" + image} />
           <h1 className="store-name">{title}</h1>
