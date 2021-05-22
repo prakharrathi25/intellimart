@@ -26,7 +26,7 @@
   position: relative;
   background: #ffffff;
   border-radius: 4px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   /* margin: 100px auto 10px; */
   overflow: hidden;
@@ -55,7 +55,7 @@
   left: 50%;
   width: 25px;
   height: 4px;
-  background: var(--accent);
+  background: var(--accent2);
   transform: translate(-50%, -50%);
 }
 .form-toggle:before {
@@ -132,7 +132,8 @@
 }
 .two .form-group button {
   background: #ffffff;
-  color: var(--accent);
+  color: var(--accent2);
+  font-weight: 600;
 }
 .form-group .form-remember {
   font-size: 12px;
@@ -172,7 +173,7 @@
   position: absolute;
   top: 0;
   left: 95%;
-  background: var(--accent);
+  background: var(--accent2);
   width: 51%;
   min-height: 100%;
   padding: 20px calc(10% + 20px) 10px 70px;
@@ -294,9 +295,7 @@
   left: 0%;
 }
 
-.form-toggle {
-  
-  
+.form-toggle {  
   top: 45px;
   right: 30px;
 }

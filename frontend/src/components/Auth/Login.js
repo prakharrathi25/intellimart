@@ -4,6 +4,7 @@ import Illustration from "../Auth/login_illus.svg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 toast.configure();
 
@@ -25,6 +26,7 @@ const formToggleHandler = () => {
 };
 
 const Login = () => {
+  const [responseData, setResponseData] = useState(null);
   const [signInFormValues, setSignInFormValues] = useState({
     email: "",
     password: "",
@@ -35,6 +37,8 @@ const Login = () => {
     mobile: "",
     password: "",
   });
+
+  const history = useHistory();
 
   // SignIn Handlers
   const handleSignInEmail = (event) => {
@@ -84,7 +88,6 @@ const Login = () => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    // console.log("loginSubmit");
     console.log(signInFormValues);
 
     var data = JSON.stringify({
@@ -97,16 +100,23 @@ const Login = () => {
       url: "http://127.0.0.1:8000/login",
       headers: {
         "Content-Type": "application/json",
-        // Cookie:
-        //   "csrftoken=No8wD0cOms43Hh37HiwdjatM4lpChEwbgfLcTTi4gmB1FIQxKrjiujILll3tDA8i",
       },
       data: data,
     };
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
-        toast.success("Padhaaro Sa");
+        let responseData = response.data;
+        if (responseData.success === "True") {
+          setResponseData(responseData);
+          localStorage.setItem("login", JSON.stringify(responseData));
+          toast.success("Welcome Back!");
+          history.push("/");
+        } else if (responseData.error === "Some other Error occurred") {
+          toast.error("Username or Password does not Exist!");
+        } else {
+          toast.error(responseData.error);
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -115,17 +125,13 @@ const Login = () => {
 
   const signupSubmit = (e) => {
     e.preventDefault();
-    // console.log("signupSubmit");
-    // console.log(signUpFormValues);
 
     var axios = require("axios");
     var data = JSON.stringify({
-      first_name: signUpFormValues.name,
-      last_name: "Singh",
+      name: signUpFormValues.name,
       email: signUpFormValues.email,
       phone: signUpFormValues.mobile,
       password: signUpFormValues.password,
-      password2: signUpFormValues.password,
     });
 
     var config = {
@@ -133,19 +139,25 @@ const Login = () => {
       url: "http://127.0.0.1:8000/register",
       headers: {
         "Content-Type": "application/json",
-        // Cookie:
-        //   "csrftoken=No8wD0cOms43Hh37HiwdjatM4lpChEwbgfLcTTi4gmB1FIQxKrjiujILll3tDA8i",
       },
       data: data,
     };
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
-        toast.error("You Can't Sit With Us");
+        let responseData = response.data;
+        console.log(responseData);
+        if (responseData.success === "True") {
+          setResponseData(responseData);
+          toast.success("Welcome to Intellimart, please login to continue!");
+          formToggleHandler();
+        } else {
+          toast.error(responseData.error);
+        }
       })
       .catch(function (error) {
-        console.log(error);
+        toast.error(error.response.data.error);
+        console.log(error.response.data.error);
       });
   };
 
@@ -186,10 +198,10 @@ const Login = () => {
                 />
               </div>
               <div className="form-group">
-                <label className="form-remember">
+                {/* <label className="form-remember">
                   <input type="checkbox" />
                   Remember Me
-                </label>
+                </label> */}
                 <a className="form-recovery">Forgot Password?</a>
               </div>
               <div className="form-group">
@@ -248,17 +260,6 @@ const Login = () => {
                   value={signUpFormValues.password}
                 />
               </div>
-              {/* <div className="form-group">
-                <label htmlFor="cpassword">Confirm Password</label>
-                <input
-                  id="cpassword"
-                  type="password"
-                  name="cpassword"
-                  required="required"
-                  onChange={handleEmail}
-                  value={formValues.password}
-                />
-              </div> */}
               <div className="form-group">
                 <button type="submit">Register</button>
               </div>
