@@ -19,6 +19,7 @@ code {
   --light-translucent: #e7ecef3a;
   --dark: #030119;
   --dark-translucent: #030119b1;
+  --grad: linear-gradient(270deg, hsla(235, 70%, 60%, 1) 35%, hsla(197, 85%, 51%, 1) 100%);
 }
 body::-webkit-scrollbar {
   width: 0.5rem;

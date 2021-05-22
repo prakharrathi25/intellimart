@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./StoreInfo.css";
-import "../../views/Stores/Stores";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-} from "@material-ui/core";
+import Waves from '../Waves/Waves'
+import Products from '../../views/Products/Products'
 import { useParams } from "react-router";
 
-const StoreInfo = (show, toggle) => {
+
+const StoreInfo = () => {
     var {id} = useParams();
     // var id = 1;
 
@@ -27,8 +23,8 @@ const StoreInfo = (show, toggle) => {
       };
       axios(config)
         .then(function (response) {
-          setResponseData(response.data);
-          console.log(response.data[0])
+          setResponseData(response.data[0]);
+          console.log(response.data)
           // console.log(response.data);
         })
         .catch(function (error) {
@@ -43,19 +39,33 @@ const StoreInfo = (show, toggle) => {
   
 
   return (
-      <>
+      <div className="store-info-container">
     {responseData !== null
         ?
-    <Dialog open={show} onClose={toggle} maxWidth="md" fullWidth={true}>
-      <DialogTitle>{responseData[0].name}</DialogTitle>
-      <DialogContent>
-        <DialogContentText>What do you wanna do next?</DialogContentText>
-        {/* <input name="taskName" value={taskName} onChange={handleChange}/>
-        <input name="category"value={category} onChange={handleChange}/>
-        <button className="task-submit"onClick={handleSave}>Create</button> */}
-      </DialogContent>
-    </Dialog>:null}
+    <>
+    <div className="store-details-container">
+        <div className="store-details">
+            
+            <img className="logo" src={"http://127.0.0.1:8000" + responseData.logo} alt=""/>
+            <div>
+            
+            <h1 className="name">{responseData.name}</h1>
+            <p className="address">{responseData.address}</p>
+            </div>
+            
+        </div>
+        <p>9899169906</p>
+        <Waves className="small-wave"/>
+        <div className="store-products">
+    <Products store={id}/>
+    </div>
+        
+    </div>
+    
+    
     </>
+    :null}
+    </div>
   );
 };
 

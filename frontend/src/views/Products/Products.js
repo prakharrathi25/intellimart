@@ -3,26 +3,27 @@ import "./Products.css";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import axios from "axios";
 
-const Products = () => {
+const Products = ({store}) => {
   const [responseData, setResponseData] = useState(null);
   const [cart, setCart] = useState([]);
 
   const saveItem = (itemObj) => {
     let tempList = [...cart, itemObj];
     setCart(tempList);
-    localStorage.setItem("cart", JSON.stringify(tempList));
+    localStorage.setItem("cart", JSON.stringify(tempList))
     
   };
 
   const getProducts = () => {
+    console.log(store.store)
     var config = {
       method: "get",
-      url: "http://127.0.0.1:8000/products",
+      url:  `http://127.0.0.1:8000/products?store_id=${store}`,
     };
     axios(config)
       .then(function (response) {
         setResponseData(response.data);
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
