@@ -244,4 +244,21 @@ class AllCustomerView(APIView):
         
         return Response(CustomerSerializer(queryset, many = True).data)
 
+class SlotView(APIView):
+    ''' View to get the data of all the slots in our database '''
 
+    # Define class variables 
+    serializer_class = SlotSerializer
+    queryset = []
+
+    def get(self, request):
+
+        ''' GET Request Handler: Display all the slots queried by the user ID and the store ID '''
+        
+        # Collect the id for the store to be displayed
+        store_id = request.GET.get('store')
+
+        queryset = Slot.get_slots(store_id=store_id)
+        
+        
+        return Response(SlotSerializer(queryset, many = True).data)

@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.base import Model, ModelState
 from django.db.models.deletion import CASCADE
-from django.db.models import Q
+from django.db.models import Q, query
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.postgres.fields import ArrayField
 from django.http.response import StreamingHttpResponse
@@ -267,3 +267,27 @@ class CartProduct(models.Model):
         
         return queryset
 
+''' Model for the slots that each store provides '''
+class Slot(models.Model):
+
+    # Define the fields
+    start_hour = models.IntegerField(default=0)
+    end_hour = models.IntegerField(default=23)
+    total_people = models.IntegerField(default=0)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    alloted = models.BooleanField(default=False)
+
+    ''' Functions to filter slots by user and store ''' 
+    @staticmethod
+    def get_slots(store_id=None):
+
+        try: 
+            queryset = Slot.objects.all()
+
+            if store_id:
+                queryset = queryset.filter(store=store_id)
+
+            return queryset
+        
+        except: 
+            return False
