@@ -33,13 +33,10 @@ class CartProductSerializer(serializers.ModelSerializer):
 ''' Register Customer Serializer Class '''
 class RegisterCustomerSerializer(serializers.ModelSerializer):
     
-    # Confirm password entry 
-    password2 = serializers.CharField(style={'input_type':'password'}, write_only=True)
-    
     class Meta:
         
         model = Customer
-        fields = ('first_name', 'last_name', 'email', 'phone', 'password', 'password2')
+        fields = ('name', 'email', 'phone', 'password')
 
         extra_kwargs = {
             'password': {'write_only' : True}
@@ -50,8 +47,7 @@ class RegisterCustomerSerializer(serializers.ModelSerializer):
 
         new_customer = Customer(
             email=self.validated_data['email'],
-            first_name=self.validated_data['first_name'],
-            last_name=self.validated_data['last_name'],
+            first_name=self.validated_data['name'],
             phone=self.validated_data['phone'],
         )
 
@@ -61,15 +57,10 @@ class RegisterCustomerSerializer(serializers.ModelSerializer):
                 'error':'This user already exists!'
             })
 
-        # Password check 
+        # Get the password
         password = self.validated_data['password']
-        password2 = self.validated_data['password2']
-        
-        if password != password2:
-            raise serializers.ValidationError({
-                'error':'Passwords do not match'
-            })
 
+        # Set the password and save the new registeration
         new_customer.set_password(password)
         new_customer.save()
         

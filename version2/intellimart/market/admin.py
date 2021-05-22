@@ -19,7 +19,7 @@ class AdminCategory(admin.ModelAdmin):
     list_display = ['id', 'name']
 
 class AdminCustomer(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'last_name', 'email']
+    list_display = ['id', 'name', 'email']
 
 class AdminOwner(admin.ModelAdmin):
     list_display = ['id', 'first_name', 'last_name', 'email']

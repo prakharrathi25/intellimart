@@ -4,6 +4,7 @@ from django.db.models.deletion import CASCADE
 from django.db.models import Q
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.postgres.fields import ArrayField
+from django.http.response import StreamingHttpResponse
 
 # Custom modules 
 from .utils import search_filter_by_text
@@ -142,13 +143,12 @@ class Product(models.Model):
 class Customer(models.Model):
 
     # Define the fields for the Customer
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100, default="")
     phone = models.CharField(max_length=15)
     email = models.EmailField()
     password = models.CharField(max_length=500)
 
-    ''' Function to get customers by email '''
+    ''' Function to get customers by various filtering methods '''
     @staticmethod
     def get_customer_by_email(email):
         try:
@@ -156,6 +156,15 @@ class Customer(models.Model):
 
         except:
             return False
+
+    @staticmethod
+    def get_cutomer(user_id=None):
+        try: 
+            return Customer.objects.filter(id=user_id)
+        
+        except: 
+            return False
+
 
     ''' Function to register the data in the database '''
     def register(self):
