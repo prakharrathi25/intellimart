@@ -183,11 +183,8 @@ class RegisterCustomer(APIView):
             new_cust = serializer.save()
             data['success'] = 'True'
             data['email'] = new_cust.email
-            data['first_name'] = new_cust.first_name
-            data['last_name'] = new_cust.last_name
+            data['name'] = new_cust.name
             data['phone'] = new_cust.phone
-
-            print(data)
 
         else: 
             data = serializer.errors
@@ -224,5 +221,27 @@ class RegisterCustomer(APIView):
         
         # return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
+class AllCustomerView(APIView):
+    ''' View to get the data of all the customers in our database '''
+
+    # Define class variables 
+    serializer_class = CustomerSerializer
+    queryset = []
+
+    def get(self, request):
+
+        ''' GET Request Handler: Display all the customers queried by the user ID '''
         
+        # Collect the id for the store to be displayed
+        user_id = request.GET.get('id')
+
+        if user_id:
+            queryset = Customer.get_cutomer(user_id)
+        
+        else:
+            queryset = Customer.objects.all()
+        
+        
+        return Response(CustomerSerializer(queryset, many = True).data)
+
 
