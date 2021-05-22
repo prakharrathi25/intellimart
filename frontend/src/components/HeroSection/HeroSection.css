@@ -7,15 +7,24 @@
     
 }
 
+body{
+    background: linear-gradient(270deg, hsla(235, 70%, 60%, 1) 35%, hsla(197, 85%, 51%, 1) 100%);
+}
+
 .hero-container{
+    top:0%;
     height:92.5vh;
     /* width: 100%; */
     display:flex;
     flex-direction: row;
-    background-color: var(--primary);
+    /* background-color: var(--accent); */
+    background: linear-gradient(270deg, hsla(235, 70%, 60%, 1) 35%, hsla(197, 85%, 51%, 1) 100%);
+
+
 }
 
 .hero-section{
+    top:0%;
     height: 100%;
     width: 50%;
     display: flex;
@@ -27,6 +36,7 @@
     font-size: 4rem;
     font-weight: 800;
     padding: 5%;
+    color: var(--light)
 }
 
 img{
@@ -60,4 +70,24 @@ img{
     img{
         padding: 10%
     }
+}
+.custom-shape-divider-bottom-1621667290 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1621667290 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 84px;
+}
+
+.custom-shape-divider-bottom-1621667290 .shape-fill {
+    fill: #FFFFFF;
 }
