@@ -156,6 +156,10 @@ nav.scrolled .nav-main {
     animation: ease 0.7s bottom-2 forwards;
 }
 
+.img-cart{
+    height: 25px;
+}
+
 @keyframes top {
     0% {
         top: 0;

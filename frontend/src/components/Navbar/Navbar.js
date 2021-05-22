@@ -14,14 +14,17 @@ const Navbar = () => {
       title: "Products",
       link: "products",
     },
-
     {
-      title: "Contact Us",
-      link: "/",
+      title: "About Us",
+      link: "/about",
     },
     {
       title: "Log In",
       link: "login",
+    },
+    {
+      title: "Stores",
+      link: "stores",
     },
   ];
 
@@ -71,6 +74,17 @@ const Navbar = () => {
                 </a>
               );
             })}
+            <a
+              className="nav-link"
+              href="/cart"
+              onClick={() => setMenuOpen(false)}
+            >
+              <img
+                className="img-cart"
+                src="https://www.freeiconspng.com/thumbs/cart-icon/basket-cart-icon-27.png"
+              />
+              {/* <div className="underline"></div> */}
+            </a>
           </ul>
         </div>
       </nav>
