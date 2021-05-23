@@ -31,6 +31,12 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [signUpFormInitialValues, setSignUpFormInitialValues] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    password: "",
+  });
   const [signUpFormValues, setSignUpFormValues] = useState({
     name: "",
     email: "",
@@ -97,7 +103,7 @@ const Login = () => {
 
     var config = {
       method: "post",
-      url: "http://127.0.0.1:8000/login",
+      url: "http://prakharrathi25.pythonanywhere.com/login",
       headers: {
         "Content-Type": "application/json",
       },
@@ -136,7 +142,7 @@ const Login = () => {
 
     var config = {
       method: "post",
-      url: "http://127.0.0.1:8000/register",
+      url: "http://prakharrathi25.pythonanywhere.com/register",
       headers: {
         "Content-Type": "application/json",
       },
@@ -150,6 +156,7 @@ const Login = () => {
         if (responseData.success === "True") {
           setResponseData(responseData);
           toast.success("Welcome to Intellimart, please login to continue!");
+          setSignUpFormValues(signUpFormInitialValues);
           formToggleHandler();
         } else {
           toast.error(responseData.error);
@@ -202,7 +209,7 @@ const Login = () => {
                   <input type="checkbox" />
                   Remember Me
                 </label> */}
-                <a className="form-recovery">Forgot Password?</a>
+                {/* <a className="form-recovery">Forgot Password?</a> */}
               </div>
               <div className="form-group">
                 <button type="submit">Log In</button>

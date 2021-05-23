@@ -15,7 +15,7 @@ const StoreInfo = () => {
     const getStores = () => {
       var config = {
         method: "get",
-        url: `http://127.0.0.1:8000/market?id=${id}`,
+        url: `http://prakharrathi25.pythonanywhere.com/market?id=${id}`,
         // headers: {
         //   Cookie:
         //     "csrftoken=No8wD0cOms43Hh37HiwdjatM4lpChEwbgfLcTTi4gmB1FIQxKrjiujILll3tDA8i",
@@ -46,7 +46,7 @@ const StoreInfo = () => {
     <div className="store-details-container">
         <div className="store-details">
             
-            <img className="logo" src={"http://127.0.0.1:8000" + responseData.logo} alt=""/>
+            <img className="logo" src={"http://prakharrathi25.pythonanywhere.com" + responseData.logo} alt=""/>
             <div>
             
             <h1 className="name">{responseData.name}</h1>

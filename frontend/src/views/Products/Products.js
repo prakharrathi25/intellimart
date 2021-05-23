@@ -18,7 +18,7 @@ const Products = ({store}) => {
     console.log(store.store)
     var config = {
       method: "get",
-      url:  `http://127.0.0.1:8000/products?store_id=${store}`,
+      url:  `http://prakharrathi25.pythonanywhere.com/products?store_id=${store}`,
     };
     axios(config)
       .then(function (response) {

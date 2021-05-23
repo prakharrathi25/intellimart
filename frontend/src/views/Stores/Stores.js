@@ -11,7 +11,7 @@ const Stores = () => {
   const getStores = () => {
     var config = {
       method: "get",
-      url: "http://127.0.0.1:8000/market",
+      url: "http://prakharrathi25.pythonanywhere.com/market",
       // headers: {
       //   Cookie:
       //     "csrftoken=No8wD0cOms43Hh37HiwdjatM4lpChEwbgfLcTTi4gmB1FIQxKrjiujILll3tDA8i",

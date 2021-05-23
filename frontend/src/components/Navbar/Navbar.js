@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Navbar.css";
+import Cart from "./../../assets/cart.png";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -11,21 +12,26 @@ const Navbar = () => {
       link: "/",
     },
     {
-      title: "Products",
-      link: "products",
+      title: "Stores",
+      link: "/stores",
     },
     {
       title: "About Us",
       link: "/about",
     },
-    {
-      title: "Log In",
-      link: "login",
-    },
-    {
-      title: "Stores",
-      link: "stores",
-    },
+    localStorage.getItem("login")
+      ? {
+          title: "Logout",
+          link: "/logout",
+        }
+      : {
+          title: "Login",
+          link: "/login",
+        },
+    // {
+    //   title: "Products",
+    //   link: "products",
+    // },
   ];
 
   const handleScroll = () => {
@@ -79,10 +85,7 @@ const Navbar = () => {
               href="/cart"
               onClick={() => setMenuOpen(false)}
             >
-              <img
-                className="img-cart"
-                src="https://www.freeiconspng.com/thumbs/cart-icon/basket-cart-icon-27.png"
-              />
+              <img className="img-cart" src={Cart} alt="NO IMAGE" />
               {/* <div className="underline"></div> */}
             </a>
           </ul>
