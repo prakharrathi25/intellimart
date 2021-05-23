@@ -244,20 +244,17 @@ class CartProduct(models.Model):
     # Define the model fields 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    # cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     user = models.ForeignKey(Customer, on_delete=models.CASCADE)
     price = models.IntegerField(default=0)
 
     ''' Functions to filter the cart products by various fields '''
     @staticmethod
-    def get_cart_product(cart_id=None, product_id=None, user_id=None):
+    def get_cart_product(product_id=None, user_id=None):
 
         queryset = CartProduct.objects.all()
         
-        # Apply filters to the data
-        if cart_id:
-            queryset = queryset.filter(cart=cart_id)
-        
+        # Apply filters to the data        
         if product_id:
             queryset = queryset.filter(product=product_id)
         

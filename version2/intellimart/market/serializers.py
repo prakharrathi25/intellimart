@@ -1,3 +1,4 @@
+from itertools import product
 from django.db.models import fields
 from rest_framework import serializers
 from .models import *
@@ -76,9 +77,48 @@ class RegisterCustomerSerializer(serializers.ModelSerializer):
         
         return new_customer
 
+''' Serializer to add the data to the Cart '''
+class AddCartProductSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CartProduct
+        fields = ('user', 'product', 'quantity', 'price')
+    
+    # Function to save a new cart product
+    def save(self):
+
+        new_cart_product = CartProduct(
+            user=self.validated_data['user'],
+            price=self.validated_data['price'],
+            product=self.validated_data['product'],
+            quantity=self.validated_data['quantity']
+        )
+        
+        print(new_cart_product.user, type(new_cart_product.user))
+        
+        # Check if the quantity is greater than the store product
+        # store_product = Product.objects.get(id=new_cart_product.product)
+        given_quantity = new_cart_product.quantity
+        existing_quantity = new_cart_product.product.quantity
+
+        print("GIVEM", given_quantity, type(given_quantity))
+        print("PRESENT", existing_quantity, type(existing_quantity))
+        
+        if given_quantity > existing_quantity:
+            raise serializers.ValidationError({
+                'error':'The quantity enterred is greater than the quantity available!'
+            })
+            
+
+        # Save the new cart product
+        new_cart_product.save()
+        
+        return new_cart_product
+
 ''' Log in Customer Serializer Class which handles email and password '''
 class LoginCustomerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Customer
         fields = ('email', 'password') 
+

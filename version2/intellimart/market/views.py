@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.filters import SearchFilter
 from django.contrib.auth.hashers import make_password, check_password
 from rest_framework.views import APIView
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from itertools import chain
 
 # Custom  modules
@@ -63,7 +63,7 @@ class ProductView(generics.ListAPIView):
 
         queryset = Product.get_products(store_id=store_id,
                                         category_id=category,
-                                        search_query=search_query )
+                                        search_query=search_query)
 
         return Response(ProductSerializer(queryset, many = True).data)
 
@@ -79,14 +79,35 @@ class CartProductView(generics.ListAPIView):
 
         ''' Display all the cart items queried by different id paramters '''
         user_id = request.GET.get('user')
-        cart_id = request.GET.get('cart')
         product_id = request.GET.get('product')
 
-        queryset = CartProduct.get_cart_product(cart_id=cart_id, 
-                                    product_id=product_id, 
-                                    user_id=user_id)
+        queryset = CartProduct.get_cart_product(product_id=product_id, 
+                                                user_id=user_id)
         
         return Response(CartProductSerializer(queryset, many=True).data)
+    
+    def post(self, request):
+
+        ''' Save the item in the cart once the cart data is sent'''
+        
+        # Create a serializer instance 
+        serializer = AddCartProductSerializer(data=request.data) 
+
+        data = {}    # Data to be returned to the user
+    
+        if serializer.is_valid():
+            new_cart_prod = serializer.save()
+            data['success'] = 'True'
+            data['user'] = new_cart_prod.user.id
+            data['price'] = new_cart_prod.price
+            data['product'] = new_cart_prod.product.id
+            data['quantity'] = new_cart_prod.quantity
+
+        else: 
+            data = serializer.errors
+        
+        return Response(data)
+
 
 class CartView(generics.ListAPIView):
     
@@ -190,36 +211,7 @@ class RegisterCustomer(APIView):
             data = serializer.errors
         
         return Response(data)
-        
-        # Method 2 
 
-        # if serializer.is_valid():
-            
-        #     cust_data = serializer.data
-            
-        #     # Get the data
-        #     first_name = cust_data.get('first_name')
-        #     last_name = cust_data.get('last_name') 
-        #     email = cust_data.get('email')
-        #     phone = cust_data.get('phone')
-
-        #     # get the passwords 
-        #     password = request.POST.get('password')
-        #     password2 = request.POST.get('password2') 
-
-        #     # Create a new customer model object to save the data 
-        #     new_customer_instance = Customer(
-        #         first_name=first_name,
-        #         last_name=last_name, 
-        #         email=email, 
-        #         phone=phone,
-        #         password=password,
-        #     )
-        #     new_customer_instance.save()
-
-        #     return Response(CustomerSerializer(new_customer_instance).data, status=status.HTTP_200_OK)
-        
-        # return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class AllCustomerView(APIView):
     ''' View to get the data of all the customers in our database '''
