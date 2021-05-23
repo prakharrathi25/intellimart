@@ -1,70 +1,57 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./StoreInfo.css";
-import Waves from '../Waves/Waves'
-import Products from '../../views/Products/Products'
+import Waves from "../Waves/Waves";
+import Products from "../../views/Products/Products";
 import { useParams } from "react-router";
 
-
 const StoreInfo = () => {
-    var {id} = useParams();
-    // var id = 1;
+  var { id } = useParams(); // Gets the variable part of the URL
+  const [stores, setStores] = useState(null);
 
-    const [responseData, setResponseData] = useState(null);
-
-    const getStores = () => {
-      var config = {
-        method: "get",
-        url: `http://prakharrathi25.pythonanywhere.com/market?id=${id}`,
-        // headers: {
-        //   Cookie:
-        //     "csrftoken=No8wD0cOms43Hh37HiwdjatM4lpChEwbgfLcTTi4gmB1FIQxKrjiujILll3tDA8i",
-        // },
-      };
-      axios(config)
-        .then(function (response) {
-          setResponseData(response.data[0]);
-          console.log(response.data)
-          // console.log(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+  const getStores = () => {
+    var config = {
+      method: "get",
+      url: `http://127.0.0.1:8000/market?id=${id}`,
     };
-  
-    useEffect(() => {
-      getStores();
-    }, []);
-  
-  
+    axios(config)
+      .then(function (response) {
+        setStores(response.data[0]);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getStores();
+  }, []);
 
   return (
-      <div className="store-info-container">
-    {responseData !== null
-        ?
-    <>
-    <div className="store-details-container">
-        <div className="store-details">
-            
-            <img className="logo" src={"http://prakharrathi25.pythonanywhere.com" + responseData.logo} alt=""/>
-            <div>
-            
-            <h1 className="name">{responseData.name}</h1>
-            <p className="address">{responseData.address}</p>
+    <div className="store-info-container">
+      {stores !== null ? (
+        <>
+          <div className="store-details-container">
+            <div className="store-details">
+              <img
+                className="logo"
+                src={"http://127.0.0.1:8000" + stores.logo}
+                alt=""
+              />
+              <div>
+                <h1 className="name">{stores.name}</h1>
+                <p className="address">{stores.address}</p>
+              </div>
             </div>
-            
-        </div>
-        <p>9899169906</p>
-        <Waves className="small-wave"/>
-        <div className="store-products">
-    <Products store={id}/>
-    </div>
-        
-    </div>
-    
-    
-    </>
-    :null}
+            <p>{stores.phone_number}</p>
+            <Waves className="small-wave" />
+            <div className="store-products">
+              <Products storeID={id} storeName={stores.name} />
+            </div>
+          </div>
+        </>
+      ) : null}
     </div>
   );
 };

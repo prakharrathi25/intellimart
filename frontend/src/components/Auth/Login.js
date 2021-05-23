@@ -103,7 +103,7 @@ const Login = () => {
 
     var config = {
       method: "post",
-      url: "http://prakharrathi25.pythonanywhere.com/login",
+      url: "http://127.0.0.1:8000/login",
       headers: {
         "Content-Type": "application/json",
       },
@@ -142,7 +142,7 @@ const Login = () => {
 
     var config = {
       method: "post",
-      url: "http://prakharrathi25.pythonanywhere.com/register",
+      url: "http://127.0.0.1:8000/register",
       headers: {
         "Content-Type": "application/json",
       },

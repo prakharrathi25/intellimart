@@ -11,7 +11,7 @@ const Stores = () => {
   const getStores = () => {
     var config = {
       method: "get",
-      url: "http://prakharrathi25.pythonanywhere.com/market",
+      url: "http://127.0.0.1:8000/market",
       // headers: {
       //   Cookie:
       //     "csrftoken=No8wD0cOms43Hh37HiwdjatM4lpChEwbgfLcTTi4gmB1FIQxKrjiujILll3tDA8i",
@@ -30,9 +30,7 @@ const Stores = () => {
 
   useEffect(() => {
     getStores();
-  }, []);
-
-  
+  }, []);  
 
   return (
     <div>
@@ -44,8 +42,7 @@ const Stores = () => {
                 title={stores.name}
                 address={stores.address}
                 image={stores.logo}
-                id={stores.id}
-                
+                id={stores.id}                
               />
               // </div>
             ))

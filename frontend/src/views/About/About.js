@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./About.css";
 
 const About = () => {
-  const [cartItems, setCartItems] = useState(null);
+  // const [cartItems, setCartItems] = useState(null);
 
-  useEffect(() => {
-    let cartValue = localStorage.getItem("cart");
-    setCartItems(cartValue);
-    console.log(JSON.parse(cartValue));
-  }, []);
+  // useEffect(() => {
+  //   let cartValue = localStorage.getItem("cart");
+  //   setCartItems(cartValue);
+  //   console.log(JSON.parse(cartValue));
+  // }, []);
 
   return (
     <div className="about-container">

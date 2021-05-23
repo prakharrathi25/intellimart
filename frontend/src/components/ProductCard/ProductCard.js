@@ -1,34 +1,65 @@
 import React from "react";
 import "./ProductCard.css";
-// import {useState} from 'react';
+import { useCart } from "react-use-cart";
 
 
+const ProductCard = ({
+  name,
+  price,
+  quantity,
+  image,
+  id,
+  description,
+  category,
+  store,
+  saveItem,
+  // key,
+  addItem,
+  alreadyAdded,
+  storeName
+}) => {
 
-const ProductCard = ({ title, price, quantity, image, saveItem }) => {
+  // const { addItem } = useCart();
 
-  
-
-  const addToCart=()=>{
-    let cartItem={};
-    cartItem['title']=title;
-    cartItem['price']=price;
-    cartItem['quantity']=quantity;
-    cartItem['image']=image;
-    saveItem(cartItem)
-  }
+  // const addToCart = () => {
+  //   let cartItem = {};
+  //   cartItem["name"] = name;
+  //   cartItem["price"] = price;
+  //   cartItem["quantity"] = quantity;
+  //   cartItem["image"] = image;
+  //   saveItem(cartItem);
+  // };
 
   return (
     <div className="card-container">
       <div className="product-title-details">
-        <img className="product-image" src={"http://prakharrathi25.pythonanywhere.com" + image} alt="" />
-        <h1 className="product-name">{title}</h1>
+        <img
+          className="product-image"
+          src={"http://127.0.0.1:8000" + image}
+          alt=""
+        />
+        <h1 className="product-name">{name}</h1>
       </div>
       <div className="product-info">
         <p className="column">₹{price}</p>
         <p className="column">{quantity}</p>
-        <button className="add-button column" 
-        onClick={addToCart}
-        >+</button>
+        <button 
+          className="add-button column" 
+          // onClick={addToCart}
+          onClick={()=>addItem(
+            {
+              "name": name,
+              "quantity": quantity,
+              "price": price,
+              "id": id,
+              "storeName": storeName,
+              "user": localStorage.getItem("login") ? localStorage.getItem("login").user_id : null,
+              "image": image
+            }
+          )}
+        >
+          +
+        </button>
       </div>
     </div>
   );

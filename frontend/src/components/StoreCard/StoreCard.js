@@ -20,7 +20,7 @@ const StoreCard = ({ title, address, image, id }) => {
       <div className="store-card-container" onClick={()=>toggleModal()}>
         <Link to={`/store/${id}`}>
         <div className="store-title-details">
-          <img className="store-image" src={"http://prakharrathi25.pythonanywhere.com" + image} />
+          <img className="store-image" src={"http://127.0.0.1:8000" + image} />
           <h1 className="store-name">{title}</h1>
         </div>
         <div className="store-info">

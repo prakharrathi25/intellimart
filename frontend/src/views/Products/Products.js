@@ -2,23 +2,23 @@ import React, { useState, useEffect } from "react";
 import "./Products.css";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import axios from "axios";
+import { useCart } from "react-use-cart";
 
-const Products = ({store}) => {
+const Products = ({ storeID, storeName }) => {
   const [responseData, setResponseData] = useState(null);
   const [cart, setCart] = useState([]);
+  const { addItem, inCart } = useCart();
 
   const saveItem = (itemObj) => {
     let tempList = [...cart, itemObj];
     setCart(tempList);
-    localStorage.setItem("cart", JSON.stringify(tempList))
-    
+    localStorage.setItem("cart", JSON.stringify(tempList));
   };
 
   const getProducts = () => {
-    console.log(store.store)
     var config = {
       method: "get",
-      url:  `http://prakharrathi25.pythonanywhere.com/products?store_id=${store}`,
+      url: `http://127.0.0.1:8000/products?store_id=${storeID}`,
     };
     axios(config)
       .then(function (response) {
@@ -38,16 +38,26 @@ const Products = ({store}) => {
     <div>
       <div className="product-container">
         {responseData !== null
-          ? responseData.map((product) => (
-              <ProductCard
-                title={product.name}
-                price={product.price}
-                quantity={product.quantity}
-                image={product.image}
-                key={product.id}
-                saveItem={saveItem}
-              />
-            ))
+          ? responseData.map((product, key) => {
+              const alreadyAdded = inCart(product.id);
+              return (
+                <ProductCard
+                  name={product.name}
+                  price={product.price}
+                  quantity={product.quantity}
+                  image={product.image}
+                  id={product.id}
+                  description={product.description}
+                  category={product.category}
+                  store={product.store}
+                  saveItem={saveItem}
+                  key={key}
+                  addItem={addItem}
+                  alreadyAdded={alreadyAdded}
+                  storeName={storeName}
+                />
+              );
+            })
           : null}
       </div>
     </div>
