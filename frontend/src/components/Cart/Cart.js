@@ -3,8 +3,11 @@ import "./Cart.css";
 import { useCart } from "react-use-cart";
 import Illustration from "../../assets/empty_cart.svg";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router";
 
 const Cart = () => {
+  const history = useHistory();
   const {
     isEmpty,
     cartTotal,
@@ -14,8 +17,9 @@ const Cart = () => {
     updateItemQuantity,
     removeItem,
     emptyCart,
+    getItem,
+    inCart,
   } = useCart();
-  const [existingUserCart, setExistingUserCart] = useState(null);
 
   // FETCHING Cart Data Using DB Fetch (ONLY IF LOGIN HAS HAPPENED)
   useEffect(() => {
@@ -33,45 +37,41 @@ const Cart = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
-        setExistingUserCart(response.data);
+        let existingUserCart = response.data;
+        console.log(existingUserCart);
+
+        existingUserCart.length == 0
+          ? console.log("ExistingUserCart.length is 0 hehehe")
+          : existingUserCart.map((existingUserCartItem, key) => {
+              inCart(existingUserCartItem.product) // Check if the item already in cart in DB has been in the current cart to append or cancel
+                ? console.log()
+                : addItem(
+                    {
+                      name: existingUserCartItem.product_details.name,
+                      // "quantity": existingCartItem.quantity,
+                      price: existingUserCartItem.price,
+                      id: existingUserCartItem.product,
+                      storeName:
+                        existingUserCartItem.product_details.store_details.name,
+                      user: existingUserCartItem.user,
+                      image: existingUserCartItem.product_details.image,
+                    },
+                    existingUserCartItem.quantity
+                  );
+            });
       })
       .catch(function (error) {
         console.log(error);
       });
   }, []);
 
-  // Fetching Product Data from Cart Data and adding into current cart
-  useEffect(() => {
-    !existingUserCart
-      ? console.log("xistingUserCart.length is 0 hehehe")
-      : existingUserCart.map((existingCartItem, key) => {
-          console.log(existingCartItem);
-          // console.log(existingCartItem.product_details);
-          // console.log(existingCartItem.store_details);
-          addItem(
-            {
-              name: existingCartItem.product_details.name,
-              // "quantity": existingCartItem.quantity,
-              price: existingCartItem.price,
-              id: existingCartItem.product,
-              storeName: existingCartItem.product_details.store_details.name,
-              user: existingCartItem.user,
-              image: existingCartItem.product_details.image,
-            },
-            existingCartItem.quantity
-          );
-        });
-  }, [existingUserCart]);
-
-  // }
-
   // Submit Data
   const submitOrder = () => {
-    console.log("SUBMIT ORDER");
+    // console.log("SUBMIT ORDER");
+    toast.success("ORDER PLACED!!!!!!!!!!!");
+    history.push("/");
   };
 
-  // Display Logic
   if (isEmpty)
     return (
       <div className="empty-cart-container">
@@ -105,23 +105,22 @@ const Cart = () => {
                   </div>
                   <div class="td_item">
                     <div className="item_qty">
-                    <button
-                    className="qty-button"
-                      onClick={() =>
-                        updateItemQuantity(item.id, item.quantity - 1)
-                      }
-                    >
-                      -
-                    </button>
-                    <button
-                    className="qty-button"
-                      onClick={() =>
-                        updateItemQuantity(item.id, item.quantity + 1)
-                      }
-                    >
-                      
-                      +
-                    </button>
+                      <button
+                        className="qty-button"
+                        onClick={() =>
+                          updateItemQuantity(item.id, item.quantity - 1)
+                        }
+                      >
+                        -
+                      </button>
+                      <button
+                        className="qty-button"
+                        onClick={() =>
+                          updateItemQuantity(item.id, item.quantity + 1)
+                        }
+                      >
+                        +
+                      </button>
                     </div>
                   </div>
                   <div class="td_item item_price">
@@ -144,7 +143,11 @@ const Cart = () => {
                   <span class="material-icons-outlined">west</span>
                   Back to Shop
                 </a> */}
-                {!isEmpty && <button onClick={emptyCart} className="empty-cart button">Empty cart</button>}
+                {!isEmpty && (
+                  <button onClick={emptyCart} className="empty-cart button">
+                    Empty cart
+                  </button>
+                )}
               </div>
               {/* <div>
                 {!isEmpty && <button onClick={emptyCart}>Empty cart</button>}
@@ -155,7 +158,10 @@ const Cart = () => {
               </div>
 
               <div className="submit-div">
-                <button onClick={()=>submitOrder()} className="submit button"> SUBMIT ORDER </button>
+                <button onClick={() => submitOrder()} className="submit button">
+                  {" "}
+                  SUBMIT ORDER{" "}
+                </button>
               </div>
             </div>
           </div>
