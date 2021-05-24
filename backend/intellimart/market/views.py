@@ -76,6 +76,14 @@ class CartProductView(generics.ListAPIView):
     serializer_class = CartProductSerializer
     queryset = []
 
+    def delete(self, request):
+        
+        # delete the product using ID and send a confirmation response
+        CartProduct.objects.get(id=request.DELETE['id']).delete()
+        return Response({
+            'status':True
+        })
+
     def get(self, request):
 
         ''' Display all the cart items queried by different id paramters '''

@@ -87,6 +87,29 @@ class AddCartProductSerializer(serializers.ModelSerializer):
     # Function to save a new cart product
     def save(self):
 
+        # Get the user and product from the data 
+        user_id = self.validated_data['user']
+        product_id = self.validated_data['product']
+
+        # filter by user and product 
+        queryset = CartProduct.objects.filter(user=user_id).filter(product=product_id)
+        print(queryset)
+        
+        if queryset:
+            # Get quantity 
+            q = self.validated_data['quantity']
+            queryset.update(quantity=q)
+
+            new_cart_product = CartProduct(
+                user=self.validated_data['user'],
+                price=self.validated_data['price'],
+                product=self.validated_data['product'],
+                quantity=self.validated_data['quantity']
+            )
+
+            return new_cart_product
+        
+        # if the queryset does not exist 
         new_cart_product = CartProduct(
             user=self.validated_data['user'],
             price=self.validated_data['price'],
@@ -94,10 +117,7 @@ class AddCartProductSerializer(serializers.ModelSerializer):
             quantity=self.validated_data['quantity']
         )
         
-        print(new_cart_product.user, type(new_cart_product.user))
-        
         # Check if the quantity is greater than the store product
-        # store_product = Product.objects.get(id=new_cart_product.product)
         given_quantity = new_cart_product.quantity
         existing_quantity = new_cart_product.product.quantity
         
