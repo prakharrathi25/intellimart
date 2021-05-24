@@ -44,7 +44,7 @@ const ProductCard = ({
         <p className="column">₹{price}</p>
         <p className="column">{quantity}</p>
         <button 
-          className="add-button column" 
+          className="add-button column hover-button" 
           // onClick={addToCart}
           onClick={()=>addItem(
             {

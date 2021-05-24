@@ -13,7 +13,7 @@ body{
 
 .hero-container{
     top:0%;
-    height:90vh;
+    height:89.5vh;
     /* width: 100%; */
     display:flex;
     flex-direction: row;
@@ -30,17 +30,73 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    
+}
+
+.hero-container:nth-child(2){
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    /* justify-content: center; */
+}
+
+.working-hdng{
+    padding: 7.5% 0 2.5% 0;
+    font-size: 2rem;
+}
+
+.working-txt{
+    width: 60%;
+    font-size: 1.125rem;
+}
+
+.working-brand-txt{
+    background: var(--grad);
+  /* font-size: 100px; */
+  background-clip: text;
+  color: transparent;
 }
 
 .hero-heading{
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 800;
-    padding: 5%;
-    color: var(--light)
+    /* padding: 2.5%; */
+    color: white;
+    text-align: left;
+    /* width: 100%; */
 }
 
-img{
-    width: 80%;    
+.hero-heading.subheading-txt{
+    color: var(--light);
+    padding: 5%;
+    text-align: center;
+    font-size: 2.75rem;
+}
+
+.hero-img{
+    width: 74%; 
+    border-radius: 50%;
+    height: 83.25%;   
+    margin-bottom: 10%;
+}
+.hero-button{
+    border: 0;
+    /* padding:1%; */
+    background: white;
+    width: 150%;
+    height: 200%;
+    border-radius: 5px;
+}
+.hero-button p{
+    background: var(--grad);
+  /* font-size: 100px; */
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 @media (max-width: 800px) {
