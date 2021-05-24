@@ -1,31 +1,63 @@
 import React, { useEffect, useState } from "react";
 import "./Cart.css";
 import { useCart } from "react-use-cart";
-import Illustration from '../../assets/empty_cart.svg';
+import Illustration from "../../assets/empty_cart.svg";
+import axios from "axios";
 
 const Cart = () => {
-  // const [cartItems, setCartItems] = useState(null);
   const {
     isEmpty,
     cartTotal,
     totalUniqueItems,
     items,
+    addItem,
     updateItemQuantity,
     removeItem,
     emptyCart,
   } = useCart();
+  const [existingUserCart, setExistingUserCart] = useState(null);
 
+  // Functional Logic
+
+  // FETCHING Cart Data Using DB Fetch
   useEffect(() => {
-    let cartValue = localStorage.getItem("cart");
-    // setCartItems(JSON.parse(cartValue));
-    console.log(JSON.parse(cartValue));
+    var config = {
+      method: "get",
+      url: "http://127.0.0.1:8000/cartprod?user=1&ordered=False",
+      headers: {},
+    };
+    
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        setExistingUserCart(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
-  if (isEmpty) return <div className="empty-cart-container"><img className="empty-cart-image" src={Illustration} alt=""/><p className="empty-cart-text">No Current Bookings!</p></div>;
+  // Fetching Product Data from Cart Data
+  // const fetchEachProductData = (productID) => {
+    
+  // }
+
+  // Submit Data
+  const submitOrder = () => {
+    console.log("SUBMIT ORDER");
+  }
+
+  // Display Logic
+  if (isEmpty)
+    return (
+      <div className="empty-cart-container">
+        <img className="empty-cart-image" src={Illustration} alt="" />
+        <p className="empty-cart-text">No Current Bookings!</p>
+      </div>
+    );
 
   return (
     <>
-      {!isEmpty && <button onClick={emptyCart}>Empty cart</button>}
       <section class="cart_wrapper">
         <div class="cart_lists">
           <div class="cart_title">
@@ -79,19 +111,27 @@ const Cart = () => {
             </div>
             <div class="footer">
               <div class="back_cart">
-                <a href="/stores">
+                {/* <a href="/stores">
                   <span class="material-icons-outlined">west</span>
                   Back to Shop
-                </a>
+                </a> */}
+                {!isEmpty && <button onClick={emptyCart}>Empty cart</button>}
               </div>
+              {/* <div>
+                {!isEmpty && <button onClick={emptyCart}>Empty cart</button>}
+              </div> */}
               <div class="subtotal">
                 <label>Subtotal: </label>
                 <strong>&#8377; {cartTotal}</strong>
               </div>
+
+              <div>
+                <button onClick={()=>submitOrder()}> SUBMIT ORDER </button>
+              </div>
             </div>
           </div>
         </div>
-{/* 
+{/*         
         <div class="cart_details">
           <div class="cart_title">Cart Details</div>
           <div class="form_row">
@@ -158,7 +198,7 @@ const Cart = () => {
             <button class="btn">Checkout</button>
           </div>
         </div> */}
-      </section> 
+      </section>
     </>
   );
 };

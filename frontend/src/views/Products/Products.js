@@ -46,7 +46,7 @@ const Products = ({ storeID, storeName }) => {
                   price={product.price}
                   quantity={product.quantity}
                   image={product.image}
-                  id={product.id}
+                  product={product.id}
                   description={product.description}
                   category={product.category}
                   store={product.store}

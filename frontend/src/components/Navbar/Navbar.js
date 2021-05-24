@@ -5,6 +5,11 @@ import Cart from "./../../assets/cart.png";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  // const [userLoggedIn, setUserLoggedIn] = useState(localStorage.getItem("login"));
+
+  // useEffect(()=>{
+  //   setUserLoggedIn(localStorage.getItem("login"));
+  // }, [userLoggedIn]);
 
   const links = [
     {

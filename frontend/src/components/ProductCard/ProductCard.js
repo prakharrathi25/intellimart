@@ -8,7 +8,7 @@ const ProductCard = ({
   price,
   quantity,
   image,
-  id,
+  product,
   description,
   category,
   store,
@@ -51,7 +51,7 @@ const ProductCard = ({
               "name": name,
               "quantity": quantity,
               "price": price,
-              "id": id,
+              "id": product,
               "storeName": storeName,
               "user": localStorage.getItem("login") ? localStorage.getItem("login").user_id : null,
               "image": image
