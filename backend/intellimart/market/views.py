@@ -12,7 +12,6 @@ from rest_framework import viewsets
 # Custom  modules
 from .models import *
 from .serializers import *
-from .mixins import ReadWriteSerializerMixin
 
 # Create your views here.
 
@@ -295,6 +294,7 @@ class AddSlotView(APIView):
         
         # Value to be returned 
         data = {}
+        data['success'] = True
         data['user'] = user_id
         data['slot'] = slot_id
         return Response(data)
@@ -343,6 +343,7 @@ class PlaceOrderView(APIView):
 
         # Value to be returned 
         data = {}
+        data['success'] = True
         data['user'] = user_id
         data['cartprods'] = cartprods
         return Response(data)
