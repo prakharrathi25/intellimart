@@ -6,22 +6,30 @@ import About from "./views/About/About";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Auth/Login";
 import Logout from "./components/Auth/Logout";
-import StoreInfo from './components/StoreInfo/StoreInfo';
-import Cart from './components/Cart/Cart';
+import StoreInfo from "./components/StoreInfo/StoreInfo";
+import Cart from "./components/Cart/Cart";
 
 function Router() {
+  const isLoggedIn =
+    localStorage.getItem("login") &&
+    JSON.parse(localStorage.getItem("login")).user_id
+      ? true
+      : false;
+  // console.log(isLoggedIn);
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} />
       <Switch>
         <Route exact path="/products" component={Products} />
         <Route exact path="/stores" component={Stores} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/" component={HeroSection} />
-        <Route exact path="/cart" component={Cart}/>
-        <Route exact path="/about" component={About}/>
-        <Route exact path="/store/:id" component={StoreInfo}/>
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/store/:id" component={StoreInfo} />
+        <Route component={HeroSection} />
       </Switch>
     </BrowserRouter>
   );

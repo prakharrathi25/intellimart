@@ -2,14 +2,10 @@ import { useState, useEffect } from "react";
 import "./Navbar.css";
 import Cart from "./../../assets/cart.png";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn }) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  // const [userLoggedIn, setUserLoggedIn] = useState(localStorage.getItem("login"));
-
-  // useEffect(()=>{
-  //   setUserLoggedIn(localStorage.getItem("login"));
-  // }, [userLoggedIn]);
+  console.log(isLoggedIn);
 
   const links = [
     {
@@ -24,7 +20,7 @@ const Navbar = () => {
       title: "About Us",
       link: "/about",
     },
-    localStorage.getItem("login")
+    isLoggedIn
       ? {
           title: "Logout",
           link: "/logout",
@@ -90,7 +86,7 @@ const Navbar = () => {
               href="/cart"
               onClick={() => setMenuOpen(false)}
             >
-              <img className="img-cart" src={Cart} alt="NO IMAGE" />
+              <img className="img-cart" src={Cart} alt="" />
               {/* <div className="underline"></div> */}
             </a>
           </ul>

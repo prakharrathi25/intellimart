@@ -40,6 +40,9 @@ body{
   color: var(--light);
 }
 
+.empty-cart .button{
+  cursor: pointer;
+}
 
 @media (max-width: 800px) {
 
@@ -1193,6 +1196,7 @@ body{
   margin: 0 25%;
   border-radius: 2.5px;
   font-size: 1.25rem;
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {
@@ -1342,10 +1346,12 @@ body{
   border: 0;
   color: white;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .submit.button{
   float: right;
+  cursor: pointer;
 }
 @media (max-width: 767px) {
   .cart_wrapper .cart_lists .cart_list_wrap .footer .subtotal {
