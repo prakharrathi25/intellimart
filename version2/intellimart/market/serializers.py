@@ -100,9 +100,6 @@ class AddCartProductSerializer(serializers.ModelSerializer):
         # store_product = Product.objects.get(id=new_cart_product.product)
         given_quantity = new_cart_product.quantity
         existing_quantity = new_cart_product.product.quantity
-
-        print("GIVEM", given_quantity, type(given_quantity))
-        print("PRESENT", existing_quantity, type(existing_quantity))
         
         if given_quantity > existing_quantity:
             raise serializers.ValidationError({

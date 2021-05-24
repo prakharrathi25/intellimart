@@ -91,6 +91,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='uploads/images/products')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)    # Foriegn key with Category Model
     store = models.ForeignKey(Store, on_delete=models.CASCADE, default=1)
+    unit = models.CharField(max_length=20, default="kg")
     
     ''' Filter functions for the product model '''
 
