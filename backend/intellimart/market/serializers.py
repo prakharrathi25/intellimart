@@ -3,6 +3,23 @@ from django.db.models import fields
 from rest_framework import serializers
 from .models import *
 
+''' Generic Serializer for Nested Queries '''
+class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
+    def __init__(self, **kwargs):
+        self.serializer = kwargs.pop('serializer', None)
+        if self.serializer is not None and not issubclass(self.serializer, serializers.Serializer):
+            raise TypeError('"serializer" is not a valid serializer class')
+
+        super().__init__(**kwargs)
+
+    def use_pk_only_optimization(self):
+        return False if self.serializer else True
+
+    def to_representation(self, instance):
+        if self.serializer:
+            return self.serializer(instance, context=self.context).data
+        return super().to_representation(instance)
+
 ''' Define different classes which will be serializing our original models '''
 class StoreSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,20 +31,47 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Customer
         fields = '__all__'
 
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = '__all__'
+# class ProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Product
+#         fields = '__all__'
 
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = '__all__'
 
+# class CartProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = CartProduct
+#         fields = '__all__'
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['store_details'] = StoreSerializer(instance.store).data
+        return response
+
 class CartProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartProduct
         fields = '__all__'
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['product_details'] = ProductSerializer(instance.product).data
+        return response
+
+# class CartProductSerializer(serializers.ModelSerializer):
+#     product = RelatedFieldAlternative(queryset=Product.objects.all(), serializer=ProductSerializer)
+#     class Meta:
+#         model = CartProduct
+#         # fields = ('id', 'user', 'price', 'quantity', 'product')
+#         fields = '__all__'
 
 class SlotSerializer(serializers.ModelSerializer): 
     class Meta: 
