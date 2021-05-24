@@ -57,7 +57,7 @@ const Cart = () => {
     );
 
   return (
-    <>
+    <div className="cart-container">
       <section class="cart_wrapper">
         <div class="cart_lists">
           <div class="cart_title">
@@ -79,8 +79,10 @@ const Cart = () => {
                   <div class="td_item item_color">
                     <label>x &nbsp;{item.quantity}</label>
                   </div>
-                  <div class="td_item item_qty">
+                  <div class="td_item">
+                    <div className="item_qty">
                     <button
+                    className="qty-button"
                       onClick={() =>
                         updateItemQuantity(item.id, item.quantity - 1)
                       }
@@ -88,12 +90,15 @@ const Cart = () => {
                       -
                     </button>
                     <button
+                    className="qty-button"
                       onClick={() =>
                         updateItemQuantity(item.id, item.quantity + 1)
                       }
                     >
+                      
                       +
                     </button>
+                    </div>
                   </div>
                   <div class="td_item item_price">
                     <label>&#8377; {item.price}</label>
@@ -115,7 +120,7 @@ const Cart = () => {
                   <span class="material-icons-outlined">west</span>
                   Back to Shop
                 </a> */}
-                {!isEmpty && <button onClick={emptyCart}>Empty cart</button>}
+                {!isEmpty && <button onClick={emptyCart} className="empty-cart button">Empty cart</button>}
               </div>
               {/* <div>
                 {!isEmpty && <button onClick={emptyCart}>Empty cart</button>}
@@ -125,81 +130,14 @@ const Cart = () => {
                 <strong>&#8377; {cartTotal}</strong>
               </div>
 
-              <div>
-                <button onClick={()=>submitOrder()}> SUBMIT ORDER </button>
+              <div className="submit-div">
+                <button onClick={()=>submitOrder()} className="submit button"> SUBMIT ORDER </button>
               </div>
             </div>
           </div>
         </div>
-{/*         
-        <div class="cart_details">
-          <div class="cart_title">Cart Details</div>
-          <div class="form_row">
-            <div class="form_group cart_type">
-              <label class="input_label">Select Card Type</label>
-
-              <input
-                type="radio"
-                name="cartType"
-                required
-                id="master"
-                checked
-              />
-              <label class="type master" title="Master" for="master"></label>
-              <input type="radio" name="cartType" required id="visa" />
-              <label class="type visa" title="Visa" for="visa"></label>
-              <input type="radio" name="cartType" required id="paypal" />
-              <label class="type paypal" title="PayPal" for="paypal"></label>
-            </div>
-
-            <div class="form_group">
-              <label class="input_label">Card Number</label>
-              <input
-                type="text"
-                class="input"
-                id="card_number"
-                name="card"
-                min="16"
-                max="16"
-                placeholder="0000 0000 0000 0000"
-                onkeypress="return checkDigit(event)"
-                autocomplete="off"
-                required
-              />
-            </div>
-
-            <div class="form_group w_75">
-              <label class="input_label">Ecpiry Date</label>
-              <input
-                type="text"
-                class="input"
-                id="card_date"
-                placeholder="MM / YY"
-                onkeypress="return checkDigit(event)"
-                autocomplete="off"
-                required
-              />
-            </div>
-
-            <div class="form_group w_25">
-              <label class="input_label">CVV</label>
-              <input
-                type="password"
-                class="input"
-                min="3"
-                max="3"
-                placeholder="***"
-                onkeypress="return checkDigit(event)"
-                autocomplete="off"
-                required
-              />
-            </div>
-
-            <button class="btn">Checkout</button>
-          </div>
-        </div> */}
       </section>
-    </>
+    </div>
   );
 };
 
