@@ -66,7 +66,7 @@ const Navbar = () => {
             {/* <Logo className='nav-brand-logo' /> */}
             <span className="nav-brand-text">IntelliMart</span>
           </span>
-          <ul className="nav-links">
+          <ul className={`nav-links`}>
             {links.map((link, index) => {
               return (
                 <a

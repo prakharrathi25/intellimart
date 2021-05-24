@@ -6,5 +6,11 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  
+}
+
+@media (max-width:800px){
+  .store-container{
+    justify-content: center;
+  }
 }

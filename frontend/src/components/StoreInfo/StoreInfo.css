@@ -31,23 +31,41 @@ body{
     width: 96%;
     padding: 2%;
     display: flex;
-    
+    align-items: center;
+}
 
+.store-logo-container{
+    background:var(--light);
+    border-radius: 50%;
+    height: 15vh;
+    width: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .store-details div{
     margin-left: 1%;
 }
 
-.store-details .logo{
-    width: 10%;
-    height:5%
+.store-logo{
+    width: 67%;
+    height:67%
 }
 
-.store-details .name{
+.address{
+    font-size: 0.9rem;
+    margin: 1.25% 0;
+}
+
+.store-ph{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* .store-details .name{
     margin-top: 30%;
     
-}
+} */
 
 .small-wave{
     position: relative !important;
@@ -64,6 +82,7 @@ body{
 
 .store-products{
     width: 100%;
+
     /* padding: 2%; */
     background-color: #F6F7FB;
 }

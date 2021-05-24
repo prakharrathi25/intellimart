@@ -13,7 +13,7 @@ code {
 }
 
 :root {
-  --primary: #DB4A20;
+  --primary: #f05;
   --accent: #525FE1;
   --light: #e7ecef;
   --light-translucent: #e7ecef3a;
@@ -34,7 +34,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: var(--accent);
+  background-color: var(--primary);
   border-radius: 100rem;
   cursor: pointer;
   height: 10rem;
@@ -42,4 +42,10 @@ body::-webkit-scrollbar-thumb {
 
 Link{
   text-decoration: none;
+    color: var(--light);
+}
+
+a{
+  text-decoration: none;
+    color: var(--light);
 }
