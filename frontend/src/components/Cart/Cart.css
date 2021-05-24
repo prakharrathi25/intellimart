@@ -40,7 +40,7 @@ body{
   color: var(--light);
 }
 
-.empty-cart button{
+.empty-cart .button{
   cursor: pointer;
 }
 
@@ -1346,6 +1346,7 @@ body{
   border: 0;
   color: white;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .submit.button{

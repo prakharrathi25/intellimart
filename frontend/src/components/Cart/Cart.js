@@ -8,6 +8,7 @@ import { useHistory } from "react-router";
 
 const Cart = () => {
   const history = useHistory();
+
   const {
     isEmpty,
     cartTotal,
@@ -20,6 +21,43 @@ const Cart = () => {
     getItem,
     inCart,
   } = useCart();
+
+  // Function to Update the Cart
+  const postItems = () => {
+    items.map((item) => {
+      // console.log(item);
+      var data = JSON.stringify({
+        quantity: item.quantity,
+        price: item.price,
+        ordered: false,
+        product: item.id,
+        user: JSON.parse(localStorage.getItem("login")).user_id,
+      });
+
+      var config = {
+        method: "post",
+        url: "http://127.0.0.1:8000/cartprod",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+  };
+
+  // Function Getting Triggered on Every change in the Cart
+  useEffect(() => {
+    console.log(items);
+    postItems();
+  }, [items]);
 
   // FETCHING Cart Data Using DB Fetch (ONLY IF LOGIN HAS HAPPENED)
   useEffect(() => {
@@ -38,7 +76,7 @@ const Cart = () => {
     axios(config)
       .then(function (response) {
         let existingUserCart = response.data;
-        console.log(existingUserCart);
+        // console.log(existingUserCart);
 
         existingUserCart.length == 0
           ? console.log("ExistingUserCart.length is 0 hehehe")
@@ -65,7 +103,7 @@ const Cart = () => {
       });
   }, []);
 
-  // Submit Data
+  // Submit Button Function
   const submitOrder = () => {
     // console.log("SUBMIT ORDER");
     toast.success("ORDER PLACED!!!!!!!!!!!");
@@ -82,28 +120,28 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
-      <section class="cart_wrapper">
-        <div class="cart_lists">
-          <div class="cart_title">
-            <span class="material-icons-outlined">local_mall</span>
+      <section className="cart_wrapper">
+        <div className="cart_lists">
+          <div className="cart_title">
+            <span className="material-icons-outlined">local_mall</span>
             Your Shopping Cart
           </div>
 
-          <div class="cart_list_wrap">
-            <div class="cart_responsive">
+          <div className="cart_list_wrap">
+            <div className="cart_responsive">
               {items.map((item) => (
-                <div class="tr_item">
-                  <div class="td_item item_img">
+                <div className="tr_item">
+                  <div className="td_item item_img">
                     <img src={"http://127.0.0.1:8000" + item.image} />
                   </div>
-                  <div class="td_item item_name">
-                    <label class="main">{item.name}</label>
-                    <label class="sub">Store: {item.storeName}</label>
+                  <div className="td_item item_name">
+                    <label className="main">{item.name}</label>
+                    <label className="sub">Store: {item.storeName}</label>
                   </div>
-                  <div class="td_item item_color">
+                  <div className="td_item item_color">
                     <label>x &nbsp;{item.quantity}</label>
                   </div>
-                  <div class="td_item">
+                  <div className="td_item">
                     <div className="item_qty">
                       <button
                         className="qty-button"
@@ -123,13 +161,13 @@ const Cart = () => {
                       </button>
                     </div>
                   </div>
-                  <div class="td_item item_price">
+                  <div className="td_item item_price">
                     <label>&#8377; {item.price}</label>
                   </div>
-                  <div class="td_item item_remove">
+                  <div className="td_item item_remove">
                     <span
                       onClick={() => removeItem(item.id)}
-                      class="material-icons-outlined"
+                      className="material-icons-outlined"
                     >
                       close
                     </span>
@@ -137,10 +175,10 @@ const Cart = () => {
                 </div>
               ))}
             </div>
-            <div class="footer">
-              <div class="back_cart">
+            <div className="footer">
+              <div className="back_cart">
                 {/* <a href="/stores">
-                  <span class="material-icons-outlined">west</span>
+                  <span className="material-icons-outlined">west</span>
                   Back to Shop
                 </a> */}
                 {!isEmpty && (
@@ -152,7 +190,7 @@ const Cart = () => {
               {/* <div>
                 {!isEmpty && <button onClick={emptyCart}>Empty cart</button>}
               </div> */}
-              <div class="subtotal">
+              <div className="subtotal">
                 <label>Subtotal: </label>
                 <strong>&#8377; {cartTotal}</strong>
               </div>
