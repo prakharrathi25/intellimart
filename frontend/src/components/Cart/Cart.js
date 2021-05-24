@@ -5,9 +5,20 @@ import Illustration from "../../assets/empty_cart.svg";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const history = useHistory();
+  
+  useEffect(()=>{
+    if(localStorage.getItem("login")){
+      return
+    } 
+    else{
+      toast.error("Please Login to Continue");
+      history.push("/login");
+    } 
+  },[])
 
   const {
     isEmpty,
@@ -24,6 +35,8 @@ const Cart = () => {
 
   // Function to Update the Cart
   const postItems = () => {
+    // console.log(items);
+
     items.map((item) => {
       // console.log(item);
       var data = JSON.stringify({
@@ -45,7 +58,7 @@ const Cart = () => {
 
       axios(config)
         .then(function (response) {
-          console.log(JSON.stringify(response.data));
+          // console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
           console.log(error);
@@ -55,8 +68,8 @@ const Cart = () => {
 
   // Function Getting Triggered on Every change in the Cart
   useEffect(() => {
-    console.log(items);
-    postItems();
+    // console.log(items);
+    items.length > 0 && postItems();
   }, [items]);
 
   // FETCHING Cart Data Using DB Fetch (ONLY IF LOGIN HAS HAPPENED)
@@ -65,7 +78,7 @@ const Cart = () => {
       return;
     }
     let userID = JSON.parse(localStorage.getItem("login")).user_id;
-    console.log(userID);
+    // console.log(userID);
 
     var config = {
       method: "get",
@@ -93,6 +106,7 @@ const Cart = () => {
                         existingUserCartItem.product_details.store_details.name,
                       user: existingUserCartItem.user,
                       image: existingUserCartItem.product_details.image,
+                      existingCartID: existingUserCartItem.id
                     },
                     existingUserCartItem.quantity
                   );
@@ -102,6 +116,10 @@ const Cart = () => {
         console.log(error);
       });
   }, []);
+
+  const emptyCartHandler = () => {
+    emptyCart();
+  };
 
   // Submit Button Function
   const submitOrder = () => {
@@ -182,7 +200,10 @@ const Cart = () => {
                   Back to Shop
                 </a> */}
                 {!isEmpty && (
-                  <button onClick={emptyCart} className="empty-cart button">
+                  <button
+                    onClick={() => emptyCartHandler()}
+                    className="empty-cart button"
+                  >
                     Empty cart
                   </button>
                 )}

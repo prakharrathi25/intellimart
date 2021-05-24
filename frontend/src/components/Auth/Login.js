@@ -94,7 +94,7 @@ const Login = () => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    console.log(signInFormValues);
+    // console.log(signInFormValues);
 
     var data = JSON.stringify({
       email: signInFormValues.email,
