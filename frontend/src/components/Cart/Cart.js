@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Cart.css";
 import { useCart } from "react-use-cart";
+import Illustration from '../../assets/empty_cart.svg';
 
 const Cart = () => {
   // const [cartItems, setCartItems] = useState(null);
@@ -20,7 +21,7 @@ const Cart = () => {
     console.log(JSON.parse(cartValue));
   }, []);
 
-  if (isEmpty) return <p>Your cart is empty</p>;
+  if (isEmpty) return <div className="empty-cart-container"><img className="empty-cart-image" src={Illustration} alt=""/><p className="empty-cart-text">No Current Bookings!</p></div>;
 
   return (
     <>

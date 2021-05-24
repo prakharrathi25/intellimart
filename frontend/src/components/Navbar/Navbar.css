@@ -157,7 +157,8 @@ nav.scrolled .nav-main {
 }
 
 .img-cart{
-    height: 25px;
+    height: 5vh;
+    width:5vh;
 }
 
 @keyframes top {

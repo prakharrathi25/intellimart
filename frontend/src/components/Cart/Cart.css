@@ -11,6 +11,27 @@ body{
     background: linear-gradient(270deg, hsla(235, 70%, 60%, 1) 35%, hsla(197, 85%, 51%, 1) 100%);
 }
 
+.empty-cart-container{
+  height:100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+  
+}
+
+.empty-cart-image{
+  width: 60%;
+  height: 60%;
+}
+
+.empty-cart-text{
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 5%;
+  color: var(--light);
+}
+
 
 @media (max-width: 800px) {
 
