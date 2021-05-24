@@ -34,17 +34,19 @@ const StoreInfo = () => {
         <>
           <div className="store-details-container">
             <div className="store-details">
+              <div className="store-logo-container">
               <img
-                className="logo"
+                className="store-logo"
                 src={"http://127.0.0.1:8000" + stores.logo}
                 alt=""
               />
+              </div>
               <div>
                 <h1 className="name">{stores.name}</h1>
                 <p className="address">{stores.address}</p>
+                <p className="store-ph">{stores.phone_number}</p>
               </div>
             </div>
-            <p>{stores.phone_number}</p>
             <Waves className="small-wave" />
             <div className="store-products">
               <Products storeID={id} storeName={stores.name} />

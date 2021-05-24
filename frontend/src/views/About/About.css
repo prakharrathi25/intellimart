@@ -7,11 +7,7 @@
 }
 
 body {
-  background: linear-gradient(
-    270deg,
-    hsla(235, 70%, 60%, 1) 35%,
-    hsla(197, 85%, 51%, 1) 100%
-  );
+  background: white;
   height: 100%;
   width: 100%;
 }
@@ -22,7 +18,6 @@ body {
   min-height: 60vh;
   /* background: #34495e; */
   color: rgba(255, 255, 255, 0.7);
-  vertical-align: middle;
   text-align: left;
   position: relative;
   /* padding: 150px 10% 50px 10%; */
@@ -37,4 +32,25 @@ body {
 .about-form {
   width: 75vw;
   height: 42vw;
+}
+
+.about-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.about-container h1{
+  background: var(--grad);
+  /* font-size: 100px; */
+  background-clip: text;
+  color: transparent;
+  padding: 2.5% 0 0 0 ;
+}
+
+.about-container p{
+  width: 70%;
+  padding: 1.25% 0 2.5% 0;
 }
