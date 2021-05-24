@@ -17,16 +17,20 @@ const Cart = () => {
   } = useCart();
   const [existingUserCart, setExistingUserCart] = useState(null);
 
-  // Functional Logic
-
-  // FETCHING Cart Data Using DB Fetch
+  // FETCHING Cart Data Using DB Fetch (ONLY IF LOGIN HAS HAPPENED)
   useEffect(() => {
+    if (!localStorage.getItem("login")) {
+      return;
+    }
+    let userID = JSON.parse(localStorage.getItem("login")).user_id;
+    console.log(userID);
+
     var config = {
       method: "get",
-      url: "http://127.0.0.1:8000/cartprod?user=1&ordered=False",
+      url: "http://127.0.0.1:8000/cartprod?user=" + userID + "&ordered=False",
       headers: {},
     };
-    
+
     axios(config)
       .then(function (response) {
         console.log(response.data);
@@ -37,15 +41,35 @@ const Cart = () => {
       });
   }, []);
 
-  // Fetching Product Data from Cart Data
-  // const fetchEachProductData = (productID) => {
-    
+  // Fetching Product Data from Cart Data and adding into current cart
+  useEffect(() => {
+    !existingUserCart
+      ? console.log("xistingUserCart.length is 0 hehehe")
+      : existingUserCart.map((existingCartItem, key) => {
+          console.log(existingCartItem);
+          // console.log(existingCartItem.product_details);
+          // console.log(existingCartItem.store_details);
+          addItem(
+            {
+              name: existingCartItem.product_details.name,
+              // "quantity": existingCartItem.quantity,
+              price: existingCartItem.price,
+              id: existingCartItem.product,
+              storeName: existingCartItem.product_details.store_details.name,
+              user: existingCartItem.user,
+              image: existingCartItem.product_details.image,
+            },
+            existingCartItem.quantity
+          );
+        });
+  }, [existingUserCart]);
+
   // }
 
   // Submit Data
   const submitOrder = () => {
     console.log("SUBMIT ORDER");
-  }
+  };
 
   // Display Logic
   if (isEmpty)
@@ -126,12 +150,12 @@ const Cart = () => {
               </div>
 
               <div>
-                <button onClick={()=>submitOrder()}> SUBMIT ORDER </button>
+                <button onClick={() => submitOrder()}> SUBMIT ORDER </button>
               </div>
             </div>
           </div>
         </div>
-{/*         
+        {/*         
         <div class="cart_details">
           <div class="cart_title">Cart Details</div>
           <div class="form_row">
