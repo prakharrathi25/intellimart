@@ -1,7 +1,9 @@
 import React from "react";
 import "./ProductCard.css";
 import { useCart } from "react-use-cart";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 const ProductCard = ({
   name,
@@ -17,9 +19,8 @@ const ProductCard = ({
   // key,
   addItem,
   alreadyAdded,
-  storeName
+  storeName,
 }) => {
-
   // const { addItem } = useCart();
 
   // const addToCart = () => {
@@ -31,6 +32,29 @@ const ProductCard = ({
   //   saveItem(cartItem);
   // };
 
+  const addItemHandler = () => {
+    addItem({
+      name: name,
+      quantity: quantity,
+      price: price,
+      id: product,
+      storeName: storeName,
+      user: localStorage.getItem("login")
+        ? localStorage.getItem("login").user_id
+        : null,
+      image: image,
+    });
+    toast.info(name + " has been added to cart!", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   return (
     <div className="card-container">
       <div className="product-title-details">
@@ -39,25 +63,17 @@ const ProductCard = ({
           src={"http://127.0.0.1:8000" + image}
           alt=""
         />
-        <h1 className="product-name">{name.substring(0,14)}</h1>
+        <h1 className="product-name">{name.substring(0, 14)}</h1>
       </div>
       <div className="product-info">
         <p className="column">₹{price}</p>
-        <p className="column">{quantity} {unit}</p>
-        <button 
-          className="add-button column hover-button" 
+        <p className="column">
+          {quantity} {unit}
+        </p>
+        <button
+          className="add-button column hover-button"
           // onClick={addToCart}
-          onClick={()=>addItem(
-            {
-              "name": name,
-              "quantity": quantity,
-              "price": price,
-              "id": product,
-              "storeName": storeName,
-              "user": localStorage.getItem("login") ? localStorage.getItem("login").user_id : null,
-              "image": image
-            }
-          )}
+          onClick={() => addItemHandler()}
         >
           +
         </button>
