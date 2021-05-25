@@ -29,8 +29,6 @@ const Cart = () => {
       ? true
       : false;
 
-  const [storeNames, setStoreNames] = useState(["Big Bazaar", "City Medicos"]);
-
   // Checking Login Status on every reload to redirect
   useEffect(() => {
     if (localStorage.getItem("login")) {
@@ -192,14 +190,11 @@ const Cart = () => {
   // Submit Button Function
   const submitOrder = () => {
     // console.log("SUBMIT ORDER");
+    emptyCartHandler();
     toast.success("ORDER PLACED!!!!!!!!!!!");
     // toggleConfetti();
     history.push("/");
   };
-
-  useEffect(() => {
-    items.map((item) => {});
-  }, [items]);
 
   if (isEmpty)
     return (
@@ -281,9 +276,7 @@ const Cart = () => {
                   </button>
                 )}
               </div>
-              {/* <div>
-                {!isEmpty && <button onClick={emptyCart}>Empty cart</button>}
-              </div> */}
+
               <div className="subtotal">
                 <label>Subtotal: </label>
                 <strong>&#8377; {cartTotal}</strong>
@@ -291,78 +284,7 @@ const Cart = () => {
               <div className="slot-container">
                 <p className="slot-heading">Select Your Slot</p>
 
-                {storeNames.map((storeName, key) => {
-                  <>
-                  
-                <div className="slot-storename">{storeName}</div>
-                <form action="/p/quote.php">
-                  {/* add slots for visual display in data-debt-amount attributee */}
-
-                  <div id="debt-amount-slider">
-                    <input
-                      type="radio"
-                      name="debt-amount"
-                      id="1"
-                      value="1"
-                      onChange={(e) => {
-                        console.log(e.target.value);
-                      }}
-                      required
-                    />
-                    <label htmlFor="1" data-debt-amount="12-2 PM"></label>
-                    <input
-                      type="radio"
-                      name="debt-amount"
-                      id="2"
-                      value="2"
-                      required
-                      onChange={(e) => {
-                        console.log(e.target.value);
-                      }}
-                    />
-                    <label htmlFor="2" data-debt-amount="2-4 PM"></label>
-                    <input
-                      type="radio"
-                      name="debt-amount"
-                      id="3"
-                      value="3"
-                      required
-                      onChange={(e) => {
-                        console.log(e.target.value);
-                      }}
-                    />
-                    <label htmlFor="3" data-debt-amount="4-6 PM"></label>
-                    <input
-                      type="radio"
-                      name="debt-amount"
-                      id="4"
-                      value="4"
-                      required
-                      onChange={(e) => {
-                        console.log(e.target.value);
-                      }}
-                    />
-                    <label htmlFor="4" data-debt-amount="6-8 PM"></label>
-                    <input
-                      type="radio"
-                      name="debt-amount"
-                      id="5"
-                      value="5"
-                      required
-                      onChange={(e) => {
-                        console.log(e.target.value);
-                      }}
-                    />
-                    <label htmlFor="5" data-debt-amount="8-10 PM"></label>
-                    <div id="debt-amount-pos"></div>
-                  </div>
-                </form>
-              
-                  </>
-                  
-                })}
-
-                <div className="slot-storename">City Medicos</div>
+                {/* <div className="slot-storename">City Medicos</div> */}
                 <form action="/p/quote.php">
                   {/* add slots for visual display in data-debt-amount attributee */}
 
