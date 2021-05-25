@@ -26,23 +26,24 @@ The IntelliMart Website has a number of Application views serving User’s each 
 
 - **Home Page:** The Home of IntelliMart, providing the user with a refreshing landing section, and options to Login, Browse and see their cart (if the User is logged in).
 
-    ![Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled.png](Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled.png)
+    ![image](https://user-images.githubusercontent.com/61727284/119465717-8e313900-bd61-11eb-9249-00c593a47ffd.png)
+
 
 - **Login/Sign Up Page:**  These pages allow users to Login or Sign Up for an account to avail the IntelliMart services.
 
-    ![Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%201.png](Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%201.png)
+    ![image](https://user-images.githubusercontent.com/61727284/119465756-98ebce00-bd61-11eb-8357-58b1ce997b63.png)
 
 - **Contact Us Page:** Powered by typeform, this pages allows users to contact the IntelliMart team for their queries
 
-    ![Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%202.png](Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%202.png)
+    ![image](https://user-images.githubusercontent.com/61727284/119465824-aa34da80-bd61-11eb-913b-1fd3fcb1c9da.png)
 
 - **Stores Page:** It contains a list of all stores available on IntelliMart along with relevant information.
 
-    ![Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%203.png](Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%203.png)
+    ![image](https://user-images.githubusercontent.com/61727284/119465851-b15be880-bd61-11eb-8498-b1808037064e.png)
 
 - **Cart Page:** Items added to a User’s Cart are displayed and slots for the selected items can be booked on this page.
 
-    ![Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%204.png](Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%204.png)
+    ![image](https://user-images.githubusercontent.com/61727284/119465877-b882f680-bd61-11eb-91bb-409c0034c437.png)
 
 ## How to run the front end?
 
