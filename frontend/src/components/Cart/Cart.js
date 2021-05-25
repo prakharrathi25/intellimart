@@ -109,10 +109,14 @@ const Cart = () => {
 
       axios(config)
         .then(function (response) {
-          // console.log(JSON.stringify(response.data));
+          console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
           console.log(error);
+          // console.log(error.response);
+          console.log(error.response.data.error);
+          toast.error("Quantity of " + item.name + " added is more than amount available");
+          updateItemQuantity(item.id, item.quantity-1);
         });
     });
   };
