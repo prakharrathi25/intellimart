@@ -1,70 +1,59 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Front End Documentation
 
-## Available Scripts
+The IntelliMart front-end has been implemented with the help of ReactJS, an efficient, declarative, and flexible open-source JavaScript library, developed by Facebook for building interactive User interfaces, as a wireframe. Industry grade design practices have been incorporated in our product. Functionality is the core of IntelliMart as state management has been thoroughly State Management provided by node package modules. Design and Functionality are interwoven to provide a clean and user-friendly front end that performs.
 
-In the project directory, you can run:
+## **Why ReactJS?**
 
-### `npm start`
+Vanilla HTML, CSS with Javascript along with web development frameworks like Angular, VueJS, Ember are being used for creation of websites nowadays and were considered while deciding upon the Front-End of our project. However, the *declarative* nature of ReactJS also makes designing UI seamless and following reasons:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **JSX -** JSX is a modified version of JavaScript which makes the syntax almost identical to HTML. This highly increases readability as well as easy to map out the layout of the Website.
+- **Server Side rendering -** React running on React DOM (A virtual DOM not needing the direct intervention of the browser for every update) can be rendered on the server-side, which increases the performance of the application.
+- **Render Function -** It is easy to know what is being rendered and by which component it takes place due to everything being exported as a function/component. This increases the modularity of the code and makes it reusable and clearer to understand.
+- **Huge community support -** For a beginner, it is always troublesome getting into a new language or framework but for almost any kind of problem one might face, there is a dedicated community around to help and provide support. The library and development support is also extensive for ReactJS and it is one of the easiest ones to find support for.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## **Consuming APIs; User sees only what matters:**
 
-### `npm test`
+An important aspect of linking the Front-End and the Back-End is that data stored in the database should be manipulated with **Components** on the Front-End. For example, a new entry is created in the Users table on every User Registration. Similarly, any user who has ordered food previously would be able to see past orders fetched from the database.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+These accesses to the database are done using the APIs and are implemented to the Front-End using ‘**Axios’** module. Axios makes it easy to send asynchronous HTTP requests to REST endpoints and perform CRUD operations.
 
-### `npm run build`
+Certain application states need to be available all the time as they can be set in one component and be retrieved in another and transfer of these states using function calls through hierarchy of the application can be both hard to debug as well as affect the performance of application.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## **Application Views:**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The IntelliMart Website has a number of Application views serving User’s each and every need creating a wholesome User Experience. The various views created have been listed below:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Home Page:** The Home of IntelliMart, providing the user with a refreshing landing section, and options to Login, Browse and see their cart (if the User is logged in).
 
-### `npm run eject`
+    ![Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled.png](Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **Login/Sign Up Page:**  These pages allow users to Login or Sign Up for an account to avail the IntelliMart services.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    ![Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%201.png](Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%201.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **Contact Us Page:** Powered by typeform, this pages allows users to contact the IntelliMart team for their queries
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    ![Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%202.png](Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%202.png)
 
-## Learn More
+- **Stores Page:** It contains a list of all stores available on IntelliMart along with relevant information.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    ![Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%203.png](Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%203.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Cart Page:** Items added to a User’s Cart are displayed and slots for the selected items can be booked on this page.
 
-### Code Splitting
+    ![Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%204.png](Front%20End%20Documentation%20270d5ff41c6d420a909c2785882f02c5/Untitled%204.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## How to run the front end?
 
-### Analyzing the Bundle Size
+- Clone the Repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    `git clone {repository link}`
 
-### Making a Progressive Web App
+- Install Node Package Module Dependencies for the React app to function. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    `npm install`
 
-### Advanced Configuration
+- Run the Front End Application on your local server. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits. You will also see any lint errors in the console.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    `npm start`
