@@ -66,13 +66,6 @@ class CartProductSerializer(serializers.ModelSerializer):
         response['product_details'] = ProductSerializer(instance.product).data
         return response
 
-# class CartProductSerializer(serializers.ModelSerializer):
-#     product = RelatedFieldAlternative(queryset=Product.objects.all(), serializer=ProductSerializer)
-#     class Meta:
-#         model = CartProduct
-#         # fields = ('id', 'user', 'price', 'quantity', 'product')
-#         fields = '__all__'
-
 class SlotSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Slot
@@ -135,31 +128,16 @@ class AddCartProductSerializer(serializers.ModelSerializer):
         user_id = self.validated_data['user']
         product_id = self.validated_data['product']
 
-        # filter by user and product 
-        queryset = CartProduct.objects.filter(user=user_id).filter(product=product_id)
-        print(queryset)
-        
-        if queryset:
-            # Get quantity 
-            q = self.validated_data['quantity']
-            queryset.update(quantity=q)
-
-            new_cart_product = CartProduct(
+        # Create a new user instance 
+        new_cart_product = CartProduct(
                 user=self.validated_data['user'],
                 price=self.validated_data['price'],
                 product=self.validated_data['product'],
                 quantity=self.validated_data['quantity']
-            )
-
-            return new_cart_product
-        
-        # if the queryset does not exist 
-        new_cart_product = CartProduct(
-            user=self.validated_data['user'],
-            price=self.validated_data['price'],
-            product=self.validated_data['product'],
-            quantity=self.validated_data['quantity']
         )
+
+        # set price based on the db value
+        new_cart_product.price = new_cart_product.product.price
         
         # Check if the quantity is greater than the store product
         given_quantity = new_cart_product.quantity
@@ -169,11 +147,36 @@ class AddCartProductSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({
                 'error':'The quantity enterred is greater than the quantity available!'
             })
-            
 
-        # Save the new cart product
-        new_cart_product.save()
+        # filter by user and product 
+        queryset = CartProduct.objects.filter(user=user_id, product=product_id)
         
+        if queryset:
+            
+            # Get quantity 
+            q = self.validated_data['quantity']
+
+            # Check if quantity is zero then delete
+            if q == 0: 
+                
+                # delete the object 
+                queryset.delete()
+            
+            else: 
+                queryset.update(quantity=q)
+        
+            # new_cart_product = CartProduct(
+            #     user=self.validated_data['user'],
+            #     price=self.validated_data['price'],
+            #     product=self.validated_data['product'],
+            #     quantity=self.validated_data['quantity']
+            # )
+    
+        else: 
+            # Save the new cart product
+            new_cart_product.save()
+
+        # return the object created
         return new_cart_product
 
 ''' Serializer to save the details of the slot that a user sends '''

@@ -228,7 +228,26 @@ const Cart = () => {
                 <label>Subtotal: </label>
                 <strong>&#8377; {cartTotal}</strong>
               </div>
-
+              <div className="slot-container">
+                <p className="slot-heading">Select Your Slot</p>
+                <form action="/p/quote.php">
+		
+    {/* add slots for visual display in data-debt-amount attributee */}
+		<div id="debt-amount-slider">
+			<input type="radio" name="debt-amount" id="1" value="1" onChange={(e)=>{console.log(e.target.value)}}required/>
+			<label for="1" data-debt-amount="< $10k"></label>
+			<input type="radio" name="debt-amount" id="2" value="2" required onChange={(e)=>{console.log(e.target.value)}}/>
+			<label for="2" data-debt-amount="$10k-25k"></label>
+			<input type="radio" name="debt-amount" id="3" value="3" required onChange={(e)=>{console.log(e.target.value)}}/>
+			<label for="3" data-debt-amount="$25k-50k"></label>
+			<input type="radio" name="debt-amount" id="4" value="4" required onChange={(e)=>{console.log(e.target.value)}}/>
+			<label for="4" data-debt-amount="$50k-100k"></label>
+			<input type="radio" name="debt-amount" id="5" value="5" required onChange={(e)=>{console.log(e.target.value)}}/>
+			<label for="5" data-debt-amount="$100k+"></label>
+			<div id="debt-amount-pos"></div>
+		</div>
+	</form>
+              </div>
               <div className="submit-div">
                 <button onClick={() => submitOrder()} className="submit button">
                   {" "}
