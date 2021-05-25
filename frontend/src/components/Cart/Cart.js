@@ -6,19 +6,31 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
 import "react-toastify/dist/ReactToastify.css";
+// import useWindowSize from 'react-use/lib/useWindowSize';
+// import Confetti from "react-confetti";
 
 const Cart = () => {
   const history = useHistory();
-  
-  useEffect(()=>{
-    if(localStorage.getItem("login")){
-      return
-    } 
-    else{
+  const isLoggedIn =
+    localStorage.getItem("login") &&
+    JSON.parse(localStorage.getItem("login")).user_id
+      ? true
+      : false;
+
+  // const [confettiVisible, setConfettiVisible] = useState(true);
+
+  // const toggleConfetti = () => {
+  //   setConfettiVisible(!confettiVisible);
+  // }
+
+  useEffect(() => {
+    if (localStorage.getItem("login")) {
+      return;
+    } else {
       toast.error("Please Login to Continue");
       history.push("/login");
-    } 
-  },[])
+    }
+  }, []);
 
   const {
     isEmpty,
@@ -69,7 +81,7 @@ const Cart = () => {
   // Function Getting Triggered on Every change in the Cart
   useEffect(() => {
     // console.log(items);
-    items.length > 0 && postItems();
+    items.length > 0 && isLoggedIn && postItems();
   }, [items]);
 
   // FETCHING Cart Data Using DB Fetch (ONLY IF LOGIN HAS HAPPENED)
@@ -106,7 +118,7 @@ const Cart = () => {
                         existingUserCartItem.product_details.store_details.name,
                       user: existingUserCartItem.user,
                       image: existingUserCartItem.product_details.image,
-                      existingCartID: existingUserCartItem.id
+                      existingCartID: existingUserCartItem.id,
                     },
                     existingUserCartItem.quantity
                   );
@@ -125,6 +137,7 @@ const Cart = () => {
   const submitOrder = () => {
     // console.log("SUBMIT ORDER");
     toast.success("ORDER PLACED!!!!!!!!!!!");
+    // toggleConfetti();
     history.push("/");
   };
 
@@ -226,6 +239,13 @@ const Cart = () => {
           </div>
         </div>
       </section>
+      {/* {confettiVisible ? ( */}
+        {/* <Confetti
+          onConfettiComplete={toggleConfetti()}
+          width={1920}
+          height={1080}
+        /> */}
+      {/* ) : null} */}
     </div>
   );
 };
