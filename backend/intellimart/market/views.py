@@ -78,11 +78,13 @@ class CartProductView(generics.ListAPIView):
 
     def delete(self, request):
         
+        id = request.GET.get['id']
+        print(id)
         # delete the product using ID and send a confirmation response
-        CartProduct.objects.get(id=request.DELETE['id']).delete()
+        CartProduct.objects.get(id=id).delete()
         return Response({
             'status':True
-        })
+        }, status=status.HTTP_204_NO_CONTENT)
 
     def get(self, request):
 
