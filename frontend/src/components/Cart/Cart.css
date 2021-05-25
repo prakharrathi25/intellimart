@@ -1575,8 +1575,13 @@ form:invalid + button {
 .slot-heading{
   font-size: 16px;
   padding: 0 0 1.5% 0%;
-  font-weight: 500;
+  font-weight: 700;
   float: left;
+  
+}
+
+.slot-storename{
+  margin-top: 1%;
 }
 
 .submit-div{

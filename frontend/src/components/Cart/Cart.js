@@ -11,27 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const history = useHistory();
-  const isLoggedIn =
-    localStorage.getItem("login") &&
-    JSON.parse(localStorage.getItem("login")).user_id
-      ? true
-      : false;
-
-  // const [confettiVisible, setConfettiVisible] = useState(true);
-
-  // const toggleConfetti = () => {
-  //   setConfettiVisible(!confettiVisible);
-  // }
-
-  useEffect(() => {
-    if (localStorage.getItem("login")) {
-      return;
-    } else {
-      toast.error("Please Login to Continue");
-      history.push("/login");
-    }
-  }, []);
-
   const {
     isEmpty,
     cartTotal,
@@ -44,45 +23,23 @@ const Cart = () => {
     getItem,
     inCart,
   } = useCart();
+  const isLoggedIn =
+    localStorage.getItem("login") &&
+    JSON.parse(localStorage.getItem("login")).user_id
+      ? true
+      : false;
 
-  // Function to Update the Cart
-  const postItems = () => {
-    // console.log(items);
+  const [storeNames, setStoreNames] = useState(["Big Bazaar", "City Medicos"]);
 
-    items.map((item) => {
-      // console.log(item);
-      var data = JSON.stringify({
-        quantity: item.quantity,
-        price: item.price,
-        ordered: false,
-        product: item.id,
-        user: JSON.parse(localStorage.getItem("login")).user_id,
-      });
-
-      var config = {
-        method: "post",
-        url: "http://127.0.0.1:8000/cartprod",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
-
-      axios(config)
-        .then(function (response) {
-          // console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    });
-  };
-
-  // Function Getting Triggered on Every change in the Cart
+  // Checking Login Status on every reload to redirect
   useEffect(() => {
-    // console.log(items);
-    items.length > 0 && isLoggedIn && postItems();
-  }, [items]);
+    if (localStorage.getItem("login")) {
+      return;
+    } else {
+      toast.error("Please Login to Continue");
+      history.push("/login");
+    }
+  }, []);
 
   // FETCHING Cart Data Using DB Fetch (ONLY IF LOGIN HAS HAPPENED)
   useEffect(() => {
@@ -129,6 +86,46 @@ const Cart = () => {
       });
   }, []);
 
+  // Function to Update the Cart to backend on every cart module updation
+  const postItems = () => {
+    // console.log(items);
+
+    items.map((item) => {
+      // console.log(item);
+      var data = JSON.stringify({
+        quantity: item.quantity,
+        price: item.price,
+        ordered: false,
+        product: item.id,
+        user: JSON.parse(localStorage.getItem("login")).user_id,
+      });
+
+      var config = {
+        method: "post",
+        url: "http://127.0.0.1:8000/cartprod",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          // console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+  };
+
+  // Function Getting Triggered on Every change in the Cart
+  useEffect(() => {
+    // console.log(items);
+    items.length > 0 && isLoggedIn && postItems();
+  }, [items]);
+
+  // Empty the cart and update backend
   const emptyCartHandler = () => {
     items.map((item) => {
       // console.log(item);
@@ -160,6 +157,7 @@ const Cart = () => {
     emptyCart();
   };
 
+  // Remove an item and update backend
   const removeItemHandler = (id) => {
     // console.log(getItem(id));
     let item = getItem(id);
@@ -198,6 +196,10 @@ const Cart = () => {
     // toggleConfetti();
     history.push("/");
   };
+
+  useEffect(() => {
+    items.map((item) => {});
+  }, [items]);
 
   if (isEmpty)
     return (
@@ -288,8 +290,14 @@ const Cart = () => {
               </div>
               <div className="slot-container">
                 <p className="slot-heading">Select Your Slot</p>
+
+                {storeNames.map((storeName, key) => {
+                  <>
+                  
+                <div className="slot-storename">{storeName}</div>
                 <form action="/p/quote.php">
                   {/* add slots for visual display in data-debt-amount attributee */}
+
                   <div id="debt-amount-slider">
                     <input
                       type="radio"
@@ -301,7 +309,7 @@ const Cart = () => {
                       }}
                       required
                     />
-                    <label htmlFor="1" data-debt-amount="< $10k"></label>
+                    <label htmlFor="1" data-debt-amount="12-2 PM"></label>
                     <input
                       type="radio"
                       name="debt-amount"
@@ -312,7 +320,7 @@ const Cart = () => {
                         console.log(e.target.value);
                       }}
                     />
-                    <label htmlFor="2" data-debt-amount="$10k-25k"></label>
+                    <label htmlFor="2" data-debt-amount="2-4 PM"></label>
                     <input
                       type="radio"
                       name="debt-amount"
@@ -323,7 +331,7 @@ const Cart = () => {
                         console.log(e.target.value);
                       }}
                     />
-                    <label htmlFor="3" data-debt-amount="$25k-50k"></label>
+                    <label htmlFor="3" data-debt-amount="4-6 PM"></label>
                     <input
                       type="radio"
                       name="debt-amount"
@@ -334,7 +342,7 @@ const Cart = () => {
                         console.log(e.target.value);
                       }}
                     />
-                    <label htmlFor="4" data-debt-amount="$50k-100k"></label>
+                    <label htmlFor="4" data-debt-amount="6-8 PM"></label>
                     <input
                       type="radio"
                       name="debt-amount"
@@ -345,7 +353,75 @@ const Cart = () => {
                         console.log(e.target.value);
                       }}
                     />
-                    <label htmlFor="5" data-debt-amount="$100k+"></label>
+                    <label htmlFor="5" data-debt-amount="8-10 PM"></label>
+                    <div id="debt-amount-pos"></div>
+                  </div>
+                </form>
+              
+                  </>
+                  
+                })}
+
+                <div className="slot-storename">City Medicos</div>
+                <form action="/p/quote.php">
+                  {/* add slots for visual display in data-debt-amount attributee */}
+
+                  <div id="debt-amount-slider">
+                    <input
+                      type="radio"
+                      name="debt-amount"
+                      id="1"
+                      value="1"
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                      }}
+                      required
+                    />
+                    <label htmlFor="1" data-debt-amount="12-2 PM"></label>
+                    <input
+                      type="radio"
+                      name="debt-amount"
+                      id="2"
+                      value="2"
+                      required
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                      }}
+                    />
+                    <label htmlFor="2" data-debt-amount="2-4 PM"></label>
+                    <input
+                      type="radio"
+                      name="debt-amount"
+                      id="3"
+                      value="3"
+                      required
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                      }}
+                    />
+                    <label htmlFor="3" data-debt-amount="4-6 PM"></label>
+                    <input
+                      type="radio"
+                      name="debt-amount"
+                      id="4"
+                      value="4"
+                      required
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                      }}
+                    />
+                    <label htmlFor="4" data-debt-amount="6-8 PM"></label>
+                    <input
+                      type="radio"
+                      name="debt-amount"
+                      id="5"
+                      value="5"
+                      required
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                      }}
+                    />
+                    <label htmlFor="5" data-debt-amount="8-10 PM"></label>
                     <div id="debt-amount-pos"></div>
                   </div>
                 </form>

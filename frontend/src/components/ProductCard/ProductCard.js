@@ -9,6 +9,7 @@ const ProductCard = ({
   quantity,
   image,
   product,
+  unit,
   description,
   category,
   store,
@@ -38,11 +39,11 @@ const ProductCard = ({
           src={"http://127.0.0.1:8000" + image}
           alt=""
         />
-        <h1 className="product-name">{name}</h1>
+        <h1 className="product-name">{name.substring(0,14)}</h1>
       </div>
       <div className="product-info">
         <p className="column">₹{price}</p>
-        <p className="column">{quantity}</p>
+        <p className="column">{quantity} {unit}</p>
         <button 
           className="add-button column hover-button" 
           // onClick={addToCart}

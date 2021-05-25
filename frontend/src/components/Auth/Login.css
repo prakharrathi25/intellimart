@@ -16,6 +16,10 @@
   height: 100%;
 }
 
+.login-form{
+  width: 100%;
+}
+
 .form {
   display: flex;
   align-items: center;

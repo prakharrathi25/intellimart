@@ -181,7 +181,7 @@ const Login = () => {
             <h1>Account Login</h1>
           </div>
           <div className="form-content">
-            <form onSubmit={loginSubmit}>
+            <form className="login-form" onSubmit={loginSubmit}>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input
@@ -222,7 +222,7 @@ const Login = () => {
             <h1>SIGN IN</h1>
           </div>
           <div className="form-content">
-            <form onSubmit={signupSubmit}>
+            <form className="login-form" onSubmit={signupSubmit}>
               <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input

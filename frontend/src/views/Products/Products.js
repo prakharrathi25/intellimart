@@ -50,6 +50,7 @@ const Products = ({ storeID, storeName }) => {
                   description={product.description}
                   category={product.category}
                   store={product.store}
+                  unit={product.unit}
                   saveItem={saveItem}
                   key={key}
                   addItem={addItem}
