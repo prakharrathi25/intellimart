@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./About.css";
+import "./Contact.css";
 import Loader from '../../components/loader';
 
-const About = () => {
+const Contact = () => {
   
 
   return (
@@ -29,4 +29,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Contact;

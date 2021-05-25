@@ -130,7 +130,65 @@ const Cart = () => {
   }, []);
 
   const emptyCartHandler = () => {
+    items.map((item) => {
+      // console.log(item);
+      var data = JSON.stringify({
+        quantity: 0,
+        price: item.price,
+        ordered: false,
+        product: item.id,
+        user: JSON.parse(localStorage.getItem("login")).user_id,
+      });
+
+      var config = {
+        method: "post",
+        url: "http://127.0.0.1:8000/cartprod",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          // console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
     emptyCart();
+  };
+
+  const removeItemHandler = (id) => {
+    // console.log(getItem(id));
+    let item = getItem(id);
+
+    var data = JSON.stringify({
+      quantity: 0,
+      price: item.price,
+      ordered: false,
+      product: item.id,
+      user: JSON.parse(localStorage.getItem("login")).user_id,
+    });
+
+    var config = {
+      method: "post",
+      url: "http://127.0.0.1:8000/cartprod",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    removeItem(id);
   };
 
   // Submit Button Function
@@ -197,7 +255,7 @@ const Cart = () => {
                   </div>
                   <div className="td_item item_remove">
                     <span
-                      onClick={() => removeItem(item.id)}
+                      onClick={() => removeItemHandler(item.id)}
                       className="material-icons-outlined"
                     >
                       close
@@ -231,22 +289,66 @@ const Cart = () => {
               <div className="slot-container">
                 <p className="slot-heading">Select Your Slot</p>
                 <form action="/p/quote.php">
-		
-    {/* add slots for visual display in data-debt-amount attributee */}
-		<div id="debt-amount-slider">
-			<input type="radio" name="debt-amount" id="1" value="1" onChange={(e)=>{console.log(e.target.value)}}required/>
-			<label for="1" data-debt-amount="< $10k"></label>
-			<input type="radio" name="debt-amount" id="2" value="2" required onChange={(e)=>{console.log(e.target.value)}}/>
-			<label for="2" data-debt-amount="$10k-25k"></label>
-			<input type="radio" name="debt-amount" id="3" value="3" required onChange={(e)=>{console.log(e.target.value)}}/>
-			<label for="3" data-debt-amount="$25k-50k"></label>
-			<input type="radio" name="debt-amount" id="4" value="4" required onChange={(e)=>{console.log(e.target.value)}}/>
-			<label for="4" data-debt-amount="$50k-100k"></label>
-			<input type="radio" name="debt-amount" id="5" value="5" required onChange={(e)=>{console.log(e.target.value)}}/>
-			<label for="5" data-debt-amount="$100k+"></label>
-			<div id="debt-amount-pos"></div>
-		</div>
-	</form>
+                  {/* add slots for visual display in data-debt-amount attributee */}
+                  <div id="debt-amount-slider">
+                    <input
+                      type="radio"
+                      name="debt-amount"
+                      id="1"
+                      value="1"
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                      }}
+                      required
+                    />
+                    <label htmlFor="1" data-debt-amount="< $10k"></label>
+                    <input
+                      type="radio"
+                      name="debt-amount"
+                      id="2"
+                      value="2"
+                      required
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                      }}
+                    />
+                    <label htmlFor="2" data-debt-amount="$10k-25k"></label>
+                    <input
+                      type="radio"
+                      name="debt-amount"
+                      id="3"
+                      value="3"
+                      required
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                      }}
+                    />
+                    <label htmlFor="3" data-debt-amount="$25k-50k"></label>
+                    <input
+                      type="radio"
+                      name="debt-amount"
+                      id="4"
+                      value="4"
+                      required
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                      }}
+                    />
+                    <label htmlFor="4" data-debt-amount="$50k-100k"></label>
+                    <input
+                      type="radio"
+                      name="debt-amount"
+                      id="5"
+                      value="5"
+                      required
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                      }}
+                    />
+                    <label htmlFor="5" data-debt-amount="$100k+"></label>
+                    <div id="debt-amount-pos"></div>
+                  </div>
+                </form>
               </div>
               <div className="submit-div">
                 <button onClick={() => submitOrder()} className="submit button">
@@ -259,7 +361,7 @@ const Cart = () => {
         </div>
       </section>
       {/* {confettiVisible ? ( */}
-        {/* <Confetti
+      {/* <Confetti
           onConfettiComplete={toggleConfetti()}
           width={1920}
           height={1080}

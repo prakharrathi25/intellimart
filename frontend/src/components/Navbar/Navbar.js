@@ -17,8 +17,8 @@ const Navbar = ({ isLoggedIn }) => {
       link: "/stores",
     },
     {
-      title: "About Us",
-      link: "/about",
+      title: "Contact Us",
+      link: "/contact",
     },
     isLoggedIn
       ? {

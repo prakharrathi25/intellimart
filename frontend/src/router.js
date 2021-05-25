@@ -2,7 +2,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Products from "./views/Products/Products";
 import HeroSection from "./components/HeroSection/HeroSection";
 import Stores from "./views/Stores/Stores";
-import About from "./views/About/About";
+import Contact from "./views/Contact/Contact";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Auth/Login";
 import Logout from "./components/Auth/Logout";
@@ -27,7 +27,7 @@ function Router() {
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/" component={HeroSection} />
         <Route exact path="/cart" component={Cart} />
-        <Route exact path="/about" component={About} />
+        <Route exact path="/contact" component={Contact} />
         <Route exact path="/store/:id" component={StoreInfo} />
         <Route component={HeroSection} />
       </Switch>
