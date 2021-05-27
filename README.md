@@ -82,8 +82,8 @@ We have discussed the benefits for the consumers in the previous segment.
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/prakharrathi25"><img src="https://avatars.githubusercontent.com/u/38958532?v=4" width="100px;" alt=""/><br /><sub><b>Prakhar Rathi</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/prkhrbhsn"><img src="https://avatars.githubusercontent.com/u/61727284?v=4" width="100px;" alt=""/><br /><sub><b>Prakhar Bhasin</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/kirtiksingh"><img src="https://avatars.githubusercontent.com/u/42700919?v=4" width="100px;" alt=""/><br /><sub><b>Kirtik Singh</b></sub></a><br /></td> 
+    <td align="center"><a href="https://github.com/prakharrathi25"><img src="https://avatars.githubusercontent.com/u/38958532?v=4" width="100px;" alt="" style="border-radius:50%"/><br /><sub><b>Prakhar Rathi</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/prkhrbhsn"><img src="https://avatars.githubusercontent.com/u/61727284?v=4" width="100px;" alt="" style="border-radius:50%"/><br /><sub><b>Prakhar Bhasin</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/kirtiksingh"><img src="https://avatars.githubusercontent.com/u/42700919?v=4" width="100px;" alt="" style="border-radius:50%"/><br /><sub><b>Kirtik Singh</b></sub></a><br /></td> 
   </tr>
 </table>
