@@ -86,4 +86,16 @@ body{
     /* padding: 2%; */
     background-color: #F6F7FB;
 }
+
+@media (max-width:800px){
+    .store-details-container{
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .store-details{
+        justify-content: space-around;
+    }
+}
    
