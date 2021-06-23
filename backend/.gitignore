@@ -1,2 +1,5 @@
 env/
 spm/
+intellimart/market/__pycache__
+intellimart/market/migrations/__pycache__
+intellimart/intellimart/__pycache__
