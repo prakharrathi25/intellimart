@@ -103,7 +103,7 @@ const Login = () => {
 
     var config = {
       method: "post",
-      url: "http://127.0.0.1:8000/login",
+      url: "/login",
       headers: {
         "Content-Type": "application/json",
       },
@@ -142,7 +142,7 @@ const Login = () => {
 
     var config = {
       method: "post",
-      url: "http://127.0.0.1:8000/register",
+      url: "/register",
       headers: {
         "Content-Type": "application/json",
       },
@@ -169,106 +169,106 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="form">
-        <div className="login-illus">
-          <img src={Illustration} alt="Login/Sign Up" className="login-svg" />
+    <div className='login-container'>
+      <div className='form'>
+        <div className='login-illus'>
+          <img src={Illustration} alt='Login/Sign Up' className='login-svg' />
         </div>
 
-        <div className="form-toggle" onClick={() => formToggleHandler()}></div>
-        <div className="form-panel one" style={{ cursor: "pointer" }}>
-          <div className="form-header">
+        <div className='form-toggle' onClick={() => formToggleHandler()}></div>
+        <div className='form-panel one' style={{ cursor: "pointer" }}>
+          <div className='form-header'>
             <h1>Account Login</h1>
           </div>
-          <div className="form-content">
-            <form className="login-form" onSubmit={loginSubmit}>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
+          <div className='form-content'>
+            <form className='login-form' onSubmit={loginSubmit}>
+              <div className='form-group'>
+                <label htmlFor='username'>Username</label>
                 <input
-                  id="username"
-                  type="text"
-                  name="username"
-                  required="required"
+                  id='username'
+                  type='text'
+                  name='username'
+                  required='required'
                   onChange={handleSignInEmail}
                   value={signInFormValues.email}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
+              <div className='form-group'>
+                <label htmlFor='password'>Password</label>
                 <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  required="required"
+                  id='password'
+                  type='password'
+                  name='password'
+                  required='required'
                   onChange={handleSignInPassword}
                   value={signInFormValues.password}
                 />
               </div>
-              <div className="form-group">
+              <div className='form-group'>
                 {/* <label className="form-remember">
                   <input type="checkbox" />
                   Remember Me
                 </label> */}
                 {/* <a className="form-recovery">Forgot Password?</a> */}
               </div>
-              <div className="form-group">
-                <button type="submit">Log In</button>
+              <div className='form-group'>
+                <button type='submit'>Log In</button>
               </div>
             </form>
           </div>
         </div>
-        <div className="form-panel two" onClick={() => formPanelTwoHandler()}>
-          <div className="form-header">
+        <div className='form-panel two' onClick={() => formPanelTwoHandler()}>
+          <div className='form-header'>
             <h1>SIGN IN</h1>
           </div>
-          <div className="form-content">
-            <form className="login-form" onSubmit={signupSubmit}>
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
+          <div className='form-content'>
+            <form className='login-form' onSubmit={signupSubmit}>
+              <div className='form-group'>
+                <label htmlFor='name'>Name</label>
                 <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  required="required"
+                  id='name'
+                  type='text'
+                  name='name'
+                  required='required'
                   onChange={handleSignUpName}
                   value={signUpFormValues.name}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
+              <div className='form-group'>
+                <label htmlFor='email'>Email Address</label>
                 <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  required="required"
+                  id='email'
+                  type='email'
+                  name='email'
+                  required='required'
                   onChange={handleSignUpEmail}
                   value={signUpFormValues.email}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="email">Phone Number</label>
+              <div className='form-group'>
+                <label htmlFor='email'>Phone Number</label>
                 <input
-                  id="mobile"
-                  type="text"
-                  name="mobile"
-                  required="required"
+                  id='mobile'
+                  type='text'
+                  name='mobile'
+                  required='required'
                   onChange={handleSignUpMobile}
                   value={signUpFormValues.mobile}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
+              <div className='form-group'>
+                <label htmlFor='password'>Password</label>
                 <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  required="required"
+                  id='password'
+                  type='password'
+                  name='password'
+                  required='required'
                   onChange={handleSignUpPassword}
                   value={signUpFormValues.password}
                 />
               </div>
-              <div className="form-group">
-                <button type="submit">Register</button>
+              <div className='form-group'>
+                <button type='submit'>Register</button>
               </div>
             </form>
           </div>

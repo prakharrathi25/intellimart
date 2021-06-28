@@ -18,7 +18,7 @@ const Products = ({ storeID, storeName }) => {
   const getProducts = () => {
     var config = {
       method: "get",
-      url: `http://127.0.0.1:8000/products?store_id=${storeID}`,
+      url: `/products?store_id=${storeID}`,
     };
     axios(config)
       .then(function (response) {
@@ -36,7 +36,7 @@ const Products = ({ storeID, storeName }) => {
 
   return (
     <div>
-      <div className="product-container">
+      <div className='product-container'>
         {responseData !== null
           ? responseData.map((product, key) => {
               const alreadyAdded = inCart(product.id);

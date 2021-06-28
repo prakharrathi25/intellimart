@@ -49,7 +49,7 @@ const Cart = () => {
 
     var config = {
       method: "get",
-      url: "http://127.0.0.1:8000/cartprod?user=" + userID + "&ordered=False",
+      url: "/cartprod?user=" + userID + "&ordered=False",
       headers: {},
     };
 
@@ -100,7 +100,7 @@ const Cart = () => {
 
       var config = {
         method: "post",
-        url: "http://127.0.0.1:8000/cartprod",
+        url: "/cartprod",
         headers: {
           "Content-Type": "application/json",
         },
@@ -115,8 +115,10 @@ const Cart = () => {
           console.log(error);
           // console.log(error.response);
           console.log(error.response.data.error);
-          toast.error("Quantity of " + item.name + " added is more than amount available");
-          updateItemQuantity(item.id, item.quantity-1);
+          toast.error(
+            "Quantity of " + item.name + " added is more than amount available"
+          );
+          updateItemQuantity(item.id, item.quantity - 1);
         });
     });
   };
@@ -141,7 +143,7 @@ const Cart = () => {
 
       var config = {
         method: "post",
-        url: "http://127.0.0.1:8000/cartprod",
+        url: "/cartprod",
         headers: {
           "Content-Type": "application/json",
         },
@@ -174,7 +176,7 @@ const Cart = () => {
 
     var config = {
       method: "post",
-      url: "http://127.0.0.1:8000/cartprod",
+      url: "/cartprod",
       headers: {
         "Content-Type": "application/json",
       },
@@ -202,39 +204,39 @@ const Cart = () => {
 
   if (isEmpty)
     return (
-      <div className="empty-cart-container">
-        <img className="empty-cart-image" src={Illustration} alt="" />
-        <p className="empty-cart-text">No Current Bookings!</p>
+      <div className='empty-cart-container'>
+        <img className='empty-cart-image' src={Illustration} alt='' />
+        <p className='empty-cart-text'>No Current Bookings!</p>
       </div>
     );
 
   return (
-    <div className="cart-container">
-      <section className="cart_wrapper">
-        <div className="cart_lists">
-          <div className="cart_title">
-            <span className="material-icons-outlined">local_mall</span>
+    <div className='cart-container'>
+      <section className='cart_wrapper'>
+        <div className='cart_lists'>
+          <div className='cart_title'>
+            <span className='material-icons-outlined'>local_mall</span>
             Your Shopping Cart
           </div>
 
-          <div className="cart_list_wrap">
-            <div className="cart_responsive">
+          <div className='cart_list_wrap'>
+            <div className='cart_responsive'>
               {items.map((item) => (
-                <div className="tr_item">
-                  <div className="td_item item_img">
+                <div className='tr_item'>
+                  <div className='td_item item_img'>
                     <img src={"http://127.0.0.1:8000" + item.image} />
                   </div>
-                  <div className="td_item item_name">
-                    <label className="main">{item.name}</label>
-                    <label className="sub">Store: {item.storeName}</label>
+                  <div className='td_item item_name'>
+                    <label className='main'>{item.name}</label>
+                    <label className='sub'>Store: {item.storeName}</label>
                   </div>
-                  <div className="td_item item_color">
+                  <div className='td_item item_color'>
                     <label>x &nbsp;{item.quantity}</label>
                   </div>
-                  <div className="td_item">
-                    <div className="item_qty">
+                  <div className='td_item'>
+                    <div className='item_qty'>
                       <button
-                        className="qty-button"
+                        className='qty-button'
                         onClick={() =>
                           updateItemQuantity(item.id, item.quantity - 1)
                         }
@@ -242,7 +244,7 @@ const Cart = () => {
                         -
                       </button>
                       <button
-                        className="qty-button"
+                        className='qty-button'
                         onClick={() =>
                           updateItemQuantity(item.id, item.quantity + 1)
                         }
@@ -251,13 +253,13 @@ const Cart = () => {
                       </button>
                     </div>
                   </div>
-                  <div className="td_item item_price">
+                  <div className='td_item item_price'>
                     <label>&#8377; {item.price}</label>
                   </div>
-                  <div className="td_item item_remove">
+                  <div className='td_item item_remove'>
                     <span
                       onClick={() => removeItemHandler(item.id)}
-                      className="material-icons-outlined"
+                      className='material-icons-outlined'
                     >
                       close
                     </span>
@@ -265,8 +267,8 @@ const Cart = () => {
                 </div>
               ))}
             </div>
-            <div className="footer">
-              <div className="back_cart">
+            <div className='footer'>
+              <div className='back_cart'>
                 {/* <a href="/stores">
                   <span className="material-icons-outlined">west</span>
                   Back to Shop
@@ -274,86 +276,86 @@ const Cart = () => {
                 {!isEmpty && (
                   <button
                     onClick={() => emptyCartHandler()}
-                    className="empty-cart button"
+                    className='empty-cart button'
                   >
                     Empty cart
                   </button>
                 )}
               </div>
 
-              <div className="subtotal">
+              <div className='subtotal'>
                 <label>Subtotal: </label>
                 <strong>&#8377; {cartTotal}</strong>
               </div>
-              <div className="slot-container">
-                <p className="slot-heading">Select Your Slot</p>
+              <div className='slot-container'>
+                <p className='slot-heading'>Select Your Slot</p>
 
                 {/* <div className="slot-storename">City Medicos</div> */}
-                <form action="/p/quote.php">
+                <form action='/p/quote.php'>
                   {/* add slots for visual display in data-debt-amount attributee */}
 
-                  <div id="debt-amount-slider">
+                  <div id='debt-amount-slider'>
                     <input
-                      type="radio"
-                      name="debt-amount"
-                      id="1"
-                      value="1"
+                      type='radio'
+                      name='debt-amount'
+                      id='1'
+                      value='1'
                       onChange={(e) => {
                         console.log(e.target.value);
                       }}
                       required
                     />
-                    <label htmlFor="1" data-debt-amount="12-2 PM"></label>
+                    <label htmlFor='1' data-debt-amount='12-2 PM'></label>
                     <input
-                      type="radio"
-                      name="debt-amount"
-                      id="2"
-                      value="2"
+                      type='radio'
+                      name='debt-amount'
+                      id='2'
+                      value='2'
                       required
                       onChange={(e) => {
                         console.log(e.target.value);
                       }}
                     />
-                    <label htmlFor="2" data-debt-amount="2-4 PM"></label>
+                    <label htmlFor='2' data-debt-amount='2-4 PM'></label>
                     <input
-                      type="radio"
-                      name="debt-amount"
-                      id="3"
-                      value="3"
+                      type='radio'
+                      name='debt-amount'
+                      id='3'
+                      value='3'
                       required
                       onChange={(e) => {
                         console.log(e.target.value);
                       }}
                     />
-                    <label htmlFor="3" data-debt-amount="4-6 PM"></label>
+                    <label htmlFor='3' data-debt-amount='4-6 PM'></label>
                     <input
-                      type="radio"
-                      name="debt-amount"
-                      id="4"
-                      value="4"
+                      type='radio'
+                      name='debt-amount'
+                      id='4'
+                      value='4'
                       required
                       onChange={(e) => {
                         console.log(e.target.value);
                       }}
                     />
-                    <label htmlFor="4" data-debt-amount="6-8 PM"></label>
+                    <label htmlFor='4' data-debt-amount='6-8 PM'></label>
                     <input
-                      type="radio"
-                      name="debt-amount"
-                      id="5"
-                      value="5"
+                      type='radio'
+                      name='debt-amount'
+                      id='5'
+                      value='5'
                       required
                       onChange={(e) => {
                         console.log(e.target.value);
                       }}
                     />
-                    <label htmlFor="5" data-debt-amount="8-10 PM"></label>
-                    <div id="debt-amount-pos"></div>
+                    <label htmlFor='5' data-debt-amount='8-10 PM'></label>
+                    <div id='debt-amount-pos'></div>
                   </div>
                 </form>
               </div>
-              <div className="submit-div">
-                <button onClick={() => submitOrder()} className="submit button">
+              <div className='submit-div'>
+                <button onClick={() => submitOrder()} className='submit button'>
                   {" "}
                   SUBMIT ORDER{" "}
                 </button>

@@ -1,36 +1,34 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 :root {
   --primary: #f05;
-  --accent: #525FE1;
+  --accent: #525fe1;
   --light: #e7ecef;
   --light-translucent: #e7ecef3a;
   --dark: #030119;
   --dark-translucent: #030119b1;
-  --grad: linear-gradient(270deg, hsla(235, 70%, 60%, 1) 35%, hsla(197, 85%, 51%, 1) 100%);
+  --grad: linear-gradient(270deg, #525ee0 35%, #18b0ec 100%);
   --accent2: hsl(197, 85%, 51%);
 }
 body::-webkit-scrollbar {
   width: 0.5rem;
   cursor: pointer;
-  
 }
 
 body::-webkit-scrollbar-track {
   background-color: var(--dark-translucent);
-  
 }
 
 body::-webkit-scrollbar-thumb {
@@ -40,14 +38,14 @@ body::-webkit-scrollbar-thumb {
   height: 10rem;
 }
 
-Link{
+Link {
   text-decoration: none;
-    color: var(--light);
+  color: var(--light);
 }
 
-a{
+a {
   text-decoration: none;
-    color: var(--light);
+  color: var(--light);
 }
 
 .hover-button {
@@ -82,14 +80,18 @@ a{
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
-.hover-button:hover, .hover-button:focus, .hover-button:active {
+.hover-button:hover,
+.hover-button:focus,
+.hover-button:active {
   color: white;
 }
-.hover-button:hover:before, .hover-button:focus:before, .hover-button:active:before {
+.hover-button:hover:before,
+.hover-button:focus:before,
+.hover-button:active:before {
   -webkit-transform: scale(0);
   transform: scale(0);
 }
 
-button{
+button {
   cursor: pointer;
 }

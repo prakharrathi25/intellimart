@@ -12,7 +12,7 @@ const StoreInfo = () => {
   const getStores = () => {
     var config = {
       method: "get",
-      url: `http://127.0.0.1:8000/market?id=${id}`,
+      url: `/market?id=${id}`,
     };
     axios(config)
       .then(function (response) {
@@ -29,26 +29,26 @@ const StoreInfo = () => {
   }, []);
 
   return (
-    <div className="store-info-container">
+    <div className='store-info-container'>
       {stores !== null ? (
         <>
-          <div className="store-details-container">
-            <div className="store-details">
-              <div className="store-logo-container">
-              <img
-                className="store-logo"
-                src={"http://127.0.0.1:8000" + stores.logo}
-                alt=""
-              />
+          <div className='store-details-container'>
+            <div className='store-details'>
+              <div className='store-logo-container'>
+                <img
+                  className='store-logo'
+                  src={"http://127.0.0.1:8000" + stores.logo}
+                  alt=''
+                />
               </div>
               <div>
-                <h1 className="name">{stores.name}</h1>
-                <p className="address">{stores.address}</p>
-                <p className="store-ph">{stores.phone_number}</p>
+                <h1 className='name'>{stores.name}</h1>
+                <p className='address'>{stores.address}</p>
+                <p className='store-ph'>{stores.phone_number}</p>
               </div>
             </div>
-            <Waves className="small-wave" />
-            <div className="store-products">
+            <Waves className='small-wave' />
+            <div className='store-products'>
               <Products storeID={id} storeName={stores.name} />
             </div>
           </div>
