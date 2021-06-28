@@ -210,46 +210,6 @@ class Customer(models.Model):
 
         return error_message
 
-''' Cart model to store the details of the users cart and products '''
-class Cart(models.Model):
-
-    # Define the model fields 
-    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    total_value = models.FloatField(default=0)
-    products = models.ManyToManyField(
-        'Product',
-        related_name='carts'
-    )
-    quantities = models.ManyToManyField(
-        'CartQuantity',
-        related_name='quantities'
-    )
-
-    ''' Function to display all products '''
-    @staticmethod
-    def get_all_products():
-
-        return Cart.objects.all()
-
-    ''' Function to filter the data by user ID '''
-    @staticmethod
-    def get_cart_products(user_id):
-
-        return Cart.objects.filter(user=user_id)
-
-''' Cart Quanitities model to save the details of the product and it's quantity in the database '''
-class CartQuantity(models.Model):
-
-    # Define the model fields 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=0)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, default=1)
-    # user = models.ForeignKey(Customer, on_delete=models.CASCADE)
-
-    # Define plural name using meta class
-    class Meta:
-        verbose_name_plural = "Cart Quantities"
-
 ''' Cart Product Model for the details of the  '''
 class CartProduct(models.Model):
 
