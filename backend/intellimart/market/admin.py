@@ -24,9 +24,6 @@ class AdminCustomer(admin.ModelAdmin):
 class AdminOwner(admin.ModelAdmin):
     list_display = ['id', 'name', 'email']
 
-class AdminCart(admin.ModelAdmin):
-    list_display = ['id', 'user', 'products']
-
 class AdminCartProduct(admin.ModelAdmin):
     list_display = ['id', 'user', 'product', 'quantity', 'ordered']
 
@@ -40,7 +37,5 @@ admin.site.register(Category, AdminCategory)
 admin.site.register(Customer, AdminCustomer)
 admin.site.register(Store, AdminStore)
 admin.site.register(Owner, AdminOwner)
-# admin.site.register(Cart)
-# admin.site.register(CartQuantity)
 admin.site.register(CartProduct, AdminCartProduct)
 admin.site.register(Slot, AdminSlot)

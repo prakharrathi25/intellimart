@@ -1,3 +1,4 @@
+from itertools import product
 from django.db import models
 from django.db.models.base import Model, ModelState
 from django.db.models.deletion import CASCADE
@@ -108,10 +109,14 @@ class Product(models.Model):
 
     # Function to combine the search filters together 
     @staticmethod 
-    def get_products(store_id=None, category_id=None, search_query=None):
+    def get_products(store_id=None, category_id=None, search_query=None, product_id=None):
 
         queryset = Product.get_all_products()
-        
+
+        # Separate filter for the product ID
+        if product_id:
+            return queryset.filter(id=product_id)
+
         # Apply filters to the data
         if store_id:
             queryset = queryset.filter(store=store_id)

@@ -18,7 +18,7 @@ from .serializers import *
 ''' API Views to return the data to the frontend ''' 
 
 class StoreView(generics.ListAPIView):
-    """Store view which returns the stores data as a Json file. 
+    """Store view which returns the stores data as a Json output. 
     """
 
     # Define class variables 
@@ -47,8 +47,6 @@ class ProductView(generics.ListAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
 
-    search_fields = ['name','description']
-    filter_backends = (SearchFilter,)
     queryset = []
 
     # Manage a get request
@@ -61,10 +59,12 @@ class ProductView(generics.ListAPIView):
         store_id = request.GET.get('store_id', None)
         search_query = request.GET.get('search')
         category = request.GET.get('category')
+        product_id = request.GET.get('id')
 
         queryset = Product.get_products(store_id=store_id,
                                         category_id=category,
-                                        search_query=search_query)
+                                        search_query=search_query, 
+                                        product_id=product_id)
 
         return Response(ProductSerializer(queryset, many = True).data)
 
@@ -76,15 +76,15 @@ class CartProductView(generics.ListAPIView):
     serializer_class = CartProductSerializer
     queryset = []
 
-    def delete(self, request):
+    # def delete(self, request):
         
-        id = request.GET.get['id']
-        print(id)
-        # delete the product using ID and send a confirmation response
-        CartProduct.objects.get(id=id).delete()
-        return Response({
-            'status':True
-        }, status=status.HTTP_204_NO_CONTENT)
+    #     id = request.GET.get['id']
+    #     print(id)
+    #     # delete the product using ID and send a confirmation response
+    #     CartProduct.objects.get(id=id).delete()
+    #     return Response({
+    #         'status':True
+    #     }, status=status.HTTP_204_NO_CONTENT)
 
     def get(self, request):
 
@@ -120,29 +120,6 @@ class CartProductView(generics.ListAPIView):
             data = serializer.errors
         
         return Response(data)
-
-class CartView(generics.ListAPIView):
-    
-    ''' View to display cart items and add items to the cart '''
-
-    # Define class variables 
-    serializer_class = CartSerializer
-    queryset = []
-
-    def get(self, request):
-
-        ''' Display all the cart items queried by the user ID '''
-         # Collect the id for the store to be displayed
-        user_id = request.GET.get('user')
-
-        if user_id:
-            queryset = Cart.get_cart_products(user_id)
-        
-        else:
-            queryset = Cart.get_all_products()
-        
-        
-        return Response(CartSerializer(queryset, many = True).data)
 
 class LoginCustomer(APIView):
     ''' View tp login a customer based on their credentials '''
@@ -307,6 +284,7 @@ class AddSlotView(APIView):
         data['success'] = True
         data['user'] = user_id
         data['slot'] = slot_id
+        
         return Response(data)
 
 class OwnerView(APIView):
