@@ -111,6 +111,18 @@ class Product(models.Model):
     @staticmethod 
     def get_products(store_id=None, category_id=None, search_query=None, product_id=None):
 
+        """Get the products from the database based on conditions
+
+        Args: 
+            store_id: ID of the store used for filtering
+            category_id: ID of the category used for filtering
+            product_id: ID of the product used for filtering
+            search_query: Text Query used for filtering objects
+
+        Returns:
+            queryset: List of product objects selected on the basis of the filters
+        """
+
         queryset = Product.get_all_products()
 
         # Separate filter for the product ID
