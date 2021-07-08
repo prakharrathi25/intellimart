@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { useStoreActions } from "easy-peasy";
 
 toast.configure();
 
@@ -31,12 +32,14 @@ const Login = () => {
     email: "",
     password: "",
   });
+  /* eslint-disable no-unused-vars */
   const [signUpFormInitialValues, setSignUpFormInitialValues] = useState({
     name: "",
     email: "",
     mobile: "",
     password: "",
   });
+  /* eslint-disable no-unused-vars */
   const [signUpFormValues, setSignUpFormValues] = useState({
     name: "",
     email: "",
@@ -45,6 +48,8 @@ const Login = () => {
   });
 
   const history = useHistory();
+
+  const toggleLog = useStoreActions((actions) => actions.toggleLog);
 
   // SignIn Handlers
   const handleSignInEmail = (event) => {
@@ -112,16 +117,17 @@ const Login = () => {
 
     axios(config)
       .then(function (response) {
-        let responseData = response.data;
-        if (responseData.success === "True") {
-          setResponseData(responseData);
-          localStorage.setItem("login", JSON.stringify(responseData));
+        let resData = response.data;
+        if (resData.success === "True") {
+          setResponseData(resData);
+          localStorage.setItem("login", JSON.stringify(resData));
+          toggleLog();
           toast.success(`Welcome Back, ${responseData.name}!`);
           history.push("/");
-        } else if (responseData.error === "Some other Error occurred") {
+        } else if (resData.error === "Some other Error occurred") {
           toast.error("Username or Password does not Exist!");
         } else {
-          toast.error(responseData.error);
+          toast.error(resData.error);
         }
       })
       .catch(function (error) {

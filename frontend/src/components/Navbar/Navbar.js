@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import "./Navbar.css";
 import Cart from "./../../assets/cart.png";
+import { useStoreState } from "easy-peasy";
 
 const Navbar = ({ isLoggedIn }) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const isLogged = useStoreState((state) => state.isLogged);
 
   const links = [
     {
@@ -19,7 +21,7 @@ const Navbar = ({ isLoggedIn }) => {
       title: "Contact Us",
       link: "/contact",
     },
-    isLoggedIn
+    isLogged
       ? {
           title: "Logout",
           link: "/logout",

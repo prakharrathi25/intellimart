@@ -1,6 +1,5 @@
 import React from "react";
 import "./ProductCard.css";
-import { useCart } from "react-use-cart";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();

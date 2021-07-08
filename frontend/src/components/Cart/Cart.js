@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Cart.css";
 import { useCart } from "react-use-cart";
 import Illustration from "../../assets/empty_cart.svg";
@@ -14,7 +14,6 @@ const Cart = () => {
   const {
     isEmpty,
     cartTotal,
-    totalUniqueItems,
     items,
     addItem,
     updateItemQuantity,
@@ -37,6 +36,7 @@ const Cart = () => {
       toast.error("Please Login to Continue");
       history.push("/login");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // FETCHING Cart Data Using DB Fetch (ONLY IF LOGIN HAS HAPPENED)
@@ -56,7 +56,7 @@ const Cart = () => {
       .then(function (response) {
         let existingUserCart = response.data;
 
-        existingUserCart.length == 0
+        existingUserCart.length === 0
           ? console.log("ExistingUserCart.length is 0")
           : existingUserCart.map((existingUserCartItem, key) => {
               inCart(existingUserCartItem.product) // Check if the item already in cart in DB has been in the current cart to append or cancel
@@ -79,6 +79,7 @@ const Cart = () => {
       .catch(function (error) {
         console.log(error);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Function to Update the Cart to backend on every cart module updation
@@ -120,12 +121,12 @@ const Cart = () => {
   useEffect(() => {
     // console.log(items);
     items.length > 0 && isLoggedIn && postItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
   // Empty the cart and update backend
   const emptyCartHandler = () => {
     items.map((item) => {
-      // console.log(item);
       var data = JSON.stringify({
         quantity: 0,
         price: item.price,
@@ -150,6 +151,7 @@ const Cart = () => {
         .catch(function (error) {
           console.log(error);
         });
+      return;
     });
     emptyCart();
   };
@@ -197,7 +199,7 @@ const Cart = () => {
   if (isEmpty)
     return (
       <div className='empty-cart-container'>
-        <img className='empty-cart-image' src={Illustration} alt='' />
+        <img className='empty-cart-image' src={Illustration} alt='empty cart' />
         <p className='empty-cart-text'>No Current Bookings!</p>
       </div>
     );
@@ -216,7 +218,10 @@ const Cart = () => {
               {items.map((item) => (
                 <div className='tr_item'>
                   <div className='td_item item_img'>
-                    <img src={process.env.REACT_APP_API_URL + item.image} />
+                    <img
+                      src={process.env.REACT_APP_API_URL + item.image}
+                      alt='cart-item'
+                    />
                   </div>
                   <div className='td_item item_name'>
                     <label className='main'>{item.name}</label>
