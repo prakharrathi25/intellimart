@@ -56,22 +56,22 @@ const ProductCard = ({
   };
 
   return (
-    <div className="card-container">
-      <div className="product-title-details">
+    <div className='card-container'>
+      <div className='product-title-details'>
         <img
-          className="product-image"
-          src={"http://127.0.0.1:8000" + image}
-          alt=""
+          className='product-image'
+          src={process.env.REACT_APP_API_URL + image}
+          alt=''
         />
-        <h1 className="product-name">{name.substring(0, 14)}</h1>
+        <h1 className='product-name'>{name.substring(0, 14)}</h1>
       </div>
-      <div className="product-info">
-        <p className="column">₹{price}</p>
-        <p className="column">
+      <div className='product-info'>
+        <p className='column'>₹{price}</p>
+        <p className='column'>
           {quantity} {unit}
         </p>
         <button
-          className="add-button column hover-button"
+          className='add-button column hover-button'
           // onClick={addToCart}
           onClick={() => addItemHandler()}
         >

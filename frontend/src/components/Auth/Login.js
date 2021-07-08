@@ -103,7 +103,7 @@ const Login = () => {
 
     var config = {
       method: "post",
-      url: "/login",
+      url: `${process.env.REACT_APP_API_URL}/login`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -116,7 +116,7 @@ const Login = () => {
         if (responseData.success === "True") {
           setResponseData(responseData);
           localStorage.setItem("login", JSON.stringify(responseData));
-          toast.success("Welcome Back!");
+          toast.success(`Welcome Back, ${responseData.name}!`);
           history.push("/");
         } else if (responseData.error === "Some other Error occurred") {
           toast.error("Username or Password does not Exist!");
@@ -142,7 +142,7 @@ const Login = () => {
 
     var config = {
       method: "post",
-      url: "/register",
+      url: `${process.env.REACT_APP_API_URL}/register`,
       headers: {
         "Content-Type": "application/json",
       },

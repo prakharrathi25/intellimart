@@ -18,7 +18,7 @@ const Products = ({ storeID, storeName }) => {
   const getProducts = () => {
     var config = {
       method: "get",
-      url: `/products?store_id=${storeID}`,
+      url: `${process.env.REACT_APP_API_URL}/products?store_id=${storeID}`,
     };
     axios(config)
       .then(function (response) {

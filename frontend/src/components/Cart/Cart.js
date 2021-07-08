@@ -45,28 +45,25 @@ const Cart = () => {
       return;
     }
     let userID = JSON.parse(localStorage.getItem("login")).user_id;
-    // console.log(userID);
 
     var config = {
       method: "get",
-      url: "/cartprod?user=" + userID + "&ordered=False",
+      url: `${process.env.REACT_APP_API_URL}/cartprod?user=${userID}&ordered=False`,
       headers: {},
     };
 
     axios(config)
       .then(function (response) {
         let existingUserCart = response.data;
-        // console.log(existingUserCart);
 
         existingUserCart.length == 0
-          ? console.log("ExistingUserCart.length is 0 hehehe")
+          ? console.log("ExistingUserCart.length is 0")
           : existingUserCart.map((existingUserCartItem, key) => {
               inCart(existingUserCartItem.product) // Check if the item already in cart in DB has been in the current cart to append or cancel
                 ? console.log()
                 : addItem(
                     {
                       name: existingUserCartItem.product_details.name,
-                      // "quantity": existingCartItem.quantity,
                       price: existingUserCartItem.price,
                       id: existingUserCartItem.product,
                       storeName:
@@ -86,10 +83,7 @@ const Cart = () => {
 
   // Function to Update the Cart to backend on every cart module updation
   const postItems = () => {
-    // console.log(items);
-
     items.map((item) => {
-      // console.log(item);
       var data = JSON.stringify({
         quantity: item.quantity,
         price: item.price,
@@ -100,7 +94,7 @@ const Cart = () => {
 
       var config = {
         method: "post",
-        url: "/cartprod",
+        url: `${process.env.REACT_APP_API_URL}/cartprod`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -113,7 +107,6 @@ const Cart = () => {
         })
         .catch(function (error) {
           console.log(error);
-          // console.log(error.response);
           console.log(error.response.data.error);
           toast.error(
             "Quantity of " + item.name + " added is more than amount available"
@@ -143,7 +136,7 @@ const Cart = () => {
 
       var config = {
         method: "post",
-        url: "/cartprod",
+        url: `${process.env.REACT_APP_API_URL}/cartprod`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -176,7 +169,7 @@ const Cart = () => {
 
     var config = {
       method: "post",
-      url: "/cartprod",
+      url: `${process.env.REACT_APP_API_URL}/cartprod`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -195,10 +188,9 @@ const Cart = () => {
 
   // Submit Button Function
   const submitOrder = () => {
-    // console.log("SUBMIT ORDER");
     emptyCartHandler();
-    toast.success("ORDER PLACED!!!!!!!!!!!");
-    // toggleConfetti();
+    toast.success("ORDER PLACED!");
+
     history.push("/");
   };
 
@@ -224,7 +216,7 @@ const Cart = () => {
               {items.map((item) => (
                 <div className='tr_item'>
                   <div className='td_item item_img'>
-                    <img src={"http://127.0.0.1:8000" + item.image} />
+                    <img src={process.env.REACT_APP_API_URL + item.image} />
                   </div>
                   <div className='td_item item_name'>
                     <label className='main'>{item.name}</label>

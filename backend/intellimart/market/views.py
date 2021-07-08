@@ -155,6 +155,7 @@ class LoginCustomer(APIView):
                     data['success'] = 'True'
                     data['user_id'] = customer.id
                     data['email'] = customer.email
+                    data['name'] = customer.name
 
                 else:
                     data['error'] = 'Invalid Password'

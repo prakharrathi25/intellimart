@@ -12,7 +12,7 @@ const StoreInfo = () => {
   const getStores = () => {
     var config = {
       method: "get",
-      url: `/market?id=${id}`,
+      url: `${process.env.REACT_APP_API_URL}/market?id=${id}`,
     };
     axios(config)
       .then(function (response) {
@@ -37,7 +37,7 @@ const StoreInfo = () => {
               <div className='store-logo-container'>
                 <img
                   className='store-logo'
-                  src={"http://127.0.0.1:8000" + stores.logo}
+                  src={process.env.REACT_APP_API_URL + stores.logo}
                   alt=''
                 />
               </div>

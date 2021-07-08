@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Stores.css";
 import StoreCard from "../../components/StoreCard/StoreCard";
-import StoreInfo from "../../components/StoreInfo/StoreInfo";
 import axios from "axios";
 import Loader from "../../components/loader";
 
@@ -9,9 +8,10 @@ const Stores = () => {
   const [responseData, setResponseData] = useState(null);
 
   const getStores = () => {
+    console.log(process.env.REACT_APP_API_URL);
     var config = {
       method: "get",
-      url: "/market",
+      url: `${process.env.REACT_APP_API_URL}/market`,
     };
     axios(config)
       .then(function (response) {
