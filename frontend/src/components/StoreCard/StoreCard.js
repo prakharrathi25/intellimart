@@ -12,22 +12,16 @@ const StoreCard = ({ title, address, image, id }) => {
 
   return (
     <>
-      {/* {showModal? */}
-
-      {/* <StoreInfo show={showModal} toggle={toggleModal} id={key} /> */}
-      {/* :null} */}
       <div className='store-card-container' onClick={() => toggleModal()}>
         <Link to={`/store/${id}`}>
           <div className='store-title-details'>
             <img
               className='store-image'
-              src={"http://127.0.0.1:8000" + image}
+              src={process.env.REACT_APP_API_URL + image}
               alt='store'
             />
-            {/* <h1 className="store-name">{title}</h1> */}
           </div>
 
-          {/* <div className="store-info"> */}
           <div className='store-info'>
             <h1 className='store-name'>{title}</h1>
             <p className='column' id='address'>
