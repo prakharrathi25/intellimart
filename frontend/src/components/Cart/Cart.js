@@ -74,6 +74,7 @@ const Cart = () => {
                     },
                     existingUserCartItem.quantity
                   );
+              return "sucess";
             });
       })
       .catch(function (error) {
@@ -114,6 +115,7 @@ const Cart = () => {
           );
           updateItemQuantity(item.id, item.quantity - 1);
         });
+      return "sucess";
     });
   };
 
@@ -151,7 +153,7 @@ const Cart = () => {
         .catch(function (error) {
           console.log(error);
         });
-      return;
+      return "sucess";
     });
     emptyCart();
   };
